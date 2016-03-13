@@ -377,9 +377,9 @@ html {
 }
 .swiftseo-overlay:target+.swiftseo-popup
 {
-    top:50%;
-    opacity:1;
-    visibility:visible
+    top:50% !important;
+    opacity:1 !important;
+    visibility:visible !important;
 }
 
 .popupred {

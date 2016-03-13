@@ -18,7 +18,7 @@
 
     <script type="text/javascript">
         window.onload = function () {
-            CDT('2016/01/11');
+            CDT('{{ bonus_class.date }}');
         }
     </script>
 
@@ -110,11 +110,11 @@
 <section class="s1">
     <div class="wrapper">
         <div class="l1">
-            <div class="clnd1">январь<span>11</span></div>
+            <div class="clnd1">{{ bonus_class.month }}<span>{{ bonus_class.day }}</span></div>
             <h4>БЕСПЛАТНЫЙ <br/>УРОК ПО ХАСТЛУ</h4>
-            <b>Когда:</b> 11 января <br/>
-            <b>Во сколько?</b> с 19:00 до 20:30 <br/>
-            м.Краснопресненская, Пресненский пер, д. 2, Спортивный клуб "Дружба" (3 мин. от метро)
+            <b>Когда:</b> {{ bonus_class.day }} {{ bonus_class.month_2 }} <br/>
+            <b>Во сколько?</b> с {{ bonus_class.begin_time }} до {{ bonus_class.end_time }} <br/>
+            м.{{ bonus_class.metro_station }}  {{ bonus_class.hall_address }}<br>({{ bonus_class.time_from_metro }} мин. от метро)
         </div>
         <div class="r1">
             <ul>
@@ -139,15 +139,15 @@
             <div id="CDT"></div>
         </div>
         <div class="r2">
-            <form method="post" action="lead.php"><input type="hidden" name="csrfmiddlewaretoken"
-                                                         value="ZAD2ZAaSuhk8SovzaYdWDriCR7DViBPj">
+            <form method="post" id="free_lesson_form">
                 <h4>Записаться на бесплатное занятие!</h4>
+                <input type="hidden" name="user_type" value="Запись на мастер-класс">
                 <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                 <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                 <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                 <span>* поле обязательно для заполнения. Мы перезвоним вам в 
 течении 30 секунд. Гарантируем сохранность данных</span>
-                <input onclick="yaCounter32063616.reachGoal('form2'); return true;" type="submit" class="inp2 btn3"
+                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form'); return false;" type="submit" class="inp2 btn3"
                        value="ОСТАВИТЬ ЗАЯВКУ">
             </form>
         </div>
@@ -453,8 +453,7 @@
             ЗАНЯТИЯ В ШКОЛЕ ХАСТЛА "ДИНАМИКА"</h2>
 
         <div class="myvideo">
-            <iframe width="853" height="480" src="https://www.youtube.com/embed/T0Jl0i4P_ec" frameborder="0"
-                    allowfullscreen></iframe>
+            <iframe src="https://player.vimeo.com/video/151710478" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
     </div>
 </section>
@@ -491,13 +490,34 @@
 
                 <div class="gallery js-flickity " data-flickity-options='{ "wrapAround": true }'>
                     <div class="slider">
-                        <img src="{% static "img/gl1.jpg" %}" class="img-slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo1.jpg" %}" class="img-slider">
                     </div>
                     <div class="slider">
-                        <img src="{% static "img/gl1.jpg" %}" class="img-slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo2.jpg" %}" class="img-slider">
                     </div>
                     <div class="slider">
-                        <img src="{% static "img/gl1.jpg" %}" class="img-slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo3.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo4.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo5.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo6.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo7.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo8.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo9.jpg" %}" class="img-slider">
+                    </div>
+                    <div class="slider">
+                        <img src="{% static "img/slider/Dinamika_site_photo10.jpg" %}" class="img-slider">
                     </div>
                 </div>
             </div>
@@ -505,8 +525,7 @@
     </div>
 </section>
 <section class="s8" id="nv8">
-    <script charset="utf-8" type="text/javascript"
-            src="http://api-maps.yandex.ru/services/constructor/1.0/js/?sid=fnyNz6OcoJk_VE2bEgBk4sr8YTuhOUen&amp;height=500"></script>
+    <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=DxchwfK05AfZruaC1ryWEowGwUtg8lL-&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
 </section>
 <section class="s9" id="nv4">
     <div class="wrapper">
@@ -533,63 +552,25 @@
             </tr>
             <!-- Table Header -->
 
-            <tr>
-                <td class="brl1 cd1">ХАСТЛ - НАЧИНАЮЩИЕ<br/> <a onclick="okn1()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">19.00-20.30</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span>
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> КАЛУЖСКАЯ<br/>улица Бутлерова, 12
-                </td>
-            </tr>
-
-            <tr>
-                <td class="cd1">ХАСТЛ - НАЧИНАЮЩИЕ<br/> <a onclick="okn1s2()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">13.30-15.00</span><br>ПН ВТ СР ЧТ ПТ <span class="p3">СБ</span> <span
-                        class="p3">ВС</span></td>
-                <td class="tal1"><img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-            <!--<tr>-->
-            <!--<td class="brl1">ХАСТЛ - НАЧИНАЮЩИЕ</td>-->
-            <!--<td><span class="p2">20.30-22.00</span><br><span class="p3">ПН</span>  ВТ <span class="p3">СР</span>  ЧТ ПТ СБ ВС</td>-->
-            <!--<td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%" height="auto" /> ТРЕТЬЯКОВСКАЯ, НОВОКУЗНЕЦКАЯ<br />Малый Татарский переулок, д. 8   </td>-->
-            <!--</tr>-->
-            <tr>
-                <td class="cd1">ХАСТЛ - НАЧИНАЮЩИЕ<br/> <a onclick="okn1s3()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">20.30-22.00</span><br>ПН <span class="p3">ВТ</span> СР</span>  <span
-                        class="p3">ЧТ</span> ПТ СБ ВС
-                </td>
-                <td class="tal1"><img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-            <tr>
-                <td class="brl1 cd1">ХАСТЛ - НАЧИНАЮЩИЕ <br/> <a onclick="okn1s4()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">19.00-20.30</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ТРЕТЬЯКОВСКАЯ, НОВОКУЗНЕЦКАЯ <br/>Малый Татарский переулок,
-                    д. 8
-                </td>
-            </tr>
-            <tr>
-                <td class="cd1">ХАСТЛ - НАЧИНАЮЩИЕ <br/> <a onclick="okn1s5()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">19.00-20.30</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="tal1"><img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/>КРАСНОПРЕСНЕНСКАЯ <br/>Пресненский переулок, 2
-                </td>
-            </tr>
-
+            {% for group in beginners %}
+                <tr>
+                    <td class="brl1 cd1">{{ group.name }} <br/>
+                        <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                    <td>
+                        <span class="p2">{{ group.time }}</span><br>
+                        {% for day in group.days %}
+                            {% if day.marked %}
+                                <span class="p3">{{ day.repr }}</span>
+                            {% else %}
+                                {{ day.repr }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="brr1 tal1">
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                    </td>
+                </tr>
+            {% endfor %}
 
         </table>
 
@@ -601,69 +582,25 @@
             </tr>
             <!-- Table Header -->
 
-            <!-- <tr>
-                <td class="brl1">Хастл - Продолжающие</td>
-                <td><span class="p2">19.00-20.30</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span> ПТ СБ ВС</td>
-                <td class="brr1 tal1">
-                    <img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%" height="auto" />
-                    КРАСНОПРЕСНЕНСКАЯ <br />Пресненский переулок, 2
-                </td>
-            </tr> -->
-
-            <tr>
-                <td class="cd1">Хастл - Продолжающие <br/> <a onclick="okn1s6()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">20.30-22.00</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="tal1">
-                    <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/>
-                    КРАСНОПРЕСНЕНСКАЯ <br/>Пресненский переулок, 2
-                </td>
-            </tr>
-
-            <!--<tr>-->
-            <!--<td>Хастл - Продолжающие</td>-->
-            <!--<td><span class="p2">19.00-20.30</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span> ПТ СБ ВС</td>-->
-            <!--<td class="tal1">-->
-            <!--<img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%" height="auto" />-->
-            <!--ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br />Волгоградский проспект 32 стр. 8-->
-            <!--</td>-->
-            <!--</tr>-->
-
-            <tr>
-                <td class="cd1">Хастл - Продолжающие <br/> <a onclick="okn1s7()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td>
-                    <span class="p2">20.30-22.00</span><br>
-                    ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span> ПТ СБ ВС
-                </td>
-                <td class="tal1">
-                    <img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/>
-                    КАЛУЖСКАЯ<br/>улица Бутлерова, 12
-                </td>
-            </tr>
-            <tr>
-                <td class="cd1">Хастл - Продолжающие <br/> <a onclick="okn1s8()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">12.00-13.30</span><br>ПН ВТ СР ЧТ ПТ <span class="p3">СБ</span> <span
-                        class="p3">ВС</span></td>
-                <td class="tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-
-            <tr>
-                <td class="brl1 cd1">Хастл - Продолжающие <br/> <a onclick="okn1s9()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">20.30-22.00</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ТРЕТЬЯКОВСКАЯ, НОВОКУЗНЕЦКАЯ <br/>Малый Татарский переулок,
-                    д. 8
-                </td>
-            </tr>
+            {% for group in inters %}
+                <tr>
+                    <td class="brl1 cd1">{{ group.name }} <br/>
+                        <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                    <td>
+                        <span class="p2">{{ group.time }}</span><br>
+                        {% for day in group.days %}
+                            {% if day.marked %}
+                                <span class="p3">{{ day.repr }}</span>
+                            {% else %}
+                                {{ day.repr }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="brr1 tal1">
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                    </td>
+                </tr>
+            {% endfor %}
 
         </table>
         <table id="tb3" class="simple-little-table light" cellspacing='0'>
@@ -673,63 +610,25 @@
                 <th>место</th>
             </tr>
             <!-- Table Header -->
-
-            <tr>
-                <td class="brl1 cd1">Конкурсная группа по E+Д классу <br/> <a onclick="okn1s10()" class="zaps1"
-                                                                              title="Записаться">Записаться</a></td>
-                <td><span class="p2">19.00-20.30</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-
-            <tr>
-                <td class="brl1 cd1">Конкурсная группа по E классу <br/> <a onclick="okn1s11()" class="zaps1"
-                                                                            title="Записаться">Записаться</a></td>
-                <td><span class="p2">19.00-20.30</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span>
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1">
-                    <img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/>
-                    КРАСНОПРЕСНЕНСКАЯ <br/>Пресненский переулок, 2
-                </td>
-            </tr>
-
-            <tr>
-                <td class="brl1 cd1">Конкурсная группа по E классу <br/> <a onclick="okn1s12()" class="zaps1"
-                                                                            title="Записаться">Записаться</a></td>
-                <td><span class="p2">19.00-20.30</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span>
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-
-            <tr>
-                <td class="cd1">Конкурсная группа по ДнД (Beginner) <br/> <a onclick="okn1s13()" class="zaps1"
-                                                                             title="Записаться">Записаться</a></td>
-                <td><span class="p2">20.30-22.00</span><br>ПН <span class="p3">ВТ</span> СР <span class="p3">ЧТ</span>
-                    ПТ СБ ВС
-                </td>
-                <td class="tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/> КРАСНОПРЕСНЕНСКАЯ <br/>Пресненский переулок, 2
-                </td>
-            </tr>
-            <tr>
-                <td class="brl1 cd1">Группа по ДнД RS+Main <br/> <a onclick="okn1s14()" class="zaps1"
-                                                                    title="Записаться">Записаться</a></td>
-                <td><span class="p2">20.30-22.00</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-
-
+            {% for group in advanced %}
+                <tr>
+                    <td class="brl1 cd1">{{ group.name }} <br/>
+                        <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                    <td>
+                        <span class="p2">{{ group.time }}</span><br>
+                        {% for day in group.days %}
+                            {% if day.marked %}
+                                <span class="p3">{{ day.repr }}</span>
+                            {% else %}
+                                {{ day.repr }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="brr1 tal1">
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
 
 
@@ -741,25 +640,25 @@
             </tr>
             <!-- Table Header -->
 
-            <tr>
-                <td class="brl1 cd1">Растяжка и общетанцевальная техника<br/> <a onclick="okn1s15()" class="zaps1"
-                                                                                 title="Записаться">Записаться</a></td>
-                <td><span class="p2">19.00-21.00</span><br>ПН ВТ СР ЧТ ПТ СБ <span class="p3">ВС</span></td>
-                <td class="brr1 tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                           height="auto"/> ВОЛГОГРАДСКИЙ ПРОСПЕКТ <br/>Волгоградский проспект 32 стр. 8
-                </td>
-            </tr>
-
-            <tr>
-                <td class="cd1">Группа - Сальса и Бачата<br/> <a onclick="okn1s16()" class="zaps1" title="Записаться">Записаться</a>
-                </td>
-                <td><span class="p2">19.00-21.00</span><br><span class="p3">ПН</span> ВТ <span class="p3">СР</span> ЧТ
-                    ПТ СБ ВС
-                </td>
-                <td class="tal1"><img src="img/h2icn6.png" alt="Танцевальный клуб - Динамика" width="100%"
-                                      height="auto"/>Улица 1905 года <br/>Звенигородское шоссе,3
-                </td>
-            </tr>
+            {% for group in other %}
+                <tr>
+                    <td class="brl1 cd1">{{ group.name }} <br/>
+                        <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                    <td>
+                        <span class="p2">{{ group.time }}</span><br>
+                        {% for day in group.days %}
+                            {% if day.marked %}
+                                <span class="p3">{{ day.repr }}</span>
+                            {% else %}
+                                {{ day.repr }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="brr1 tal1">
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
 
 
@@ -826,15 +725,16 @@
             <div id="CDT2"></div>
         </div>
         <div class="r2">
-            <form method="post" action="lead.php"><input type="hidden" name="csrfmiddlewaretoken"
-                                                         value="ZAD2ZAaSuhk8SovzaYdWDriCR7DViBPj">
+            <form method="post" id="free_lesson_form2">
                 <h4>Записаться на бесплатное занятие!</h4>
+                <input type="hidden" name="user_type" value="Запись на мастер-класс">
+                <input type="hidden" name="class_date" value="{{ bonus_class.date }}">
                 <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                 <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                 <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                 <span>* поле обязательно для заполнения. Мы перезвоним вам в 
 течении 30 секунд. Гарантируем сохранность данных</span>
-                <input onclick="yaCounter32063616.reachGoal('form2'); return true;" type="submit" class="inp2 btn3"
+                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form2'); return false;" type="submit" class="inp2 btn3"
                        value="ОСТАВИТЬ ЗАЯВКУ">
             </form>
         </div>
@@ -848,187 +748,21 @@
     </div>
 </footer>
 
+{% for group in all_groups %}
+    <a href="#" class="swiftseo-overlay" id="g{{ group.id }}" onclick="scroll1('#nv4', 0);"></a>
+    <div class="window2 swiftseo-popup">
+        <form id="group_form{{ group.id }}">
+            <span class="sp1">Запись в группу <br/> {{ group.name }}</span>
+            <span class="sp2">
+                {{ group.time }} {% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}<br/>
+                м.{{ group.metro }}<br>{{ group.address }}
+            </span>
 
-<script type="text/javascript">
-    function okn1(id) {
-        {
-            document.getElementById("window1").style.display = "flex";
-        }
-    }
-    function okn2(id) {
-        {
-            document.getElementById("window1").style.display = "none";
-        }
-    }
-
-    function okn1s2(id) {
-        {
-            document.getElementById("window1-2").style.display = "flex";
-        }
-    }
-    function okn2s2(id) {
-        {
-            document.getElementById("window1-2").style.display = "none";
-        }
-    }
-
-    function okn1s3(id) {
-        {
-            document.getElementById("window1-3").style.display = "flex";
-        }
-    }
-    function okn2s3(id) {
-        {
-            document.getElementById("window1-3").style.display = "none";
-        }
-    }
-
-    function okn1s4(id) {
-        {
-            document.getElementById("window1-4").style.display = "flex";
-        }
-    }
-    function okn2s4(id) {
-        {
-            document.getElementById("window1-4").style.display = "none";
-        }
-    }
-
-    function okn1s5(id) {
-        {
-            document.getElementById("window1-5").style.display = "flex";
-        }
-    }
-    function okn2s5(id) {
-        {
-            document.getElementById("window1-5").style.display = "none";
-        }
-    }
-
-    function okn1s6(id) {
-        {
-            document.getElementById("window1-6").style.display = "flex";
-        }
-    }
-    function okn2s6(id) {
-        {
-            document.getElementById("window1-6").style.display = "none";
-        }
-    }
-
-    function okn1s7(id) {
-        {
-            document.getElementById("window1-7").style.display = "flex";
-        }
-    }
-    function okn2s7(id) {
-        {
-            document.getElementById("window1-7").style.display = "none";
-        }
-    }
-
-    function okn1s8(id) {
-        {
-            document.getElementById("window1-8").style.display = "flex";
-        }
-    }
-    function okn2s8(id) {
-        {
-            document.getElementById("window1-8").style.display = "none";
-        }
-    }
-
-    function okn1s9(id) {
-        {
-            document.getElementById("window1-9").style.display = "flex";
-        }
-    }
-    function okn2s9(id) {
-        {
-            document.getElementById("window1-9").style.display = "none";
-        }
-    }
-
-    function okn1s10(id) {
-        {
-            document.getElementById("window1-10").style.display = "flex";
-        }
-    }
-    function okn2s10(id) {
-        {
-            document.getElementById("window1-10").style.display = "none";
-        }
-    }
-
-    function okn1s11(id) {
-        {
-            document.getElementById("window1-11").style.display = "flex";
-        }
-    }
-    function okn2s11(id) {
-        {
-            document.getElementById("window1-11").style.display = "none";
-        }
-    }
-
-    function okn1s12(id) {
-        {
-            document.getElementById("window1-12").style.display = "flex";
-        }
-    }
-    function okn2s12(id) {
-        {
-            document.getElementById("window1-12").style.display = "none";
-        }
-    }
-
-    function okn1s13(id) {
-        {
-            document.getElementById("window1-13").style.display = "flex";
-        }
-    }
-    function okn2s13(id) {
-        {
-            document.getElementById("window1-13").style.display = "none";
-        }
-    }
-
-    function okn1s14(id) {
-        {
-            document.getElementById("window1-14").style.display = "flex";
-        }
-    }
-    function okn2s14(id) {
-        {
-            document.getElementById("window1-14").style.display = "none";
-        }
-    }
-    function okn1s15(id) {
-        {
-            document.getElementById("window1-15").style.display = "flex";
-        }
-    }
-    function okn2s15(id) {
-        {
-            document.getElementById("window1-15").style.display = "none";
-        }
-    }
-    function okn1s16(id) {
-        {
-            document.getElementById("window1-16").style.display = "flex";
-        }
-    }
-    function okn2s16(id) {
-        {
-            document.getElementById("window1-16").style.display = "none";
-        }
-    }
-</script>
-<div id="window1">
-    <div class="window2">
-        <form action="posts/post2.php" method="post">
-            <span class="sp1">Запись в группу <br/> ХАСТЛ-НАЧИНАЮЩИЕ</span>
-            <span class="sp2">ВТ, ЧТ на 19.00-20.30 <br/>КАЛУЖСКАЯ улица Бутлерова, 12</span>
+            <input type="hidden" name="user_type" value="Заявка на запись в группу" />
+            <input type="hidden" name="group_name" value="{{ group.name }}" />
+            <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
+            <input type="hidden" name="time" value="{{ group.time }}" />
+            <input type="hidden" name="station" value="{{ group.metro }}" />
 
             <div class="name_inp">ФИО</div>
             <div class="input-prepend">
@@ -1039,381 +773,56 @@
                 <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
                        autocomplete="of">
             </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
+            <button onclick="sendForm('group_form{{ group.id }}'); return false;" type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
                 Записаться
             </button>
         </form>
         <a class="close1" onclick="okn2()">x</a>
     </div>
-</div>
+{% endfor %}
 
-<div id="window1-2">
-    <div class="window2">
-        <form action="posts/post1.php" method="post">
-            <span class="sp1">Запись в группу <br/> ХАСТЛ-НАЧИНАЮЩИЕ</span>
-            <span class="sp2">СБ, ВС на 13.30-15.00 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
+<a href="#" class="swiftseo-overlay" id="success_l"></a>
+<div class="swiftseo-popup"><p> Благодарим за заявку, наш администратор свяжется с Вами в ближайшее время. </p></div>
 
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s2()">x</a>
-    </div>
-</div>
-
-<div id="window1-3">
-    <div class="window2">
-        <form action="posts/post3.php" method="post">
-            <span class="sp1">Запись в группу <br/> ХАСТЛ-НАЧИНАЮЩИЕ</span>
-            <span class="sp2">ВТ, ЧТ на 20.30-22.00 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s3()">x</a>
-    </div>
-</div>
-
-<div id="window1-4">
-    <div class="window2">
-        <form action="posts/post4.php" method="post">
-            <span class="sp1">Запись в группу <br/> ХАСТЛ-НАЧИНАЮЩИЕ</span>
-            <span class="sp2">ПН, СР на 19.00-20.30 <br/>ТРЕТЬЯКОВСКАЯ, НОВОКУЗНЕЦКАЯ Малый Татарский переулок, д. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s4()">x</a>
-    </div>
-</div>
-
-<div id="window1-5">
-    <div class="window2">
-        <form action="posts/post5.php" method="post">
-            <span class="sp1">Запись в группу <br/> ХАСТЛ-НАЧИНАЮЩИЕ</span>
-            <span class="sp2">ПН, СР на 19.00-20.30 <br/>КРАСНОПРЕСНЕНСКАЯ Пресненский переулок, 2</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s5()">x</a>
-    </div>
-</div>
-
-<div id="window1-6">
-    <div class="window2">
-        <form action="posts/post6.php" method="post">
-            <span class="sp1">Запись в группу <br/> Хастл - Продолжающие</span>
-            <span class="sp2">ПН, СР на 20.30-22.00 <br/>КРАСНОПРЕСНЕНСКАЯ Пресненский переулок, 2</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s6()">x</a>
-    </div>
-</div>
-
-<div id="window1-7">
-    <div class="window2">
-        <form action="posts/post7.php" method="post">
-            <span class="sp1">Запись в группу <br/> Хастл - Продолжающие</span>
-            <span class="sp2">ВТ, ЧТ на 20.30-22.00 <br/>КАЛУЖСКАЯ улица Бутлерова, 12</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s7()">x</a>
-    </div>
-</div>
-
-<div id="window1-8">
-    <div class="window2">
-        <form action="posts/post8.php" method="post">
-            <span class="sp1">Запись в группу <br/> Хастл - Продолжающие</span>
-            <span class="sp2">СБ, ВС на 12.00-13.30 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s8()">x</a>
-    </div>
-</div>
-
-<div id="window1-9">
-    <div class="window2">
-        <form action="posts/post9.php" method="post">
-            <span class="sp1">Запись в группу <br/> Хастл - Продолжающие</span>
-            <span class="sp2">ПН, СР на 20.30-22.00 <br/>ТРЕТЬЯКОВСКАЯ, НОВОКУЗНЕЦКАЯ Малый Татарский переулок, д. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s9()">x</a>
-    </div>
-</div>
-
-<div id="window1-10">
-    <div class="window2">
-        <form action="posts/post10.php" method="post">
-            <span class="sp1">Конкурсная группа <br/> по E+Д классу</span>
-            <span class="sp2">ПН, СР на 19.00-20.30 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s10()">x</a>
-    </div>
-</div>
-
-<div id="window1-11">
-    <div class="window2">
-        <form action="posts/post11.php" method="post">
-            <span class="sp1">Конкурсная группа <br/> по E классу</span>
-            <span class="sp2">ВТ, ЧТ на 19.00-20.30 <br/>КРАСНОПРЕСНЕНСКАЯ Пресненский переулок, 2</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s11()">x</a>
-    </div>
-</div>
-
-<div id="window1-12">
-    <div class="window2">
-        <form action="posts/post12.php" method="post">
-            <span class="sp1">Конкурсная группа <br/> по E классу</span>
-            <span class="sp2">ВТ, ЧТ на 19.00-20.30 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s12()">x</a>
-    </div>
-</div>
-
-<div id="window1-13">
-    <div class="window2">
-        <form action="posts/post13.php" method="post">
-            <span class="sp1">Конкурсная группа <br/> по ДнД (Beginner)</span>
-            <span class="sp2">ВТ, ЧТ на 20.30-22.00 <br/>КРАСНОПРЕСНЕНСКАЯ Пресненский переулок, 2</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s13()">x</a>
-    </div>
-</div>
-
-<div id="window1-14">
-    <div class="window2">
-        <form action="posts/post14.php" method="post">
-            <span class="sp1">Группа <br/> по ДнД RS+Main</span>
-            <span class="sp2">ПН, СР на 20.30-22.00 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s14()">x</a>
-    </div>
-</div>
-
-<div id="window1-15">
-    <div class="window2">
-        <form action="posts/post15.php" method="post">
-            <span class="sp1">Растяжка и <br/>общетанцевальная техника</span>
-            <span class="sp2">ВС на 19.00-21.00 <br/>ВОЛГОГРАДСКИЙ ПРОСПЕКТ Волгоградский проспект 32 стр. 8</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s15()">x</a>
-    </div>
-</div>
-
-<div id="window1-16">
-    <div class="window2">
-        <form action="posts/post16.php" method="post">
-            <span class="sp1">Группа - Сальса<br/> и Бачата</span>
-            <span class="sp2">ПН, СР на 19.00-21.00 <br/>Улица 1905 года Звенигородское шоссе,3</span>
-
-            <div class="name_inp">ФИО</div>
-            <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
-            </div>
-            <div class="name_inp">Телефон</div>
-            <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
-                       autocomplete="of">
-            </div>
-            <button type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
-        </form>
-        <a class="close1" onclick="okn2s16()">x</a>
-    </div>
-</div>
-
-
-<a href="" class="swiftseo-overlay" id="success_l"></a>
-
-<div class="swiftseo-popup"><p> Сообщение отправленно! </p></div>
-<a href="#x" class="swiftseo-overlay" id="zvonok"></a>
-
+<a href="#" class="swiftseo-overlay" id="zvonok"></a>
 <div class="swiftseo-popup"><p class="popup-zag">Закажите звонок!</p>
-
-    <form method="post" action="lead.php"><input type='hidden' name='csrfmiddlewaretoken'
-                                                 value='ZAD2ZAaSuhk8SovzaYdWDriCR7DViBPj'/>
+    <form method="post" id="call_form">
+        <input type="hidden" name="user_type" value="Заказ звонка">
         Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
         Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
-        <input onclick="yaCounter32063616.reachGoal('close-enter'); return true;" value="ЗАКАЗАТЬ" type="submit"
-               class="popupgreen"></form>
+        <input onclick="yaCounter32063616.reachGoal('close-enter'); sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="popupgreen">
+    </form>
 </div>
+
 <a href="#x" class="swiftseo-overlay" id="napisat"></a>
 <script src="{% static "js/slider.js" %}"></script>
 <script src="{% static "js/buff.js" %}"></script>
 <script>
-    var scroll1 = function (name) {
+    function scroll1(name, delay) {
         var top = $(name).offset().top;
-        $('body,html').animate({scrollTop: top - 40}, 800);
+        $('body,html').animate({scrollTop: top - 40}, delay || 800);
+    }
+
+    function sendForm(formId) {
+        var form = $('#'+formId),
+            formData = {};
+        form.find('input').each(function() {
+            if($(this).is('input[type=text]') || $(this).is('input[type=hidden]')) {
+                formData[$(this).attr('name')] = $(this).val();
+            }
+        });
+
+        $.ajax('', {
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+            },
+            method: 'POST',
+            data: formData
+        }).done(function() {
+            document.location.hash = '#success_l';
+        }).error(function(err) {
+            console.log(err);
+        });
     }
 </script>
 </body>

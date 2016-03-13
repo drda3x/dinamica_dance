@@ -888,14 +888,15 @@ height:100%;
 	max-width:200px !important;
 }
 .window2{
+    display:none;
 	position:relative;
 	margin:0 auto 0 auto;
-	max-width:500px;
+	max-width:350px;
 	border-radius:10px;
 	background-color:#F9F7E6;
 	padding:20px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-	display:flex;
+    align-items: center;
 }
 .sp1{
 	display:block;
