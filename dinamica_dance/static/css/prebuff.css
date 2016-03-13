@@ -371,9 +371,12 @@ html {
     -moz-transition:opacity .5s,top .3s;
     -ms-transition:opacity .5s,top .3s;
     -o-transition:opacity .5s,top .3s;
-    transition:opacity .5s,top .3s;width:600px;
+    transition:opacity .5s,top .3s;
     padding-bottom:30px;
-    background-color: rgb(219, 219, 219)
+    background-color: rgb(219, 219, 219);
+    width: inherit;
+    min-width: 280px;
+    max-width: 600px;
 }
 .swiftseo-overlay:target+.swiftseo-popup
 {
@@ -413,7 +416,8 @@ html {
     background: #696969;
     border: none;
     color: white;
-     width: 350px;
+    max-width: 350px;
+    min-width: 280px;
 }
 .popup-zag {
     font-size: 24px;
