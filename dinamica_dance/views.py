@@ -125,7 +125,7 @@ class IndexView(TemplateView):
         def get_group_repr(group):
             return dict(
                 id=group.id,
-                name='%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
+                name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d), xrange(0, 7), ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']),
                 metro=group.dance_hall.station.upper(),
@@ -150,8 +150,8 @@ class IndexView(TemplateView):
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
-            begin_time=bonus_class.time.strftime('%H:%M'),
-            end_time=bonus_class.end_time.strftime('%H:%M'),
+            begin_time=bonus_class.time.strftime('%H:%M') if bonus_class.time else u'',
+            end_time=bonus_class.end_time.strftime('%H:%M') if bonus_class.end_time else u'',
             hall_address=bonus_class.hall.address,
             metro_station=bonus_class.hall.station,
             time_from_metro=bonus_class.hall.time_to_come
