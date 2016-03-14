@@ -63,16 +63,16 @@
 <!-- /Yandex.Metrika counter -->
 <nav>
     <div class="wrapper1">
-        <div style="cursor: pointer;" class="logo" onclick="scroll1('body')"></div>
+        <div style="cursor: pointer;" class="logo" onclick="softScroll('body'); document.location.hash = '#';"></div>
         <ul>
-            <li><a onclick="scroll1('#nv9')" href="#!" title="тренеры">Почему мы?</a></li>
-            <li><a onclick="scroll1('#nv6')" href="#!" title="тренеры">тренеры</a></li>
-            <li><a onclick="scroll1('#nv2')" href="#!" title="отзывы">отзывы</a></li>
-            <li><a onclick="scroll1('#nv3')" href="#!" title="фото">фото</a></li>
-            <li><a onclick="scroll1('#nv8')" href="#!" title="адреса">адреса</a></li>
-            <li><a onclick="scroll1('#nv4')" href="#!" title="расписание">расписание</a></li>
-            <li><a onclick="scroll1('#nv5')" href="#!" title="цена">цена</a></li>
-            <li><a onclick="scroll1('#nv7')" href="#!" title="записаться">записаться</a></li>
+            <li><a onclick="softScroll('#nv9'); document.location.hash = '#nv9'; return false;" href="#" title="тренеры">Почему мы?</a></li>
+            <li><a onclick="softScroll('#nv6'); document.location.hash = '#nv6'; return false;" href="#" title="тренеры">тренеры</a></li>
+            <li><a onclick="softScroll('#nv2'); document.location.hash = '#nv2'; return false;" href="#" title="отзывы">отзывы</a></li>
+            <li><a onclick="softScroll('#nv3'); document.location.hash = '#nv3'; return false;" href="#" title="фото">фото</a></li>
+            <li><a onclick="softScroll('#nv8'); document.location.hash = '#nv8'; return false;" href="#" title="адреса">адреса</a></li>
+            <li><a onclick="softScroll('#nv4'); document.location.hash = '#nv4'; return false;" href="#" title="расписание">расписание</a></li>
+            <li><a onclick="softScroll('#nv5'); document.location.hash = '#nv5'; return false;" href="#" title="цена">цены</a></li>
+            <li><a onclick="softScroll('#nv7'); document.location.hash = '#nv7'; return false;" href="#" title="записаться">записаться</a></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -101,7 +101,7 @@
                     <li>Не скучать вечерами за компьютером в одиночестве;</li>
                     <li>Найти свою "танцевальную семью" и зажигать вместе</li>
                 </ul>
-                <a href="#!" title="записаться на бесплатное занятие" class="btn1" onclick="scroll1('#nv7')">записаться
+                <a href="#!" title="записаться на бесплатное занятие" class="btn1" onclick="softScroll('#nv7')">записаться
                     на бесплатное занятие</a>
             </div>
         </div>
@@ -147,8 +147,9 @@
                 <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                 <span>* поле обязательно для заполнения. Мы перезвоним вам в 
 течении 30 секунд. Гарантируем сохранность данных</span>
-                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form'); return false;" type="submit" class="inp2 btn3"
+                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form'); return false;" type="submit" class="user-action inp2 btn3"
                        value="ОСТАВИТЬ ЗАЯВКУ">
+                <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
             </form>
         </div>
         <div class="clear"></div>
@@ -734,8 +735,9 @@
                 <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                 <span>* поле обязательно для заполнения. Мы перезвоним вам в 
 течении 30 секунд. Гарантируем сохранность данных</span>
-                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form2'); return false;" type="submit" class="inp2 btn3"
+                <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form2'); return false;" type="submit" class="user-action inp2 btn3"
                        value="ОСТАВИТЬ ЗАЯВКУ">
+                <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
             </form>
         </div>
 
@@ -749,7 +751,7 @@
 </footer>
 
 {% for group in all_groups %}
-    <a href="#" class="swiftseo-overlay" id="g{{ group.id }}" onclick="scroll1('#nv4', 0);"></a>
+    <a href="#nv4" class="swiftseo-overlay" id="g{{ group.id }}"></a>
     <div class="window2 swiftseo-popup">
         <form id="group_form{{ group.id }}">
             <span class="sp1">Запись в группу <br/> {{ group.name }}</span>
@@ -766,18 +768,16 @@
 
             <div class="name_inp">ФИО</div>
             <div class="input-prepend">
-                <input type="text" name="name" class="input-medium focused inp1">
+                <input type="text" name="name" class="inputt2">
             </div>
             <div class="name_inp">Телефон</div>
             <div class="input-prepend">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100"
+                <input class="inputt2" name="phone" type="text" value maxlength="100"
                        autocomplete="of">
             </div>
-            <button onclick="sendForm('group_form{{ group.id }}'); return false;" type="submit" class="btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">
-                Записаться
-            </button>
+            <input class="popupgreen" onclick="sendForm('group_form{{ group.id }}'); return false;" type="submit" name="send" value="Записаться">
         </form>
-        <a class="close1" onclick="okn2()">x</a>
+        <a class="close1" href="#nv4">x</a>
     </div>
 {% endfor %}
 
@@ -790,7 +790,8 @@
         <input type="hidden" name="user_type" value="Заказ звонка">
         Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
         Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
-        <input onclick="yaCounter32063616.reachGoal('close-enter'); sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="popupgreen">
+        <input onclick="yaCounter32063616.reachGoal('close-enter'); sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
+        <div style="display: none; margin: 51px 0 0;" class="user-message">Отправка данных...</div>
     </form>
 </div>
 
@@ -798,12 +799,22 @@
 <script src="{% static "js/slider.js" %}"></script>
 <script src="{% static "js/buff.js" %}"></script>
 <script>
-    function scroll1(name, delay) {
+
+    function scroll(name) {
+        setTimeout(function() {
+            var top = $(name).offset().top;
+            $('body,html').scrollTop(top - 40);
+        }, 500);
+    }
+
+    function softScroll(name) {
         var top = $(name).offset().top;
-        $('body,html').animate({scrollTop: top - 40}, delay || 800);
+        $('body,html').animate({scrollTop: top - 40}, 800);
     }
 
     function sendForm(formId) {
+        showUserMessage();
+
         var form = $('#'+formId),
             formData = {};
         form.find('input').each(function() {
@@ -820,10 +831,23 @@
             data: formData
         }).done(function() {
             document.location.hash = '#success_l';
+            showUserAction();
         }).error(function(err) {
             console.log(err);
+            showUserAction();
         });
     }
+
+    function showUserMessage() {
+        $('.user-action').hide();
+        $('.user-message').show();
+    }
+
+    function showUserAction() {
+        $('.user-action').show();
+        $('.user-message').hide();
+    }
+
 </script>
 </body>
 </html>
