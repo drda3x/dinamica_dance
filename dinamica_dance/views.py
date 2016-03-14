@@ -140,10 +140,10 @@ class IndexView(TemplateView):
         except BonusClasses.DoesNotExist:
             bonus_class = BonusClasses.objects.select_related().filter(date__lte=now).latest('date')
 
-        context['beginners'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.beginners_str_code, all_groups))
-        context['inters'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.intermediate_str_code, all_groups))
-        context['advanced'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.advanced_str_code, all_groups))
-        context['other'] = map(get_group_repr, filter(lambda g: g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
+        context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
+        context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
+        context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
+        context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
         context['bonus_class'] = dict(
             date=bonus_class.date.strftime('%d.%m.%Y'),
