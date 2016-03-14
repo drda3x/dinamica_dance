@@ -125,7 +125,7 @@ class IndexView(TemplateView):
         def get_group_repr(group):
             return dict(
                 id=group.id,
-                name='%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
+                name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d), xrange(0, 7), ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']),
                 metro=group.dance_hall.station.upper(),
@@ -140,18 +140,18 @@ class IndexView(TemplateView):
         except BonusClasses.DoesNotExist:
             bonus_class = BonusClasses.objects.select_related().filter(date__lte=now).latest('date')
 
-        context['beginners'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.beginners_str_code, all_groups))
-        context['inters'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.intermediate_str_code, all_groups))
-        context['advanced'] = map(get_group_repr, filter(lambda g: g.level.string_code == self.advanced_str_code, all_groups))
-        context['other'] = map(get_group_repr, filter(lambda g: g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
+        context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
+        context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
+        context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
+        context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
         context['bonus_class'] = dict(
             date=bonus_class.date.strftime('%d.%m.%Y'),
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
-            begin_time=bonus_class.time.strftime('%H:%M'),
-            end_time=bonus_class.end_time.strftime('%H:%M'),
+            begin_time=bonus_class.time.strftime('%H:%M') if bonus_class.time else u'',
+            end_time=bonus_class.end_time.strftime('%H:%M') if bonus_class.end_time else u'',
             hall_address=bonus_class.hall.address,
             metro_station=bonus_class.hall.station,
             time_from_metro=bonus_class.hall.time_to_come
