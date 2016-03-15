@@ -14,7 +14,7 @@ from django.http import HttpResponse, HttpResponseServerError
 class EmailNotifier(object):
     encoding = 'windows-1251'
     mail_from = 'report@dinamica.dance'
-    mail_to = 'da3x11@gmail.com'
+    mail_to = 'kudryavtsev-m@mail.ru'
     password = 'thisishustle'
 
     e_mail_types = [
