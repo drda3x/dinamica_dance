@@ -10,7 +10,7 @@ from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render_to_response 
-from settings import EMAIL_TO
+from project.settings import EMAIL_TO
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
