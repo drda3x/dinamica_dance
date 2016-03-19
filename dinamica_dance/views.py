@@ -9,6 +9,7 @@ from datetime import datetime
 from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
+from django.shortcuts import render_to_response 
 from settings import EMAIL_TO
 
 class EmailNotifier(object):
@@ -162,7 +163,7 @@ class IndexView(TemplateView):
     def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
         if self.email.send_mail(**kw):
-            return HttpResponse(200)
+            return render_to_response('response.html')
 
         else:
             return HttpResponseServerError()

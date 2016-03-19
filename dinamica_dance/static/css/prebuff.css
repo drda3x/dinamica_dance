@@ -433,3 +433,8 @@ html {
     padding: 10px 50px;
     cursor: pointer;
 }
+
+
+.shedule-router:target+.simple-little-table{
+    display: block !important;
+}
