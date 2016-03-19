@@ -105,6 +105,11 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = ''
 
+
+# dinamica.dance settings
+EMAIL_TO = 'kudryavtsev-m@mail.ru'
+
+
 try:
     from settings_local import *
 except Exception:

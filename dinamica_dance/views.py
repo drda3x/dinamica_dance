@@ -9,12 +9,12 @@ from datetime import datetime
 from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
-
+from settings import EMAIL_TO
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
     mail_from = 'report@dinamica.dance'
-    mail_to = 'kudryavtsev-m@mail.ru'
+    mail_to = EMAIL_TO
     password = 'thisishustle'
 
     e_mail_types = [

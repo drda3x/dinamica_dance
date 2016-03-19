@@ -142,6 +142,7 @@
             <form method="post" id="free_lesson_form">
                 <h4>Записаться на бесплатное занятие!</h4>
                 <input type="hidden" name="user_type" value="Запись на мастер-класс">
+                <input type="hidden" name="class_date" value="{{ bonus_class.date }}">
                 <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                 <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                 <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">

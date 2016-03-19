@@ -10,6 +10,8 @@ DATABASES = {
         'USER': 'adminwe8CFsC',
         'PASSWORD': '9SIjCTSzQT6m',
         'HOST': '127.0.0.1',
-        'PORT': '3307',
+        'PORT': '3306',
     }
 }
+
+EMAIL_TO = 'da3x11@gmail.com'
