@@ -9,7 +9,7 @@ from datetime import datetime
 from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
-
+from django.utils.timezone import get_default_timezone
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
@@ -132,13 +132,13 @@ class IndexView(TemplateView):
                 address=group.dance_hall.address
             )
 
-        now = datetime.now()
+        now = datetime.now(tz=get_default_timezone())
         all_groups = list(Groups.objects.select_related('level').filter(is_opened=True))
 
         try:
-            bonus_class = BonusClasses.objects.select_related().filter(date__gte=now).earliest('date')
+            bonus_class = BonusClasses.objects.select_related().filter(date__gt=now.date()).earliest('date')
         except BonusClasses.DoesNotExist:
-            bonus_class = BonusClasses.objects.select_related().filter(date__lte=now).latest('date')
+            bonus_class = BonusClasses.objects.select_related().filter(date__lte=now.date()).latest('date')
 
         context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
         context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
