@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'dinamica_dance.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u48649',
+        'USER': 'u48649',
+        'PASSWORD': 'adkk6kasdr',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -104,6 +108,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = ''
+
+
+# dinamica.dance settings
+EMAIL_TO = 'kudryavtsev-m@mail.ru'
+
 
 try:
     from settings_local import *

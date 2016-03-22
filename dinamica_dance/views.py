@@ -10,11 +10,14 @@ from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
+from django.shortcuts import render_to_response 
+from project.settings import EMAIL_TO
+
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
     mail_from = 'report@dinamica.dance'
-    mail_to = 'kudryavtsev-m@mail.ru'
+    mail_to = EMAIL_TO
     password = 'thisishustle'
 
     e_mail_types = [
@@ -162,7 +165,7 @@ class IndexView(TemplateView):
     def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
         if self.email.send_mail(**kw):
-            return HttpResponse(200)
+            return render_to_response('response.html')
 
         else:
             return HttpResponseServerError()
