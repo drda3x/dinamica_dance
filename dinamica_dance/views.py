@@ -45,11 +45,11 @@ class EmailNotifier(object):
             s.sendmail(self.mail_from, self.mail_to, msg.as_string())
             s.quit()
 
-            return True
+            return True, None
 
         except Exception:
-            from traceback import format_exc; print format_exc()
-            return False
+            from traceback import format_exc
+            return False, format_exc()
 
     def get_test(self, **kwargs):
         if kwargs['user_type'].lower() == self.e_mail_types[0]:
@@ -161,8 +161,10 @@ class IndexView(TemplateView):
 
     def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
-        if self.email.send_mail(**kw):
+        success, error = self.email.send_mail(**kw)
+
+        if success:
             return HttpResponse(200)
 
         else:
-            return HttpResponseServerError()
+            return HttpResponseServerError('can\'t send e-mail')
