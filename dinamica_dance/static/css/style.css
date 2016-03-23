@@ -879,6 +879,7 @@ height:100%;
 	padding-bottom:5px;
 	display:block;
 	color:#666666;
+    margin-top: 5px;
 }
 .window2 .btn{
 	margin:10px auto 10px auto !important;
@@ -933,6 +934,18 @@ height:100%;
 .bodypost1 p{
 	text-align:center;
 }
+
+.user-message {
+    cursor: default !important;
+}
+
+.user-message-2 {
+    display: none;
+    margin-bottom: 10px !important;
+    padding: 12px 10px !important;
+    font-size: 19px !important;
+}
+
 /*Footer*/
 footer{
 	background: #D50018 url(../img/bg3.png) no-repeat top center;

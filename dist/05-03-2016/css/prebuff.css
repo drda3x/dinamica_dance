@@ -373,7 +373,7 @@ html {
     -o-transition:opacity .5s,top .3s;
     transition:opacity .5s,top .3s;width:600px;
     padding-bottom:30px;
-    background-color: rgb(219, 219, 219)
+    background-color: rgb(219, 219, 219);
 }
 .swiftseo-overlay:target+.swiftseo-popup
 {

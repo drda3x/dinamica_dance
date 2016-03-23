@@ -9,12 +9,15 @@ from datetime import datetime
 from application.models import Groups, BonusClasses
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
+from django.utils.timezone import get_default_timezone
+from django.shortcuts import render_to_response
+from project.settings import EMAIL_TO
 
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
     mail_from = 'report@dinamica.dance'
-    mail_to = 'da3x11@gmail.com'
+    mail_to = EMAIL_TO
     password = 'thisishustle'
 
     e_mail_types = [
@@ -45,11 +48,11 @@ class EmailNotifier(object):
             s.sendmail(self.mail_from, self.mail_to, msg.as_string())
             s.quit()
 
-            return True, None
+            return True
 
         except Exception:
-            from traceback import format_exc
-            return False, format_exc()
+            from traceback import format_exc; print format_exc()
+            return False
 
     def get_test(self, **kwargs):
         if kwargs['user_type'].lower() == self.e_mail_types[0]:
@@ -132,13 +135,13 @@ class IndexView(TemplateView):
                 address=group.dance_hall.address
             )
 
-        now = datetime.now()
+        now = datetime.now(tz=get_default_timezone())
         all_groups = list(Groups.objects.select_related('level').filter(is_opened=True))
 
         try:
-            bonus_class = BonusClasses.objects.select_related().filter(date__gte=now).earliest('date')
+            bonus_class = BonusClasses.objects.select_related().filter(date__gt=now.date()).earliest('date')
         except BonusClasses.DoesNotExist:
-            bonus_class = BonusClasses.objects.select_related().filter(date__lte=now).latest('date')
+            bonus_class = BonusClasses.objects.select_related().filter(date__lte=now.date()).latest('date')
 
         context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
         context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
@@ -161,10 +164,8 @@ class IndexView(TemplateView):
 
     def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
-        success, error = self.email.send_mail(**kw)
-
-        if success:
-            return HttpResponse(200)
+        if self.email.send_mail(**kw):
+            return render_to_response('response.html')
 
         else:
             return HttpResponseServerError('can\'t send e-mail')
