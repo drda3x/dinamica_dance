@@ -136,7 +136,7 @@ class IndexView(TemplateView):
             )
 
         now = datetime.now(tz=get_default_timezone())
-        all_groups = list(Groups.objects.select_related('level').filter(is_opened=True))
+        all_groups = list(Groups.opened.select_related('level'))
 
         try:
             bonus_class = BonusClasses.objects.select_related().filter(date__gt=now.date()).earliest('date')
