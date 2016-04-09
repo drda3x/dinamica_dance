@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime
-from application.models import Groups, BonusClasses
+from application.models import Groups, BonusClasses, PassTypes
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
@@ -122,17 +122,45 @@ class IndexView(TemplateView):
         ('декабрь', 'декабря')
     ]
 
+    days = [
+        ('ПН', 'Понедельник'),
+        ('ВТ', 'Вторник'),
+        ('СР', 'Среда'),
+        ('ЧТ', 'Четверг'),
+        ('ПТ', 'Пятница'),
+        ('СБ', 'Суббота'),
+        ('ВС', 'Воскресение')
+    ]
+
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
         def get_group_repr(group):
+
+            passes = []
+
+            for p in PassTypes.objects.filter(pk__in=group.available_passes_external, prise__gt=0).order_by('lessons', 'skips'):
+                if p.lessons == 1:
+                    passes.append(u'Разовое посещение - %dр.' % p.prise)
+                else:
+                    if p.skips == 0:
+                        passes.append(u'Абонемент на %d заняти%s (без пропусков) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.prise))
+                    else:
+                        passes.append(u'Абонемент на %d заняти%s (%d пропуск%s) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов', p.prise))
+
             return dict(
                 id=group.id,
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
-                days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d), xrange(0, 7), ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']),
+                date=group.start_date_str,
+                days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
+                days_full=', '.join([self.days[i][1] for i in group.days_nums]),
+                passes=passes,
                 metro=group.dance_hall.station.upper(),
-                address=group.dance_hall.address
+                address=group.dance_hall.address,
+                teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,
+                course_details=u'',
+                after_course=u''
             )
 
         now = datetime.now(tz=get_default_timezone())

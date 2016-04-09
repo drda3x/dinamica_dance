@@ -561,6 +561,7 @@
                 <tr>
                     <td class="brl1 cd1">{{ group.name }} <br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                        <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
                         <span class="p2">{{ group.time }}</span><br>
                         {% for day in group.days %}
@@ -591,6 +592,7 @@
                 <tr>
                     <td class="brl1 cd1">{{ group.name }} <br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                        <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
                         <span class="p2">{{ group.time }}</span><br>
                         {% for day in group.days %}
@@ -619,6 +621,7 @@
                 <tr>
                     <td class="brl1 cd1">{{ group.name }} <br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                        <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
                         <span class="p2">{{ group.time }}</span><br>
                         {% for day in group.days %}
@@ -648,6 +651,7 @@
                 <tr>
                     <td class="brl1 cd1">{{ group.name }} <br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
+                        <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
                         <span class="p2">{{ group.time }}</span><br>
                         {% for day in group.days %}
@@ -757,6 +761,8 @@
 {% for group in all_groups %}
     <a href="#nv4" class="swiftseo-overlay" id="g{{ group.id }}"></a>
     <div class="window2 swiftseo-popup">
+        {{ group.name }}
+
         <form id="group_form{{ group.id }}" method="post">
             {% csrf_token %}
             <span class="sp1">Запись в группу <br/> {{ group.name }}</span>
@@ -784,6 +790,73 @@
         </form>
         <a class="close1" href="#nv4">x</a>
     </div>
+{% endfor %}
+
+{% for group in all_groups %}
+    <a href="#nv4" class="swiftseo-overlay" id="det{{ group.id }}"></a>
+    <!--<div class="podrobwindow1 swiftseo-popup2">-->
+        <div class="podrobw1 swiftseo-popup2">
+            <h3>{{ group.name }}</h3>
+            <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
+            <h5>Основная информация о группе:</h5>
+            <p><b>Преподаватели:</b> {{group.teachers}}</p>
+            <p><b>Начало занятий:</b> {{ group.date }}</p>
+            <p><b>Время занятий:</b> {{ group.time }}</p>
+            <p><b>Дни занятий:</b> {{ group.days_full }}</p>
+            <p><b>Стоимость занятий:</b> {% if not group.passes %}Точную стоимость и варианты оплаты можно узнать по телефону +7-916-824-666-1{% endif %}</p>
+            {% for p in group.passes %}
+                <p style="text-indent: 2em;">{{p}}</p>
+            {% endfor %}
+            <p><b>Место проведения занятий:</b>  м. {{ group.metro }}, {{ group.address }}</p>
+            <p><b>Длительность курса:</b> 2 месяца</p>
+            <p><b>Любые вопросы можно задать по телефону:</b> +7-916-824-666-1</p>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" value="Заявка на запись в группу" />
+                <input type="hidden" name="group_name" value="{{ group.name }}" />
+                <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
+                <input type="hidden" name="time" value="{{ group.time }}" />
+                <input type="hidden" name="station" value="{{ group.metro }}" />
+                <div class="name_inp">ФИО</div>
+                <div class="input-prepend">
+                    <input type="text" name="name" class="input-medium focused inp1">
+                </div>
+                <div class="name_inp">Телефон</div>
+                <div class="input-prepend">
+                    <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of">
+                </div>
+                <button type="submit" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+            </form>
+
+            <div>{{course_details}}</div>
+            <div>{{after_course}}</div>
+
+            <!--<h5>Подробнее о курсе :</h5>
+            <p>Техника основного шага (на 4 счета): различные виды основного шага.</p>
+            <p>Базовые элементы: смены, "веревочки", вращения, поддержки.</p>
+            <p>Взаимодействие в паре: основы ведения и следования.</p>
+            <p>Вариации и связки элементов.</p>
+            <p>Яркие шоу-фигуры.</p>
+            <p>Основные движения и элементы, исполняемые на дискотеках.</p>
+            <p>Общая танцевальная техника: осанка, баланс, вращения, работа корпуса, стоп, рук.</p>
+            <h5>В конце курса начинающих вы научитесь:</h5>
+            <p>Уверенно танцевать хастл, удивляя друзей на дискотеках</p>
+            <p>Исполнять интересные и красивые движения</p>
+            <p>Узнаете как правильно пригласить девушку / молодого человека на танец</p>
+            <p>Выучите поддержки, которые украсят ваши фотоальбомы</p>
+            <p>Найдете много новых знакомых!!!</p>-->
+
+            <div class="myvideo">
+                <iframe width="853" height="480" src="https://www.youtube.com/embed/T0Jl0i4P_ec" frameborder="0" allowfullscreen></iframe>
+            </div><br />
+            <p><b>Тренеры ТСК "Динамика" и специальная группа организаторов</b> создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
+            <p><b>В чём приходить на занятия:</b> <br />
+            <b>Одежда</b> должна быть свободной, не стесняющей движений. Главное, чтобы Вам было удобно двигаться, поэтому нежелательно одевать мини-юбки, высокие каблуки и обувь с длинными носами.<br />
+            <b>Обувь</b> на занятия желательно одевать без каблуков, особенно на первом этапе (идеальный вариант - это джазовки или чешки).</p>
+            <a class="close1" href="#nv4">x</a>
+        </div>
+    <!--</div>-->
 {% endfor %}
 
 <a href="#" class="swiftseo-overlay" id="success_l"></a>

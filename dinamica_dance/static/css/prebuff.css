@@ -380,11 +380,15 @@ html {
 }
 .swiftseo-overlay:target+.swiftseo-popup
 {
-    top:50% !important;
     opacity:1 !important;
     visibility:visible !important;
 }
-
+.swiftseo-overlay:target+.swiftseo-popup2
+{
+    opacity:1 !important;
+    visibility:visible !important;
+    display:block !important;
+}
 .popupred {
     margin-top: 30px;
     background: #ae3b2d;

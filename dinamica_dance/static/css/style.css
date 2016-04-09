@@ -767,6 +767,13 @@ height:100%;
 .zaps1:hover{
 	background-color:#F2031C;
 }
+.pdrb1{
+	background-color:#D27D26;
+	margin-left:10px;
+}
+.pdrb1:hover{
+	background-color:#E09040;
+}
 .s9-1{
 	background: #F9F8E6 url(../img/bg9-1.jpg) no-repeat top center;
 	padding:60px 0 75px 0;
@@ -881,6 +888,78 @@ height:100%;
 	color:#666666;
     margin-top: 5px;
 }
+
+
+.podrobwindow1 {
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	background:rgba(0,0,0,0.5);
+	z-index:500000;
+}
+.podrobw1{
+	display:none;
+/*	position:relative;*/
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	max-width:900px;
+	margin:0 auto;
+	background:#fff;
+	z-index:1000000;
+	box-shadow:0 0 10px rgba(0,0,0,0.2);
+	overflow-y:scroll;
+	max-height:100%;
+	width:96%;
+	box-sizing:border-box;
+	padding:30px;
+	font-size:0.9em;
+}
+.podrobw1 h3{
+	text-align:center;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+.podrobw1 h4{
+	font-weight:normal;
+	text-align:center;
+}
+.podrobw1 h5{
+	font-size:1.2em;
+	color:#333333;
+	font-weight:bold;
+}
+.podrobw1 p{
+	margin-bottom:10px;
+}
+.podrobw1 .name_inp{
+	display:inline-block;
+	margin-left:20px;
+}
+.podrobw1 .input-prepend{
+	display:inline-block;
+}
+.podrobw1 .inp1{
+	border:1px solid #cccccc;
+	margin-right:10px;
+}
+.podrobw1 .btn1{
+	margin-left:20px;
+}
+.podrobw1 form{
+	display:block;
+	padding:20px;
+	box-sizing:border-box;
+	background-color:#dedede;
+	margin:0 auto 20px auto;
+}
+
+
 .window2 .btn{
 	margin:10px auto 10px auto !important;
 	display:block;
@@ -890,7 +969,7 @@ height:100%;
 }
 .window2{
     display:none;
-	position:relative;
+	/*position:relative;*/
 	margin:0 auto 0 auto;
 	max-width:350px;
 	border-radius:10px;
