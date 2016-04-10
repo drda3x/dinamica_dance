@@ -809,10 +809,10 @@
             <p><b>Длительность курса:</b> 2 месяца</p>
             <p><b>Любые вопросы можно задать по телефону:</b> +7-916-824-666-1</p>
 
-            <form method="post">
+            <form id="group_det_form{{ group.id }}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="user_type" value="Заявка на запись в группу" />
-                <input type="hidden" name="group_name" value="{{ group.name }}" />
+                <input type="hidden" name="group_name" value="{{ group.form }}" />
                 <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
                 <input type="hidden" name="time" value="{{ group.time }}" />
                 <input type="hidden" name="station" value="{{ group.metro }}" />
@@ -824,7 +824,7 @@
                 <div class="input-prepend">
                     <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of">
                 </div>
-                <button type="submit" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                <button type="submit" onclick="sendForm('group_det_form{{ group.id }}'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
             </form>
 
             <div>{{course_details}}</div>
