@@ -763,7 +763,7 @@
 
         <form id="group_form{{ group.id }}" method="post">
             {% csrf_token %}
-            <span class="sp1">Запись в группу <br/> {{ group.name }}</span>
+            <span class="sp1">Запись в группу <br/> {{ group.name }} {{group.start_date}}</span>
             <span class="sp2">
                 {{ group.time }} {% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}<br/>
                 м.{{ group.metro }}<br>{{ group.address }}
