@@ -373,7 +373,7 @@
             </div>
 
             <div class="slider2">
-                <!-- <img src="{% static "img/treneri1.jpg" %}" class="img-slider2"> -->
+                <img src="{% static "img/treneri11.jpg" %}" class="img-slider2">
                 <div class="block19 ">
                     <p class="p1">Евгений Арутюнян</p>
                     <ul>
@@ -394,7 +394,7 @@
             </div>
 
             <div class="slider2">
-                <!-- <img src="{% static "img/treneri1.jpg" %}" class="img-slider2"> -->
+                <img src="{% static "img/treneri12.jpg" %}" class="img-slider2">
                 <div class="block19 ">
                     <p class="p1">Антон Егоров</p>
                     <ul>
@@ -528,9 +528,6 @@
         </div>
     </div>
 </section>
-<section class="s8" id="nv8">
-    <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=DxchwfK05AfZruaC1ryWEowGwUtg8lL-&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
-</section>
 <section class="s9" id="nv4">
     <div class="wrapper">
         <h2><img src="{% static "img/h2icn5.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/>РАСПИСАНИЕ</h2>
@@ -559,7 +556,7 @@
 
             {% for group in beginners %}
                 <tr>
-                    <td class="brl1 cd1">{{ group.name }} <br/>
+                    <td class="brl1 cd1">{{ group.name }} {{group.start_date}} <br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
                         <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
@@ -590,7 +587,7 @@
 
             {% for group in inters %}
                 <tr>
-                    <td class="brl1 cd1">{{ group.name }} <br/>
+                    <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
                         <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
@@ -619,7 +616,7 @@
             <!-- Table Header -->
             {% for group in advanced %}
                 <tr>
-                    <td class="brl1 cd1">{{ group.name }} <br/>
+                    <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
                         <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
@@ -649,7 +646,7 @@
 
             {% for group in other %}
                 <tr>
-                    <td class="brl1 cd1">{{ group.name }} <br/>
+                    <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                         <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
                         <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
                     <td>
@@ -668,8 +665,6 @@
                 </tr>
             {% endfor %}
         </table>
-
-
     </div>
 </section>
 <section class="s9-1" id="nv5">
@@ -697,6 +692,9 @@
                 class="price1 tsdzaglsm3">от 1000 <br/>до 2000 руб</span><span class="tsdbt1">1  занятие 1 час</span>
         </div>
     </div>
+</section>
+<section class="s8" id="nv8">
+    <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=DxchwfK05AfZruaC1ryWEowGwUtg8lL-&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
 </section>
 <section class="s10">
     <div class="wrapper">

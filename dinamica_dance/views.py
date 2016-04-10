@@ -5,13 +5,16 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
-from datetime import datetime
+from datetime import datetime, timedelta
 from application.models import Groups, BonusClasses, PassTypes
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
 from django.shortcuts import render_to_response
+from django.db.models import Q
 from project.settings import EMAIL_TO
+
+from application.utils.date_api import MONTH_PARENT_FORM
 
 
 class EmailNotifier(object):
@@ -134,6 +137,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        now = datetime.now(tz=get_default_timezone())
 
         def get_group_repr(group):
 
@@ -148,6 +152,19 @@ class IndexView(TemplateView):
                     else:
                         passes.append(u'Абонемент на %d заняти%s (%d пропуск%s) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов', p.prise))
 
+            delta = (group.start_date - now.date()).days
+            if delta < 0:
+                start_date = u''
+            elif delta == 0:
+                start_date = u'старт сегодня'
+            elif delta == 1:
+                start_date = u'старт завтра'
+            elif delta == 2:
+                start_date = u'старт послезавтра'
+            else:
+                start_date = u'c %d %s' % (group.start_date.day, MONTH_PARENT_FORM[group.start_date.month])
+
+
             return dict(
                 id=group.id,
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
@@ -160,10 +177,10 @@ class IndexView(TemplateView):
                 address=group.dance_hall.address,
                 teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,
                 course_details=u'',
-                after_course=u''
+                after_course=u'',
+                start_date=start_date
             )
 
-        now = datetime.now(tz=get_default_timezone())
         all_groups = list(Groups.opened.select_related('level'))
 
         try:

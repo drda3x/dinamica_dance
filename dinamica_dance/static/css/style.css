@@ -543,7 +543,8 @@ header{
 	padding:50px 0 70px 0;
 }
 .s7{
-	background: url(../img/bg3.png) no-repeat bottom center;
+	/*background: url(../img/bg3.png) no-repeat bottom center;*/
+	background: #ffffff url(../img/bg10.png) no-repeat bottom center;
 	padding:0 0 99px 0;
 	position:relative;
 	z-index:4;
@@ -563,16 +564,16 @@ header{
 .s8{
 	margin-top:-80px;
 	position:relative;
-	z-index:3;
+	z-index:0;
 	position:relative;
 	overflow:hidden;
 }
 .s9{
-	background:url(../img/bg8.png) no-repeat top center, url(../img/bg9.jpg) no-repeat center 114px, url(../img/bg9-1.jpg) no-repeat center 844px;
-	margin-top:-114px;
+	/*background:url(../img/bg8.png) no-repeat top center, url(../img/bg9.jpg) no-repeat center 114px, url(../img/bg9-1.jpg) no-repeat center 844px;*/
+	background:url(../img/bg7_1.png) no-repeat bottom center, url(../img/bg3.jpg) center;
 	position:relative;
 	z-index:5;
-	padding:110px 0 90px 0;
+	padding: 20px 0 90px 0;
 }
 .s9 h2 img{
 	width:45px;
@@ -705,8 +706,12 @@ header{
 	left:-30px;
 }
 .s10{
-	background: #F9F7E6 url(../img/bg2.png) no-repeat bottom center;
-	padding:30px 0 90px 0;
+	background:url(../img/bg4.png) no-repeat top center, url(../img/bg2.png) no-repeat bottom center;
+	/*background: #F9F7E6 url(../img/bg2.png) no-repeat bottom center;*/
+	padding: 110px 0 90px 0;
+	position: relative;
+	z-index: 5;
+	margin-top: -87px;
 }
 .pp2{
 	display:inline-block;
@@ -750,12 +755,12 @@ height:100%;
 	max-width:1000px;
 }
 .zaps1{
-	display:block;
-	margin:5px auto 0 auto;
+	display:inline-block;
+	margin:7px auto 0 auto;
 	text-align:center;
 	background-color:#D50018;
 	border-radius:5px;
-	padding:5px 0 5px 0;
+	padding:5px;
 	color:#ffffff;
 	text-transform:uppercase;
 	font-size:12px;
@@ -775,8 +780,10 @@ height:100%;
 	background-color:#E09040;
 }
 .s9-1{
-	background: #F9F8E6 url(../img/bg9-1.jpg) no-repeat top center;
-	padding:60px 0 75px 0;
+	background: url(../img/bg9-1.png) no-repeat center -88px;
+	padding: 0px 0 80px 0;
+	z-index: 3;
+	position: relative;
 }
 .s9-1 h2{
 	color:#323232;
@@ -1023,6 +1030,12 @@ height:100%;
     margin-bottom: 10px !important;
     padding: 12px 10px !important;
     font-size: 19px !important;
+}
+
+.float-footer {
+	width: 100%;
+	height: 30px;
+	background:url(../img/bg3.png);
 }
 
 /*Footer*/
