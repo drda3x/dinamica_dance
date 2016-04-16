@@ -207,10 +207,18 @@ class IndexView(TemplateView):
 
         return context
 
-    def post(self, request):
+    def post(self, request):    
         kw = {key: val for key, val in request.POST.iteritems()}
         if self.email.send_mail(**kw):
             return render_to_response('response.html')
 
         else:
             return HttpResponseServerError('can\'t send e-mail')
+
+
+    def dispatch(self, request):
+        return super(IndexView, self).dispatch(request)
+
+from django.shortcuts import redirect
+def dancehustle(request):
+    return redirect('http://dinamica.dance/')

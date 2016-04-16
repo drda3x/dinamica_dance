@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from dinamica_dance.views import IndexView
+from dinamica_dance.views import IndexView, dancehustle
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
