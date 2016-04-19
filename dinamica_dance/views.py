@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from django.shortcuts import redirect
+from django.utils.timezone import make_aware
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
@@ -100,6 +102,7 @@ class EmailNotifier(object):
             return None
 
 
+
 class IndexView(TemplateView):
     template_name = 'index.html'
     http_method_names = ('get', 'post')
@@ -164,7 +167,6 @@ class IndexView(TemplateView):
             else:
                 start_date = u'c %d %s' % (group.start_date.day, MONTH_PARENT_FORM[group.start_date.month])
 
-
             return dict(
                 id=group.id,
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
@@ -182,11 +184,19 @@ class IndexView(TemplateView):
             )
 
         all_groups = list(Groups.opened.select_related('level'))
-
+        bonus_class = None
         try:
-            bonus_class = BonusClasses.objects.select_related().filter(date__gt=now.date()).earliest('date')
+            bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:2]
+            for _class in bonus_classes:
+                if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
+                    bonus_class = _class
+                    break
+
+            if not bonus_class:
+                raise BonusClasses.DoesNotExist
+
         except BonusClasses.DoesNotExist:
-            bonus_class = BonusClasses.objects.select_related().filter(date__lte=now.date()).latest('date')
+            bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
 
         context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
         context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
@@ -215,10 +225,8 @@ class IndexView(TemplateView):
         else:
             return HttpResponseServerError('can\'t send e-mail')
 
-
     def dispatch(self, request):
-        return super(IndexView, self).dispatch(request)
+        if 'dancehustle' in request.get_host():
+            return redirect('http://dinamica.dance/')
 
-from django.shortcuts import redirect
-def dancehustle(request):
-    return redirect('http://dinamica.dance/')
+        return super(IndexView, self).dispatch(request)
