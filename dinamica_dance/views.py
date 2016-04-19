@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import time
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
 import smtplib
@@ -146,7 +147,7 @@ class IndexView(TemplateView):
 
             passes = []
 
-            for p in PassTypes.objects.filter(pk__in=group.available_passes_external, prise__gt=0).order_by('lessons', 'skips'):
+            for p in group.external_passes.all(): #PassTypes.objects.filter(pk__in=group.available_passes_external, prise__gt=0).order_by('lessons', 'skips'):
                 if p.lessons == 1:
                     passes.append(u'Разовое посещение - %dр.' % p.prise)
                 else:
@@ -177,7 +178,7 @@ class IndexView(TemplateView):
                 passes=passes,
                 metro=group.dance_hall.station.upper(),
                 address=group.dance_hall.address,
-                teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,
+                teachers=', '.join(map(lambda t: t.__unicode__(), group.teachers.all())),
                 course_details=u'',
                 after_course=u'',
                 start_date=start_date
@@ -188,8 +189,10 @@ class IndexView(TemplateView):
         try:
             bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:2]
             for _class in bonus_classes:
-                if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
+                t = make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone())
+                if now < t:
                     bonus_class = _class
+                    bonus_class.end_date_time = t
                     break
 
             if not bonus_class:
@@ -205,6 +208,7 @@ class IndexView(TemplateView):
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
         context['bonus_class'] = dict(
             date=bonus_class.date.strftime('%d.%m.%Y'),
+            end_date_time=time.mktime(bonus_class.end_date_time.timetuple()) * 1000,
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],

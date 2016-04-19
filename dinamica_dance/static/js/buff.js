@@ -28,10 +28,10 @@ CountdownTimer.prototype={
  },addZero:function(num){ return ('0'+num).slice(-2); }
 };
 
-function CDT(datestr){
+function CDT(datenum){
 
  // Set countdown limit
- var tl = new Date(datestr.split('.').reverse().join('/'));
+ var tl = new Date(datenum);
 
  // You can add time's up message here
  var timer = new CountdownTimer('CDT',tl,'<span class="number-wrapper"><div class="line"></div><span class="number end">Time is up!</span></span>');
