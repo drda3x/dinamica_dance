@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import json
 import time
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
@@ -9,13 +10,13 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, PassTypes
+from application.models import Groups, BonusClasses, DanceHalls
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
 from django.shortcuts import render_to_response
 from django.db.models import Q
-from project.settings import EMAIL_TO
+from project.settings import EMAIL_TO, IS_PRODUCTION
 
 from application.utils.date_api import MONTH_PARENT_FORM
 
@@ -206,6 +207,7 @@ class IndexView(TemplateView):
         context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
+        context['dance_halls'] = json.dumps(map(lambda x: x.__json__(), DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)))
         context['bonus_class'] = dict(
             date=bonus_class.date.strftime('%d.%m.%Y'),
             end_date_time=time.mktime(bonus_class.end_date_time.timetuple()) * 1000,
@@ -218,6 +220,8 @@ class IndexView(TemplateView):
             metro_station=bonus_class.hall.station,
             time_from_metro=bonus_class.hall.time_to_come
         )
+
+        context['production_config'] = IS_PRODUCTION
 
         return context
 

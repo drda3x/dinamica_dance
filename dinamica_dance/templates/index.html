@@ -16,6 +16,7 @@
     <link href="{% static "css/buff.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}"/>
 
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = function () {
             CDT({{ bonus_class.end_date_time }});
@@ -25,6 +26,7 @@
 </head>
 
 <body>
+{% if production_config %}
 <!-- Yandex.Metrika informer -->
 <a href="https://metrika.yandex.ru/stat/?id=34798545&amp;from=informer"
 target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/34798545/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
@@ -60,6 +62,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/34798545" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+{% endif %}
 <nav>
     <div class="wrapper1">
         <div style="cursor: pointer;" class="logo" onclick="softScroll('body'); document.location.hash = '#';"></div>
@@ -693,7 +696,11 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
     </div>
 </section>
 <section class="s8" id="nv8">
+{% comment %}
+
     <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=DxchwfK05AfZruaC1ryWEowGwUtg8lL-&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
+{% endcomment %}
+    <div style="width: 100%; height: 500px;" id="map"></div>
 </section>
 <section class="s10">
     <div class="wrapper">
@@ -951,6 +958,28 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
 
         return false;
     });
+
+    (function() {
+        ymaps.ready(init);
+        var myMap,
+            placemarks;
+
+        function init(){
+            myMap = new ymaps.Map("map", {
+                center: [55.76, 37.64],
+                zoom: 11
+            });
+
+            placemarks = $.map({{ dance_halls | safe }}, function(obj) {
+                return new ymaps.Placemark([obj.lon, obj.lat], {
+                    balloonContent: obj.address
+                })
+            });
+            $.map(placemarks, function(obj) {
+                myMap.geoObjects.add(obj);
+            });
+        }
+    })()
 
 </script>
 </body>

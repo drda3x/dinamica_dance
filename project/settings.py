@@ -112,7 +112,7 @@ STATIC_ROOT = ''
 
 # dinamica.dance settings
 EMAIL_TO = 'kudryavtsev-m@mail.ru'
-
+IS_PRODUCTION = True
 
 try:
     from settings_local import *
