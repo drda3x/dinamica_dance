@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
-import time
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
 import smtplib
@@ -10,13 +8,13 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, DanceHalls
+from application.models import Groups, BonusClasses, PassTypes
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
 from django.shortcuts import render_to_response
 from django.db.models import Q
-from project.settings import EMAIL_TO, IS_PRODUCTION
+from project.settings import EMAIL_TO
 
 from application.utils.date_api import MONTH_PARENT_FORM
 
@@ -104,7 +102,6 @@ class EmailNotifier(object):
             return None
 
 
-
 class IndexView(TemplateView):
     template_name = 'index.html'
     http_method_names = ('get', 'post')
@@ -148,7 +145,7 @@ class IndexView(TemplateView):
 
             passes = []
 
-            for p in group.external_passes.all(): #PassTypes.objects.filter(pk__in=group.available_passes_external, prise__gt=0).order_by('lessons', 'skips'):
+            for p in group.external_passes.all().order_by('lessons', 'skips'): #PassTypes.objects.filter(pk__in=group.external_passes, prise__gt=0).order_by('lessons', 'skips'):
                 if p.lessons == 1:
                     passes.append(u'Разовое посещение - %dр.' % p.prise)
                 else:
@@ -157,7 +154,9 @@ class IndexView(TemplateView):
                     else:
                         passes.append(u'Абонемент на %d заняти%s (%d пропуск%s) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов', p.prise))
 
-            delta = (group.start_date - now.date()).days
+            dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
+            delta = (dt - now.date()).days
+
             if delta < 0:
                 start_date = u''
             elif delta == 0:
@@ -167,7 +166,7 @@ class IndexView(TemplateView):
             elif delta == 2:
                 start_date = u'старт послезавтра'
             else:
-                start_date = u'c %d %s' % (group.start_date.day, MONTH_PARENT_FORM[group.start_date.month])
+                start_date = u'c %d %s' % (dt.day, MONTH_PARENT_FORM[dt.month])
 
             return dict(
                 id=group.id,
@@ -179,7 +178,7 @@ class IndexView(TemplateView):
                 passes=passes,
                 metro=group.dance_hall.station.upper(),
                 address=group.dance_hall.address,
-                teachers=', '.join(map(lambda t: t.__unicode__(), group.teachers.all())),
+                teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
                 course_details=u'',
                 after_course=u'',
                 start_date=start_date
@@ -190,10 +189,8 @@ class IndexView(TemplateView):
         try:
             bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:2]
             for _class in bonus_classes:
-                t = make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone())
-                if now < t:
+                if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
                     bonus_class = _class
-                    bonus_class.end_date_time = t
                     break
 
             if not bonus_class:
@@ -207,10 +204,8 @@ class IndexView(TemplateView):
         context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
-        context['dance_halls'] = json.dumps(map(lambda x: x.__json__(), DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)))
         context['bonus_class'] = dict(
             date=bonus_class.date.strftime('%d.%m.%Y'),
-            end_date_time=time.mktime(bonus_class.end_date_time.timetuple()) * 1000,
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
@@ -220,8 +215,6 @@ class IndexView(TemplateView):
             metro_station=bonus_class.hall.station,
             time_from_metro=bonus_class.hall.time_to_come
         )
-
-        context['production_config'] = IS_PRODUCTION
 
         return context
 
