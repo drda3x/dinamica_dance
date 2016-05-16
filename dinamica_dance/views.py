@@ -147,12 +147,12 @@ class IndexView(TemplateView):
 
             for p in group.external_passes.all().order_by('lessons', 'skips'): #PassTypes.objects.filter(pk__in=group.external_passes, prise__gt=0).order_by('lessons', 'skips'):
                 if p.lessons == 1:
-                    passes.append(u'Разовое посещение - %dр.' % p.prise)
+                    passes.append(dict(name=u'Разовое посещение', prise=p.prise))
                 else:
                     if p.skips == 0:
-                        passes.append(u'Абонемент на %d заняти%s (без пропусков) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.prise))
+                        passes.append(dict(name=u'Абонемент на %d заняти%s (без пропусков)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й'), prise=p.prise))
                     else:
-                        passes.append(u'Абонемент на %d заняти%s (%d пропуск%s) - %dр.' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов', p.prise))
+                        passes.append(dict(name=u'Абонемент на %d заняти%s (%d пропуск%s)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов'), prise=p.prise))
 
             dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
             delta = (dt - now.date()).days
@@ -176,8 +176,7 @@ class IndexView(TemplateView):
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
                 days_full=', '.join([self.days[i][1] for i in group.days_nums]),
                 passes=passes,
-                metro=group.dance_hall.station.upper(),
-                address=group.dance_hall.address,
+                dance_hall = group.dance_hall,
                 teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
                 course_details=u'',
                 after_course=u'',

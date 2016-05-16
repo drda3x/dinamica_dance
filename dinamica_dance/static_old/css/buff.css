@@ -29,7 +29,7 @@
 .block1 {
     position: relative;
     height: 600px;
-    background-image: url(../img/fon/fon1.html);
+    background-image: url(../img/fon/fon1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     -webkit-box-shadow: inset 0px 18px 16px -14px rgba(0,0,0,0.75);
@@ -173,7 +173,7 @@ box-shadow: inset 0px 18px 16px -14px rgba(0,0,0,0.75);
     margin-left: -50px;
 }
 .block7 {
-    background: url(../img/fon/fon2.html);
+    background: url(../img/fon/fon2.jpg);
     background-repeat: no-repeat;
     background-position: center;
     height: 500px;
@@ -207,7 +207,7 @@ box-shadow: inset 0px 18px 16px -14px rgba(0,0,0,0.75);
 }
 .block10 {
     height: 770px;
-    background-image: url(../img/fon/fon3.html);
+    background-image: url(../img/fon/fon3.jpg);
     background-size: cover;
     padding-top: 5px;
     position: relative;
