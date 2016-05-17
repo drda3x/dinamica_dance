@@ -8,13 +8,13 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, PassTypes
+from application.models import Groups, BonusClasses, PassTypes, GroupList
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
 from django.shortcuts import render_to_response
-from django.db.models import Q
-from project.settings import EMAIL_TO
+from django.db.models import Q, Sum
+from project.settings import EMAIL_TO, TEACHERS_BOOK_STATIC_URL
 
 from application.utils.date_api import MONTH_PARENT_FORM
 
@@ -157,7 +157,7 @@ class IndexView(TemplateView):
             dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
             delta = (dt - now.date()).days
 
-            if delta < 0:
+            if delta + 21 < 0:
                 start_date = u''
             elif delta == 0:
                 start_date = u'старт сегодня'
@@ -173,11 +173,15 @@ class IndexView(TemplateView):
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
                 date=group.start_date_str,
+                free_places=(group.free_placees or 0) - GroupList.objects.filter(group=group, active=True).count(),
+                top_msg=group.lending_message or '',
+                duration=group.duration,
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
                 days_full=', '.join([self.days[i][1] for i in group.days_nums]),
                 passes=passes,
                 dance_hall = group.dance_hall,
-                teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
+                # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
+                teachers=group.teachers.all(),
                 course_details=u'',
                 after_course=u'',
                 start_date=start_date
@@ -214,6 +218,8 @@ class IndexView(TemplateView):
             metro_station=bonus_class.hall.station,
             time_from_metro=bonus_class.hall.time_to_come
         )
+
+        context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
 
         return context
 

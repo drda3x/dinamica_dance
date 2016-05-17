@@ -600,7 +600,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                         {% endfor %}
                     </td>
                     <td class="brr1 tal1">
-                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.dance_hall.station | upper }}<br/>{{ group.dance_hall.address }}
                     </td>
                 </tr>
             {% endfor %}
@@ -629,7 +629,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                         {% endfor %}
                     </td>
                     <td class="brr1 tal1">
-                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.dance_hall.station | upper }}<br/>{{ group.dance_hall.address }}
                     </td>
                 </tr>
             {% endfor %}
@@ -659,7 +659,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                         {% endfor %}
                     </td>
                     <td class="brr1 tal1">
-                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.metro }}<br/>{{ group.address }}
+                        <img src="{% static "img/h2icn6.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> {{ group.dance_hall.station | upper }}<br/>{{ group.dance_hall.address }}
                     </td>
                 </tr>
             {% endfor %}
@@ -765,7 +765,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
             <span class="sp1">Запись в группу <br/> {{ group.name }} {{group.start_date}}</span>
             <span class="sp2">
                 {{ group.time }} {% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}<br/>
-                м.{{ group.metro }}<br>{{ group.address }}
+                м.{{ group.dance_hall.station }}<br>{{ group.address }}
             </span>
 
             <input type="hidden" name="user_type" value="Заявка на запись в группу" />
@@ -795,17 +795,21 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
         <div class="podrobw1 swiftseo-popup2">
             <h3>{{ group.name }}</h3>
             <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
-            <span class="sp5">* Можно присоединиться парам и юношам! *</span>
+            <span class="sp5">{{ group.top_msg }}</span>
             <div class="ls1">
             	<h4>Общая информация</h4>
                 <table cellpadding="0" cellspacing="0">
                 	<tbody>
                 	<tr><td>Начало занятий</td>
                     <td>{{ group.date }}</td></tr>
+                    {% if group.free_places and group.free_places > 0 %}
                     <tr><td>Осталось мест</td>
-                    <td>{{ group.last_place }}</td></tr>
+                    <td>{{ group.free_places }}</td></tr>
+                    {% endif %}
+                    {% if group.duration %}
                     <tr><td>Длительность курса</td>
-                    <td>{{ group.course_duration }}</td></tr>
+                    <td>{{ group.duration }}</td></tr>
+                    {% endif %}
                     <tr><td>Дни недели</td>
                     <td>{{ group.days_full }}</td></tr>
                     <tr><td>Время занятий</td>
@@ -831,54 +835,39 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
             <div class="prepod1">
             <span class="hline"></span>
             <div class="h3bl1"><h3>ПРЕПОДАВАТЕЛИ</h3></div>
-            <div class="ls2">
-            	<img src="static/img/pr1.jpg" width="290" height="280">
-                <h4>Татьяна Дутчак</h4>
-                <p>А и Star класс по хастлу, призер Чемпионатов Москвы и России
-в различных номинациях,  действующая вице-чемпионка России в номинации «шоу-хастл»
-Мастер спорта, лицензированный тренер (МФТС)</p><p>
-Татьяна – невероятно чуткий педагог с впечатляющим танцевальным (24 года) и преподавательским (6 лет) стажем.</p>
-            </div>
-            <div class="rs2">
-            	<div class="videoblock1">
-                	<div class="videoWrapper">
-                    	<iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
-                    </div>
+            {% for teacher in group.teachers %}
+                <div class="ls2">
+                    {% if teacher.photo_file %}
+                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ teacher.photo_file }}" width="290" height="280" />
+                    {% endif %}
+                    <h4>{{ teacher.first_name }} {{ teacher.last_name }}</h4>
+                    <p>{{ teacher.about }}</p>
                 </div>
-            </div>
-            <div class="clear"></div>
-            <div class="ls2">
-            	<img src="static/img/pr2.jpg" width="290" height="280">
-                <h4>Антон Егоров</h4>
-                <p>Семикратный победитель и многократный призер танцевальных чемпионатов
-в различных номинациях (в том числе Чемпионата России 2014)</p><p>
-Лучший танцор уровня Main в России, танцор B-класса
-Если бывают танцоры «от Бога»,
-то Антон – несомненно один из них. Начав заниматься 2,5 года назад, он успел обойти по уровню мастерства профессионалов, танцующих с детства.</p>
-            </div>
-            <div class="rs2">
-            	<div class="videoblock1">
-                	<div class="videoWrapper">
-                    	<iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+                <div class="rs2">
+                    {% if teacher.video %}
+                    <div class="videoblock1">
+                        <div class="videoWrapper">
+                            <iframe width="560" height="349" src="{{ teacher.video }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
-            </div>
-            <div class="clear"></div>
-
+                <div class="clear"></div>
+            {% endfor %}
             <div class="formwrapper1">
-            <form id="group_det_form36" method="post">
-                <input type='hidden' name='csrfmiddlewaretoken' value='AV0BSPDo3L8FFUq5R2xPl53ohN1cjfJM' />
-                <input type="hidden" name="user_type" value="Заявка на запись в группу" />
-                <input type="hidden" name="group_name" value="" />
-                <input type="hidden" name="days" value="СБ ВС " />
-                <input type="hidden" name="time" value="15:00-16:30" />
-                <input type="hidden" name="station" value="ВОЛГОГРАДСКИЙ ПР-Т" />
-                    <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
-                    <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
-                <button type="submit" onclick="sendForm('group_det_form36'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
-                <button type="submit" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
-                <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
-            </form>
+                <form id="group_form{{ group.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_type" value="Заявка на запись в группу" />
+                    <input type="hidden" name="group_name" value="{{ group.name }}" />
+                    <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
+                    <input type="hidden" name="time" value="{{ group.time }}" />
+                    <input type="hidden" name="station" value="{{ group.station }}" />
+                        <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
+                        <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
+                    <button type="submit" onclick="sendForm('group_form{{ group.id }}'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                    <button type="submit" onclick="sendForm('group_form{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
+                    <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
+                </form>
             </div>
             <p class="bp1">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
             </div>
@@ -887,41 +876,18 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
             <div class="h3bl1"><h3>как проехать</h3></div>
             <div class="ls1">
             	<div class="gallery">
-            	<img src="static/img/ii1.jpg" id="preview" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
+            	<img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
                 <div>
-	<img src="static/img/ii1.jpg" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', 'static/img/ii1.jpg').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-	<img src="static/img/ii2.jpg" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', 'static/img/ii2.jpg').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-	<img src="static/img/ii3.jpg" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', 'static/img/ii3.jpg').fadeIn(300);})" width="165" height="110">
+	<img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
+	<img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
+	<img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}').fadeIn(300);})" width="165" height="110">
 	<div class="clear"></div></div></div>
             </div>
             <div class="rs1">
-            	<span class="prenazv1">м. Шаболовская
-Малый Калужский переулок, д. 15, стр. 16</span>
-<ul><li><b>Площадь зала:</b> 90 кв.м. </li><li><b>Музыкальное оборудование:</b> центр с функциями чтения CD с помощью
-   AUX можно подключить любое устройство со входом jack 3,5mm.</li><li><b>Код от этажа:</b> 1299</li></ul>
-<p>1й вагон из центра, из стеклянных дверей налево. Идем прямо вдоль Волгоградского проспекта до Академии МФЮА, поворачиваем направо в арку под шлагбаум, далее прямо метров 100, за рестораном "МотоМосква" арка для въезда машин, слева от арки красный пластиковый козырек, заходим в этот подъезд, поднимаемся на 3 этаж, и в левое крыло. Сначала будут раздевалки, где можно переодеться и оставить верхнюю одежду/обувь, ценные вещи берем с собой в зал, который находится в самом конце этого коридора.</p>
-<ul><li><b>Площадь зала:</b> 90 кв.м. </li><li><b>Музыкальное оборудование:</b> центр с функциями чтения CD с помощью
-   AUX можно подключить любое устройство со входом jack 3,5mm.</li><li><b>Код от этажа:</b> 1299</li></ul>
+            	<span class="prenazv1">м. {{ group.dance_hall.station }}
+{{ group.dance_hall.address }}</span>
+<p>{{ group.dance_hall.about }}</p>
             </div>
-            <!--div class="clear"></div>
-             <div class="ls1">
-            <div class="gallery">
-            	<img src="static/img/ii1.jpg" id="preview2" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
-                <div>
-	<img src="static/img/ii1.jpg" onmouseover="$('#preview2').fadeOut(100, function() { $(this).attr('src', 'static/img/ii1.jpg').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-	<img src="static/img/ii2.jpg" onmouseover="$('#preview2').fadeOut(100, function() { $(this).attr('src', 'static/img/ii2.jpg').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-	<img src="static/img/ii3.jpg" onmouseover="$('#preview2').fadeOut(100, function() { $(this).attr('src', 'static/img/ii3.jpg').fadeIn(300);})" width="165" height="110">
-	</div><div class="clear"></div></div>
-            </div>
-            <div class="rs1">
-            	<span class="prenazv1">м. Шаболовская
-Малый Калужский переулок, д. 15, стр. 16</span>
-<ul><li><b>Площадь зала:</b> 90 кв.м. </li><li><b>Музыкальное оборудование:</b> центр с функциями чтения CD с помощью
-   AUX можно подключить любое устройство со входом jack 3,5mm.</li><li><b>Код от этажа:</b> 1299</li></ul>
-<p>1й вагон из центра, из стеклянных дверей налево. Идем прямо вдоль Волгоградского проспекта до Академии МФЮА, поворачиваем направо в арку под шлагбаум, далее прямо метров 100, за рестораном "МотоМосква" арка для въезда машин, слева от арки красный пластиковый козырек, заходим в этот подъезд, поднимаемся на 3 этаж, и в левое крыло. Сначала будут раздевалки, где можно переодеться и оставить верхнюю одежду/обувь, ценные вещи берем с собой в зал, который находится в самом конце этого коридора.</p>
-<ul><li><b>Площадь зала:</b> 90 кв.м. </li><li><b>Музыкальное оборудование:</b> центр с функциями чтения CD с помощью
-   AUX можно подключить любое устройство со входом jack 3,5mm.</li><li><b>Код от этажа:</b> 1299</li></ul>
-            </div-->
             <div class="clear"></div>
 
             </div>
@@ -1001,6 +967,11 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
                 formData[$(this).attr('name')] = $(this).val();
             }
         });
+
+        // Костыльььь =((((
+        if(arguments[1] == 'call') {
+            formData.user_type='Заказ звонка';
+        }
 
         $.ajax('', {
             beforeSend: function(xhr) {
