@@ -112,7 +112,11 @@ STATIC_ROOT = ''
 
 # dinamica.dance settings
 EMAIL_TO = 'kudryavtsev-m@mail.ru'
+IS_PRODUCTION = True
 
+FILE_STORAGE = ''
+
+TEACHERS_BOOK_STATIC_URL = ''
 
 try:
     from settings_local import *
