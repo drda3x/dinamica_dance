@@ -116,7 +116,7 @@ IS_PRODUCTION = True
 
 FILE_STORAGE = ''
 
-TEACHERS_BOOK_STATIC_URL = ''
+TEACHERS_BOOK_STATIC_URL = 'http://127.0.0.1:8080/static/img/'
 
 try:
     from settings_local import *
