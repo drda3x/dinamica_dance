@@ -182,8 +182,8 @@ class IndexView(TemplateView):
                 dance_hall = group.dance_hall,
                 # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
                 teachers=group.teachers.all(),
-                course_details=u'',
-                after_course=u'',
+                course_details=group.level.course_details,
+                course_results=group.level.course_results,
                 start_date=start_date
             )
 
@@ -223,7 +223,7 @@ class IndexView(TemplateView):
 
         return context
 
-    def post(self, request):    
+    def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
         if self.email.send_mail(**kw):
             return render_to_response('response.html')
