@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import time
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
 import smtplib
@@ -208,7 +208,8 @@ class IndexView(TemplateView):
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
         context['bonus_class'] = dict(
-            date=bonus_class.date.strftime('%d.%m.%Y'),
+            #date=bonus_class.date.strftime('%d.%m.%Y'),
+            date=time.mktime(bonus_class.date.timetuple())*1000,
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
