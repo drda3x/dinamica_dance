@@ -172,7 +172,7 @@ class IndexView(TemplateView):
                 id=group.id,
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
-                date=group.start_date_str,
+                date =(lambda dt: u'%d %s %d' % (dt.day, MONTH_PARENT_FORM[dt.month], dt.year))(max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())),
                 free_places=(group.free_placees or 0) - GroupList.objects.filter(group=group, active=True).count(),
                 top_msg=group.lending_message or '',
                 duration=group.duration,
