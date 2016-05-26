@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import time
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
 import smtplib
@@ -182,8 +182,8 @@ class IndexView(TemplateView):
                 dance_hall = group.dance_hall,
                 # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
                 teachers=group.teachers.all(),
-                course_details=u'',
-                after_course=u'',
+                course_details=group.course_details or group.level.course_details,
+                course_results=group.course_results or group.level.course_results,
                 start_date=start_date
             )
 
@@ -208,7 +208,8 @@ class IndexView(TemplateView):
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
         context['bonus_class'] = dict(
-            date=bonus_class.date.strftime('%d.%m.%Y'),
+            #date=bonus_class.date.strftime('%d.%m.%Y'),
+            date=time.mktime(bonus_class.date.timetuple())*1000,
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
@@ -223,7 +224,7 @@ class IndexView(TemplateView):
 
         return context
 
-    def post(self, request):    
+    def post(self, request):
         kw = {key: val for key, val in request.POST.iteritems()}
         if self.email.send_mail(**kw):
             return render_to_response('response.html')
