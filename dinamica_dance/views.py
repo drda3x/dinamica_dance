@@ -210,6 +210,7 @@ class IndexView(TemplateView):
         context['bonus_class'] = dict(
             #date=bonus_class.date.strftime('%d.%m.%Y'),
             date=time.mktime(bonus_class.date.timetuple())*1000,
+            date_str=bonus_class.date.strftime('%d.%m.%Y'),
             day=bonus_class.date.day,
             month=self.months[bonus_class.date.month - 1][0],
             month_2=self.months[bonus_class.date.month - 1][1],
