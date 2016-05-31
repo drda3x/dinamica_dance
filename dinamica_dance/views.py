@@ -70,7 +70,7 @@ class EmailNotifier(object):
 
             С уважением,
             dinamica.dance
-            """ % (kwargs['name'], kwargs['tel'])
+            """ % (kwargs['name'], kwargs.get('tel') or kwargs['phone'])
 
         elif kwargs['user_type'].lower() == self.e_mail_types[1]:
             return u"""

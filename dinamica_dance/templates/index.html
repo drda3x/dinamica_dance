@@ -144,7 +144,7 @@
                         <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                         <span>* поле обязательно для заполнения. Мы перезвоним вам в 
                         течении 30 секунд. Гарантируем сохранность данных</span>
-                        <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form'); return false;" type="submit" class="user-action inp2 btn3"
+                        <input onclick="sendForm('free_lesson_form'); return false;" type="submit" class="user-action inp2 btn3"
                             value="ОСТАВИТЬ ЗАЯВКУ">
                         <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
                     </form>
@@ -715,7 +715,7 @@
                         <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                         <span>* поле обязательно для заполнения. Мы перезвоним вам в 
                         течении 30 секунд. Гарантируем сохранность данных</span>
-                        <input onclick="yaCounter32063616.reachGoal('form2'); sendForm('free_lesson_form2'); return false;" type="submit" class="user-action inp2 btn3"
+                        <input onclick="sendForm('free_lesson_form2'); return false;" type="submit" class="user-action inp2 btn3"
                             value="ОСТАВИТЬ ЗАЯВКУ">
                         <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
                     </form>
@@ -743,7 +743,7 @@
                 <input type="hidden" name="group_name" value="{{ group.name }}" />
                 <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
                 <input type="hidden" name="time" value="{{ group.time }}" />
-                <input type="hidden" name="station" value="{{ group.metro }}" />
+                <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
                 <div class="name_inp">ФИО</div>
                 <div class="input-prepend">
                     <input type="text" name="name" class="inputt2">
@@ -863,17 +863,17 @@
                 <div class="clear"></div>
                 {% endfor %}
                 <div class="formwrapper1">
-                    <form id="group_form{{ group.id }}" method="post">
+                    <form id="group_form2_{{ group.id }}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_type" value="Заявка на запись в группу" />
                         <input type="hidden" name="group_name" value="{{ group.name }}" />
                         <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
                         <input type="hidden" name="time" value="{{ group.time }}" />
-                        <input type="hidden" name="station" value="{{ group.station }}" />
+                        <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
                         <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
                         <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
-                        <button type="submit" onclick="sendForm('group_form{{ group.id }}'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
-                        <button type="submit" onclick="sendForm('group_form{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
+                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
                         <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
                     </form>
                 </div>
@@ -946,7 +946,7 @@
                 <input type="hidden" name="user_type" value="Заказ звонка">
                 Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
                 Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
-                <input onclick="yaCounter32063616.reachGoal('close-enter'); sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
+                <input onclick="sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
                 <div style="display: none; margin: 51px 0 0;" class="user-message">Отправка данных...</div>
             </form>
         </div>
@@ -1007,6 +1007,7 @@
                         $(this).val('');
                     })
                 });
+                return false;
             }
             
             function showUserMessage() {
