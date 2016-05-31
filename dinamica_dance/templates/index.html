@@ -138,7 +138,7 @@
                         <h4>Записаться на бесплатное занятие!</h4>
                         {% csrf_token %}
                         <input type="hidden" name="user_type" value="Запись на мастер-класс">
-                        <input type="hidden" name="class_date" value="{{ bonus_class.date }}">
+                        <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
                         <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                         <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                         <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
@@ -709,7 +709,7 @@
                         <h4>Записаться на бесплатное занятие!</h4>
                         {% csrf_token %}
                         <input type="hidden" name="user_type" value="Запись на мастер-класс">
-                        <input type="hidden" name="class_date" value="{{ bonus_class.date }}">
+                        <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
                         <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                         <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                         <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
