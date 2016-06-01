@@ -887,7 +887,7 @@
                     <h3>как проехать</h3>
                 </div>
                 <div class="ls1">
-                    <div class="gallery">
+                  <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
                         <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
                         <div>
                             <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
@@ -1027,10 +1027,15 @@
             });
            
             // Заменялка для фоток в подробностях о группе
-            function changeImage(id, url) {
-                $('#'+id).fadeOut(100, function() {
-                    $(this).attr('src', url).fadeIn(300);
+            function changeImage(id, newUrl) {
+              var $this = $('#'+id),
+                  oldUrl = $this.attr('src');
+              
+              if(oldUrl != newUrl) {
+                $this.fadeOut(100, function() {
+                    $(this).attr('src', newUrl).fadeIn(300);
                 });
+              }
             }
 
         </script>
