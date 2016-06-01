@@ -888,11 +888,11 @@
                 </div>
                 <div class="ls1">
                     <div class="gallery">
-                        <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
+                        <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
                         <div>
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}').fadeIn(300);})" width="165" height="110" style="margin-right:3px;">
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="$('#preview').fadeOut(100, function() { $(this).attr('src', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}').fadeIn(300);})" width="165" height="110">
+                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
+                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
+                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -1025,7 +1025,14 @@
             
                 return false;
             });
-            
+           
+            // Заменялка для фоток в подробностях о группе
+            function changeImage(id, url) {
+                $('#'+id).fadeOut(100, function() {
+                    $(this).attr('src', url).fadeIn(300);
+                });
+            }
+
         </script>
     </body>
 </html>
