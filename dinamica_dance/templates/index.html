@@ -22,7 +22,7 @@
                 console.log("con1");
             }
         </script>
-        <script type="text/javascript">
+        <script>
             // Магия Google аналитики
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -147,8 +147,12 @@
                       + скидка на абонемент 25%</span>
                   </h4>
                   <span class="l2s1">абонемент от 2500 рублей</span>
-                  <span class="l2s2">до конца акции осталось:</span>
-                  <div id="CDT"></div>
+                  <ul class="s2-list">
+                    <li><span>Можно без пары (найдем на занятии!)</span></li>
+                    <li><span>Можно без подготовки и опыта, «с нуля»</span></li>
+                    <li><span>Можно в любом возрасте и в любой физической форме</span></li>
+                    <li><span>Можно в любой сменной обуви и удобной одежде</span></li>
+                  </ul>
               </div>
               <div class="r2">
                   <form method="post" id="free_lesson_form">
@@ -158,7 +162,7 @@
                       <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
                       <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                       <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
-                      <input name="email" type="text" class="inp1" placeholder="Ваш e-mail">
+                      <!--input name="email" type="text" class="inp1" placeholder="Ваш e-mail"-->
                       <span>* поле обязательно для заполнения. Мы перезвоним вам в 
                       течении 30 секунд. Гарантируем сохранность данных</span>
                       <input onclick="sendForm('free_lesson_form'); return false;" type="submit" class="user-action inp2 btn3"
