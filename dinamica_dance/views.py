@@ -70,7 +70,7 @@ class EmailNotifier(object):
 
             С уважением,
             dinamica.dance
-            """ % (kwargs['name'], kwargs['tel'])
+            """ % (kwargs['name'], kwargs.get('tel') or kwargs['phone'])
 
         elif kwargs['user_type'].lower() == self.e_mail_types[1]:
             return u"""
@@ -79,11 +79,10 @@ class EmailNotifier(object):
 
             ФИО: %s
             Телефон: %s
-            e-mail: %s
 
             С уважением,
             dinamica.dance
-            """ % (kwargs['class_date'], kwargs['name'], kwargs['tel'], kwargs['email'])
+            """ % (kwargs['class_date'], kwargs['name'], kwargs['tel'])
 
         elif kwargs['user_type'].lower() == self.e_mail_types[2]:
             return u"""
@@ -172,7 +171,7 @@ class IndexView(TemplateView):
                 id=group.id,
                 name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
                 time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
-                date=group.start_date_str,
+                date =(lambda dt: u'%d %s %d' % (dt.day, MONTH_PARENT_FORM[dt.month], dt.year))(max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())),
                 free_places=(group.free_placees or 0) - GroupList.objects.filter(group=group, active=True).count(),
                 top_msg=group.lending_message or '',
                 duration=group.duration,
@@ -191,35 +190,39 @@ class IndexView(TemplateView):
         bonus_class = None
         try:
             bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:2]
-            for _class in bonus_classes:
-                if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
-                    bonus_class = _class
-                    break
+            #for _class in bonus_classes:
+            #   if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
+            #       bonus_class = _class
+            #       break
 
-            if not bonus_class:
-                raise BonusClasses.DoesNotExist
+            #f not bonus_class:
+            #   raise BonusClasses.DoesNotExist
 
         except BonusClasses.DoesNotExist:
-            bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
+            #bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
+            bonus_classes = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
 
         context['beginners'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.beginners_str_code, all_groups))
         context['inters'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.intermediate_str_code, all_groups))
         context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
-        context['bonus_class'] = dict(
-            #date=bonus_class.date.strftime('%d.%m.%Y'),
-            date=time.mktime(bonus_class.end_datetime.timetuple())*1000,
-            date_str=bonus_class.date.strftime('%d.%m.%Y'),
-            day=bonus_class.date.day,
-            month=self.months[bonus_class.date.month - 1][0],
-            month_2=self.months[bonus_class.date.month - 1][1],
-            begin_time=bonus_class.time.strftime('%H:%M') if bonus_class.time else u'',
-            end_time=bonus_class.end_time.strftime('%H:%M') if bonus_class.end_time else u'',
-            hall_address=bonus_class.hall.address,
-            metro_station=bonus_class.hall.station,
-            time_from_metro=bonus_class.hall.time_to_come
-        )
+        context['bonus_classes'] = [
+            dict(
+                #date=bonus_class.date.strftime('%d.%m.%Y'),
+                date=time.mktime(bonus_class.end_datetime.timetuple())*1000,
+                date_str=bonus_class.date.strftime('%d.%m.%Y'),
+                day=bonus_class.date.day,
+                month=self.months[bonus_class.date.month - 1][0],
+                month_2=self.months[bonus_class.date.month - 1][1],
+                begin_time=bonus_class.time.strftime('%H:%M') if bonus_class.time else u'',
+                end_time=bonus_class.end_time.strftime('%H:%M') if bonus_class.end_time else u'',
+                hall_address=bonus_class.hall.address,
+                metro_station=bonus_class.hall.station,
+                time_from_metro=bonus_class.hall.time_to_come
+            )
+            for bonus_class in bonus_classes
+        ]
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
 

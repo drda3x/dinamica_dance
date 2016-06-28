@@ -34,8 +34,8 @@ function CDT(datenum){
  var tl = new Date(datenum);
 
  // You can add time's up message here
- var timer = new CountdownTimer('CDT',tl,'<span class="number-wrapper"><div class="line"></div><span class="number end">Time is up!</span></span>');
+// var timer = new CountdownTimer('CDT',tl,'<span class="number-wrapper"><div class="line"></div><span class="number end">Time is up!</span></span>');
  var timer2 = new CountdownTimer('CDT2',tl,'<span class="number-wrapper"><div class="line"></div><span class="number end">Time is up!</span></span>');
- timer.countDown();
+ //timer.countDown();
  timer2.countDown();
 }

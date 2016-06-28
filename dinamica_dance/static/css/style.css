@@ -315,6 +315,23 @@ header{
 	padding:20px 0 0 0;
 	background-color:#ffffff;
 }
+
+.s2-list{
+    margin-left: -165px;
+    margin-top: 40px;
+    font-size: 16pt;
+    list-style: disc;
+}
+
+.s2-list li{
+    margin: 5px 0;
+    color: #FF2300;
+}
+
+.s2-list li span{
+    color: #6b6b6b;
+}
+
 .l2{
 	float:left;
 	width:49%;
