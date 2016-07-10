@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import time
+import json
 from django.shortcuts import redirect
 from django.utils.timezone import make_aware
 import smtplib
@@ -8,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, PassTypes, GroupList
+from application.models import Groups, BonusClasses, PassTypes, GroupList, DanceHalls
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
@@ -225,6 +226,7 @@ class IndexView(TemplateView):
         ]
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
+        context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
 
         return context
 

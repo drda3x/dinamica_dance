@@ -689,7 +689,7 @@
           </div>
       </section>
       <section class="s8" id="nv8">
-          <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=DxchwfK05AfZruaC1ryWEowGwUtg8lL-&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
+          <div id="hall_map" style="width: 100%; height: 500px"></div>
       </section>
       <section class="s10">
           <div class="wrapper">
@@ -972,7 +972,29 @@
         <a href="#x" class="swiftseo-overlay" id="napisat"></a>
         <script src="{% static "js/slider.js" %}"></script>
         <script src="{% static "js/buff.js" %}"></script>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <script>
+             // Карты
+            (function() {
+                var myMap,
+                coords = {{halls | safe}} || [];
+                
+                function init(){     
+                   myMap = new ymaps.Map("hall_map", {
+                       center: [55.76, 37.64],
+                       zoom: 11 
+                   });
+
+                   for(var i= coords.length-1; i >= 0; i--){
+                     myMap.geoObjects.add(
+                         new ymaps.Placemark([coords[i].lon, coords[i].lat], { hintContent: coords[i].station})
+                     );
+                   }
+                }  
+                 
+                ymaps.ready(init);
+            })();
+
             function scroll(name) {
                 setTimeout(function() {
                     var top = $(name).offset().top;
