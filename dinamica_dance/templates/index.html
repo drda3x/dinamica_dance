@@ -779,44 +779,45 @@
             <a class="close1" href="#nv4">x</a>
         </div>
         {% endfor %}
-        {% for group in all_groups %}
-        <a href="#nv4" class="swiftseo-overlay" id="det{{ group.id }}"></a>
-        <!--<div class="podrobwindow1 swiftseo-popup2">-->
+
+        <a href="#nv4" class="swiftseo-overlay" id="group-detail-form"></a>
         <div class="podrobw1 swiftseo-popup2">
-            <h3>{{ group.name }}</h3>
-            <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
-            <span class="sp5">{{ group.top_msg }}</span>
+          <h3 class="gdf-changable" data-name="name"></h3> <!-- {{ group.name }} -->
+          <span class="sp5 gdf-changable" data-name="top_msg"></span> <!-- {{ group.top_msg }} -->
             <div class="ls1">
                 <h4>Общая информация</h4>
                 <table cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr>
                             <td>Начало занятий</td>
-                            <td>{{ group.date }}</td>
+                            <td class="gdf-changable" data-name="date"></td> <!-- {{ group.date }} -->
                         </tr>
-                        {% if group.free_places and group.free_places > 0 %}
+
+                        <!-- TODO: Этот блок показывать когда значение не пустое -->
                         <tr>
                             <td>Осталось мест</td>
-                            <td>{{ group.free_places }}</td>
+                            <td class="gdf-changable" data-name="free_places"></td> <!-- {{ group.free_places }} -->
                         </tr>
-                        {% endif %}
-                        {% if group.duration %}
+                        <!-- /TODO  -->
+
+                        <!-- TODO: Этот блок показывать когда значение не пустое -->
                         <tr>
                             <td>Длительность курса</td>
-                            <td>{{ group.duration }}</td>
+                            <td class="gdf-changable" data-name="duration"></td> <!-- {{ group.duration }} -->
                         </tr>
-                        {% endif %}
+                        <!-- /TODO  -->
+
                         <tr>
                             <td>Дни недели</td>
-                            <td>{{ group.days_full }}</td>
+                            <td class="gdf-changable" data-name="days_full"></td> <!-- {{ group.days_full }} -->
                         </tr>
                         <tr>
                             <td>Время занятий</td>
-                            <td>{{ group.time }}</td>
+                            <td class="gdf-changable" data-name="time"></td> <!-- {{ group.time }} -->
                         </tr>
                         <tr>
                             <td>Метро</td>
-                            <td>{{ group.dance_hall.station }}</td>
+                            <td class="gdf-changable" data-name="station"></td> <!-- {{ group.dance_hall.station }} -->
                         </tr>
                     </tbody>
                 </table>
@@ -825,38 +826,40 @@
                 <h4>Стоимость занятий</h4>
                 <table cellpadding="0" cellspacing="0">
                     <tbody>
-                        {% if not group.passes %}
+                        <!-- TODO: этот блок показывать если нету списка абонементов -->
                         <tr>
                             <td>Точную стоимость и варианты оплаты можно узнать по телефону +7-916-824-666-1</td>
                         </tr>
-                        {% endif %}
-                        {% for p in group.passes %}
+                        <!-- /TODO -->
+
+                        <!-- TODO: а вот этот на оборот, когда список абонементов есть -->
                         <tr>
-                            <td>{{ p.name }}</td>
-                            <td>{{ p.prise }}</td>
+                          <td class="gdf-changable" data-name="pass-name"></td> <!-- {{ p.name }} -->
+                          <td class="gdf-changable" data-name="pass-prise"></td> <!-- {{ p.prise }} -->
                         </tr>
-                        {% endfor %}
-                        {% if group in beginners %}
+                        <!-- /TODO -->
+
+                        <!-- TODO: это показывать только для бегиннеров -->
                         <tr>
                             <td class="ltd1">Для студентов скидка — 1000 руб.</td>
                         </tr>
-                        {% endif %}
+                        <!-- /TODO -->
                     </tbody>
                 </table>
             </div>
             <div class="clear"></div>
             <div class="prewho1">
                 <div class="ls1">
-                    {% if group.course_details %}
+                    <!-- TODO: этот блок показывать только когда есть подробности о курсе -->
                     <h4>Подробнее о курсе</h4>
-                    <p>{{ group.course_details | safe }}</p>
-                    {% endif %}
+                    <p class="gdf-changable" data-name="course_details"></p> <!-- {{ group.course_details | safe }} -->
+                    <!-- /TODO -->
                 </div>
                 <div class="rs1">
-                  {% if group.course_results %}
+                  <!-- TODO: этот блок показывать только когда есть то, чему можно научиться после курса -->
                   <h4>В конце курса Вы научитесь</h4>
-                  <p>{{ group.course_results | safe }}</p>
-                  {% endif %}
+                  <p class="gdf-changable" data-name="course_results"></p> <!-- {{ group.course_results | safe }} -->
+                  <!-- /TODO -->
                 </div>
                 <div class="clear"></div>
             <div class="prepod1">
@@ -864,7 +867,8 @@
                 <div class="h3bl1">
                     <h3>ПРЕПОДАВАТЕЛИ</h3>
                 </div>
-                {% for teacher in group.teachers %}
+                <!-- TODO: блок с преподавателями надо сделать так: создать записи для всех преподов и показывать толкьо тех, кто не нужен -->
+                <!--{% for teacher in group.teachers %}
                 <div class="ls2">
                     {% if teacher.photo_file %}
                     <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ teacher.photo_file }}" width="290" height="280" />
@@ -882,7 +886,7 @@
                     {% endif %}
                 </div>
                 <div class="clear"></div>
-                {% endfor %}
+                {% endfor %} -->
                 <div class="formwrapper1">
                     <form id="group_form2_{{ group.id }}" method="post">
                         {% csrf_token %}
