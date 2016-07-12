@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, PassTypes, GroupList, DanceHalls
+from application.models import Groups, BonusClasses, PassTypes, GroupList, DanceHalls, User
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
@@ -179,9 +179,9 @@ class IndexView(TemplateView):
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
                 days_full=', '.join([self.days[i][1] for i in group.days_nums]),
                 passes=passes,
-                dance_hall = group.dance_hall,
+                dance_hall = group.dance_hall.__json__(),
                 # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
-                teachers=group.teachers.all(),
+                teachers=[t.pk for t in group.teachers.all()],
                 course_details=group.course_details or group.level.course_details,
                 course_results=group.course_results or group.level.course_results,
                 start_date=start_date
@@ -227,6 +227,13 @@ class IndexView(TemplateView):
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
         context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
+
+        context['groups'] = json.dumps({
+            i['id']: i
+            for i in context['beginners'] + context['inters'] + context['advanced'] + context['other']
+        })
+
+        context['teachers'] = User.objects.all()
 
         return context
 
