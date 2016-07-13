@@ -557,7 +557,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}} <br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}" onclick="showGroup({{ group.id }})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -585,7 +585,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}" onclick="showGroup({{ group.id }})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -613,7 +613,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}" onclick="showGroup({{ group.id }})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -641,7 +641,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}" onclick="showGroup({{ group.id }})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -780,8 +780,8 @@
         </div>
         {% endfor %}
 
-        <a href="#nv4" class="swiftseo-overlay" id="group-detail-form"></a>
-        <div class="podrobw1 swiftseo-popup2" style="display: block;">
+        <a href="#nv4" class="swiftseo-overlay groupWidget" id="group-detail-form"></a>
+        <div class="podrobw1 swiftseo-popup2">
           <h3 class="gdf-changable" data-name="name"></h3> <!-- {{ group.name }} -->
           <span class="sp5 gdf-changable" data-name="top_msg"></span> <!-- {{ group.top_msg }} -->
             <div class="ls1">
@@ -869,14 +869,14 @@
                 </div>
                 <!-- TODO: блок с преподавателями надо сделать так: создать записи для всех преподов и показывать толкьо тех, кто не нужен -->
                 {% for teacher in teachers %}
-                <div class="ls2">
+                <div class="ls2 teachers" data-id="{{teacher.id}}">
                     {% if teacher.photo_file %}
                     <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ teacher.photo_file }}" width="290" height="280" />
                     {% endif %}
                     <h4>{{ teacher.first_name }} {{ teacher.last_name }}</h4>
                     <p>{{ teacher.about | safe }}</p>
                 </div>
-                <div class="rs2">
+                <div class="rs2 teachers" data-id="{{teacher.id}}">
                     {% if teacher.video %}
                     <div class="videoblock1">
                         <div class="videoWrapper">
@@ -1088,10 +1088,12 @@
               }
             }
 
-            var vidgetFiller = (function() {
+            var showGroup = (function() {
                 // Данные с сервера и модель для быстрой подстановки данных
                 var vidgetData = {{ groups | safe}},
-                    model = {};
+                    model = {},
+                    $teachers = $('.teachers'),
+                    $div = $('<div></div>');
 
                 $('.gdf-changable').each(function(elem) {
 
@@ -1101,7 +1103,8 @@
                           return $element.text();
                       },
                       set: function(val) {
-                          $element.text(val);
+                          $div.html(val);
+                          $element.html($div.html());
                       } 
                     }
                   })($(this)));
@@ -1114,6 +1117,17 @@
                     for(var i in group) {
                         model[i] = group[i];
                     }
+                    
+                    $teachers.hide(); 
+                    for(var i=group.teachers.length-1; i>=0; i--) {
+                      $teachers.each(function() {
+                        if($(this).data('id') == group.teachers[i]) {
+                          $(this).show();
+                        }
+                      });
+                    }
+
+                    $('.groupWidget').attr('id', 'det' + groupId);
                 }
 
             })(); 
