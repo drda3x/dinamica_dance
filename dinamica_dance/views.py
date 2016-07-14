@@ -226,7 +226,9 @@ class IndexView(TemplateView):
         ]
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
-        context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
+        context['dance_halls'] = DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)
+        context['halls'] = json.dumps(map(lambda x: x.__json__(), context['dance_halls']))
+        # json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
 
         context['groups'] = json.dumps({
             i['id']: i

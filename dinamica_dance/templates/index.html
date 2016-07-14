@@ -888,23 +888,21 @@
                 <div class="clear"></div>
                 {% endfor %} 
                 <!-- TODO ну, форм может быть сколько есть групп. Но нужно опять же их фильтровать и нужную показать -->
-                {% for group in all_groups %}
                 <div class="formwrapper1">
-                    <form id="group_form2_{{ group.id }}" method="post">
+                    <form class="group_form2" id="group_form2" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_type" value="Заявка на запись в группу" />
-                        <input type="hidden" name="group_name" value="{{ group.name }}" />
-                        <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
-                        <input type="hidden" name="time" value="{{ group.time }}" />
-                        <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
+                        <input type="hidden" name="group_name" data-name="name" value="" />
+                        <input type="hidden" name="days" data-name="days_full" value="" />
+                        <input type="hidden" name="time" data-name="time" value="" />
+                        <input type="hidden" name="station" data-name="station" value="" />
                         <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
                         <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
-                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
-                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
+                        <button type="submit" onclick="sendForm('group_form2'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                        <button type="submit" onclick="sendForm('group_form2', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
                         <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
                     </form>
                 </div>
-                {% endfor %}
                 {% if group in beginners %}
                 <p class="bp1">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
                 {% endif %}
@@ -914,23 +912,25 @@
                 <div class="h3bl1">
                     <h3>как проехать</h3>
                 </div>
-                <div class="ls1">
-                  <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
-                        <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
-                        <div>
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
-                            <div class="clear"></div>
+                {% for dance_hall in dance_halls %}
+                    <div class="ls1 dance_halls" data-id={{ dance_hall.id }}>
+                      <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
+                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
+                            <div>
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
+                                <div class="clear"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="rs1">
-                    <span class="prenazv1">м. {{ group.dance_hall.station }}
-                    {{ group.dance_hall.address }}</span>
-                    <p>{{ group.dance_hall.about | safe }}</p>
-                </div>
-                <div class="clear"></div>
+                    <div class="rs1 dance_halls" data-id={{ dance_hall.id }}>
+                        <span class="prenazv1">м. {{ group.dance_hall.station }}
+                        {{ group.dance_hall.address }}</span>
+                        <p>{{ group.dance_hall.about | safe }}</p>
+                    </div>
+                    <div class="clear"></div>
+                {% endfor %}
             </div>
             {% if group in beginners %}
                 <div class="prewho1">
@@ -1092,7 +1092,9 @@
                 // Данные с сервера и модель для быстрой подстановки данных
                 var vidgetData = {{ groups | safe}},
                     model = {},
+                    form = {},
                     $teachers = $('.teachers'),
+                    $danceHalls = $('.dance_halls'),
                     $div = $('<div></div>');
 
                 $('.gdf-changable').each(function(elem) {
@@ -1110,15 +1112,35 @@
                   })($(this)));
 
                 });
+                
+                $('.group_form2 input[type=hidden]').each(function() {
+                  var name = $(this).data('name');
+                  
+                  if(name) {
+                      Object.defineProperty(form, name, (function($element) {
+                        return {
+                          get: function() {
+                            return $element.val();
+                          },
+                          set: function(val) {
+                            return $element.val(val);
+                          }
+                        }
+                      })($(this)));
+                  }
+
+                });                
 
                 return function(groupId) {
                     var group = vidgetData[groupId];
                     
                     for(var i in group) {
                         model[i] = group[i];
+                        form[i] = group[i];
                     }
                     
                     $teachers.hide(); 
+                    $danceHalls.hide();
                     for(var i=group.teachers.length-1; i>=0; i--) {
                       $teachers.each(function() {
                         if($(this).data('id') == group.teachers[i]) {
@@ -1126,6 +1148,12 @@
                         }
                       });
                     }
+
+                    $danceHalls.each(function() {
+                      if($(this).data('id') == group.dance_hall.id) {
+                        $(this).show();
+                      }
+                    });
 
                     $('.groupWidget').attr('id', 'det' + groupId);
                 }
