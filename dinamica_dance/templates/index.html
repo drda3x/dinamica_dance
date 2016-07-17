@@ -786,7 +786,7 @@
           <span class="sp5 gdf-changable" data-name="top_msg"></span> <!-- {{ group.top_msg }} -->
             <div class="ls1">
                 <h4>Общая информация</h4>
-                <table cellpadding="0" cellspacing="0">
+                <table cellpadding="0" cellspacing="0" class="info-table">
                     <tbody>
                         <tr>
                             <td>Начало занятий</td>
@@ -794,14 +794,14 @@
                         </tr>
 
                         <!-- TODO: Этот блок показывать когда значение не пустое -->
-                        <tr>
+                        <tr class="cond" data-viewcond="freePlaces">
                             <td>Осталось мест</td>
                             <td class="gdf-changable" data-name="free_places"></td> <!-- {{ group.free_places }} -->
                         </tr>
                         <!-- /TODO  -->
 
                         <!-- TODO: Этот блок показывать когда значение не пустое -->
-                        <tr>
+                        <tr class="cond" data-viewcond="duration">
                             <td>Длительность курса</td>
                             <td class="gdf-changable" data-name="duration"></td> <!-- {{ group.duration }} -->
                         </tr>
@@ -817,26 +817,28 @@
                         </tr>
                         <tr>
                             <td>Метро</td>
-                            <td class="gdf-changable" data-name="station"></td> <!-- {{ group.dance_hall.station }} -->
+                            <td class="gdf-changable" data-name="dance_hall.station"></td> <!-- {{ group.dance_hall.station }} -->
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="rs1">
                 <h4>Стоимость занятий</h4>
-                <table cellpadding="0" cellspacing="0">
+                <table cellpadding="0" cellspacing="0" class="info-table">
                     <tbody>
                         <!-- TODO: этот блок показывать если нету списка абонементов -->
-                        <tr>
+                        <tr id="pass-default">
                             <td>Точную стоимость и варианты оплаты можно узнать по телефону +7-916-824-666-1</td>
                         </tr>
                         <!-- /TODO -->
-
+                        
+                        {% for p in passes%}
                         <!-- TODO: а вот этот на оборот, когда список абонементов есть -->
-                        <tr>
-                          <td class="gdf-changable" data-name="pass-name"></td> <!-- {{ p.name }} -->
-                          <td class="gdf-changable" data-name="pass-prise"></td> <!-- {{ p.prise }} -->
+                        <tr class="passes" data-id="{{p.id}}">
+                            <td>{{ p.name }}</td> <!--  -->
+                          <td>{{ p.prise }}</td> <!--  -->
                         </tr>
+                        {% endfor %}
                         <!-- /TODO -->
 
                         <!-- TODO: это показывать только для бегиннеров -->
@@ -895,7 +897,7 @@
                         <input type="hidden" name="group_name" data-name="name" value="" />
                         <input type="hidden" name="days" data-name="days_full" value="" />
                         <input type="hidden" name="time" data-name="time" value="" />
-                        <input type="hidden" name="station" data-name="station" value="" />
+                        <input type="hidden" name="station" data-name="dance_hall.station" value="" />
                         <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
                         <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
                         <button type="submit" onclick="sendForm('group_form2'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
@@ -903,9 +905,7 @@
                         <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
                     </form>
                 </div>
-                {% if group in beginners %}
-                <p class="bp1">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
-                {% endif %}
+                <p class="bp1 beginners-info">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
             </div>
             <div class="predres1">
                 <span class="hline"></span>
@@ -914,20 +914,20 @@
                 </div>
                 {% for dance_hall in dance_halls %}
                     <div class="ls1 dance_halls" data-id={{ dance_hall.id }}>
-                      <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
-                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
+                        <div class="gallery" onmouseout="changeImage('preview{{dance_hall.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.map_filename }}')">
+                            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.map_filename }}" id="preview{{dance_hall.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
                             <div>
-                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
-                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
-                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p1_filename }}" onmouseover="changeImage('preview{{dance_hall.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p2_filename }}" onmouseover="changeImage('preview{{dance_hall.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
+                                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p3_filename }}" onmouseover="changeImage('preview{{dance_hall.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ dance_hall.p3_filename }}')" width="165" height="110">
                                 <div class="clear"></div>
                             </div>
                         </div>
                     </div>
                     <div class="rs1 dance_halls" data-id={{ dance_hall.id }}>
-                        <span class="prenazv1">м. {{ group.dance_hall.station }}
-                        {{ group.dance_hall.address }}</span>
-                        <p>{{ group.dance_hall.about | safe }}</p>
+                        <span class="prenazv1">м. {{ dance_hall.station }}
+                        {{ dance_hall.address }}</span>
+                        <p>{{ dance_hall.about | safe }}</p>
                     </div>
                     <div class="clear"></div>
                 {% endfor %}
@@ -1088,59 +1088,114 @@
               }
             }
 
+            function getCascadeProperty(obj, arr) {
+                // Функция для выковыривания свойств из вложеных объектов
+                var _arr, _obj;
+
+                if(typeof arr == 'string') {
+                    _arr = arr.split('.');
+                } else {
+                    _arr = arr;
+                }
+
+                if(_arr.length > 1) {
+                    _obj = obj[_arr.shift()];
+                    return getCascadeProperty(_obj, _arr);
+                } else {
+                    return obj[_arr[0]];
+                }
+
+            }
+
             var showGroup = (function() {
                 // Данные с сервера и модель для быстрой подстановки данных
                 var vidgetData = {{ groups | safe}},
-                    model = {},
-                    form = {},
+                    model = {
+                        __keys: []
+                    },
+                    form = {
+                        __keys: []
+                    },
                     $teachers = $('.teachers'),
                     $danceHalls = $('.dance_halls'),
+                    $passes = $('.passes'),
                     $div = $('<div></div>');
+                
+                // Условия показа блоков в виджете
+                var viewconditions = {
+                    freePlaces: function($elem) {
+                        if(model.free_places > 0) {
+                            $elem.show();
+                        } else {
+                            $elem.hide();
+                        } 
+                    },
+                    duration: function($elem) {
+                        if(model.duration > 0) {
+                            $elem.show();
+                        } else {
+                            $elem.hide();
+                        } 
+                    }
+                };
 
                 $('.gdf-changable').each(function(elem) {
+                    var name = $(this).data('name');
 
-                  Object.defineProperty(model, $(this).data('name'), (function($element) {
-                    return {
-                      get: function() {
-                          return $element.text();
-                      },
-                      set: function(val) {
-                          $div.html(val);
-                          $element.html($div.html());
-                      } 
+                    if(name) {
+                        Object.defineProperty(model, name, (function($element) {
+                            return {
+                                get: function() {
+                                    return $element.text();
+                                },
+                                set: function(val) {
+                                    $div.html(val);
+                                    $element.html($div.html());
+                                } 
+                            }
+                        })($(this)));
+                        model.__keys.push(name);
+
                     }
-                  })($(this)));
-
                 });
                 
                 $('.group_form2 input[type=hidden]').each(function() {
                   var name = $(this).data('name');
                   
                   if(name) {
-                      Object.defineProperty(form, name, (function($element) {
-                        return {
-                          get: function() {
-                            return $element.val();
-                          },
-                          set: function(val) {
-                            return $element.val(val);
-                          }
-                        }
-                      })($(this)));
-                  }
+                        Object.defineProperty(form, name, (function($element) {
+                            return {
+                            get: function() {
+                                return $element.val();
+                            },
+                            set: function(val) {
+                                return $element.val(val);
+                            }
+                            }
+                        })($(this)));
 
-                });                
+                        form.__keys.push(name);
+                    }
+
+                    });                
 
                 return function(groupId) {
                     var group = vidgetData[groupId];
-                    
-                    for(var i in group) {
-                        model[i] = group[i];
-                        form[i] = group[i];
+
+                    for(var i=model.__keys.length - 1; i>=0; i--) {
+                        var prop = model.__keys[i];
+                        model[prop] = getCascadeProperty(group, prop);
+                    }
+
+                    for(var i=form.__keys.length - 1; i>=0; i--) {
+                        var prop = form.__keys[i];
+                        form[prop] = getCascadeProperty(group, prop);
                     }
                     
                     $teachers.hide(); 
                     $danceHalls.hide();
+                    $passes.hide();
+
                     for(var i=group.teachers.length-1; i>=0; i--) {
                       $teachers.each(function() {
                         if($(this).data('id') == group.teachers[i]) {
@@ -1155,7 +1210,44 @@
                       }
                     });
 
+                    var defaultPass = $('#pass-default')
+                    if(group.passes.length == 0) {
+                        defaultPass.show(); 
+                    } else {
+                        defaultPass.hide();
+
+                        for(var i=group.passes.length-1; i>=0; i--) {
+                        $passes.each(function() {
+                            if($(this).data('id') == group.passes[i]) {
+                            $(this).show();
+                            }
+                        });
+                        }
+                    }
+
                     $('.groupWidget').attr('id', 'det' + groupId);
+
+                    $('.cond').each(function() {
+                        var func = viewconditions[$(this).data('viewcond')];
+
+                        if(func) {
+                            func($(this));
+                        }
+                    });
+                    
+                    $('.info-table').each(function(index) {
+                        var i = 1;
+                        $(this).find('tr').removeClass('info-table-tr').each(function() {
+                            if($(this).css('display') != 'none') {
+                                if(i % 2) {
+                                    $(this).addClass('info-table-tr');
+                                }
+                                i++;
+                            } 
+                        });
+                    });
+                    
+                    if(group.is_beginners) $('.beginners-info').show();
                 }
 
             })(); 

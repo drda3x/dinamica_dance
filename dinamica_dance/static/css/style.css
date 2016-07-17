@@ -1127,7 +1127,12 @@ height:100%;
 	color:#6b6b6b;
 	display:table;
 }
-.ls1 table tbody tr:nth-child(odd), .rs1 table tbody tr:nth-child(odd) {background: #f6f6f6}
+/*.ls1 table tbody .info-table-tr:nth-of-type(odd), .rs1 table tbody .info-table-tr:nth-of-type(odd) {background: #f6f6f6}*/
+
+.info-table-tr{
+    background: #f6f6f6;
+}
+
 .ls1 table tbody tr td{
 	width:50%;
 	padding:10px;
