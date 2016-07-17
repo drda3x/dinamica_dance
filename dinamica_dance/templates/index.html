@@ -20,6 +20,7 @@
               var dates = [{% for bonus_class in bonus_classes%}{{ bonus_class.date }}{% if not forloop.last%},{% endif %}{% endfor %}];
                 CDT((dates.length > 0) ? dates[0] : 0);
                 console.log("con1");
+
             }
         </script>
         <script>
@@ -1252,6 +1253,8 @@
 
             })(); 
 
+            var hash = window.location.hash;
+            $('a[href='+hash+']').trigger('click');
         </script>
     </body>
 </html>
