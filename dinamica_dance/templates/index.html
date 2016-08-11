@@ -95,7 +95,7 @@
                             <img src="{% static "img/phone1.png" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/>+7 (916)
                             824-666-1
                         </div>
-                        <a href="#zvonok" onclick="yaCounter32063616.reachGoal('close-start'); return true;"
+                        <a href="#zvonok" onclick="return true;"
                             title="заказать звонок" class="btn2">заказать звонок</a>
                         <div class="clear"></div>
                     </div>
@@ -166,9 +166,8 @@
                       <!--input name="email" type="text" class="inp1" placeholder="Ваш e-mail"-->
                       <span>* поле обязательно для заполнения. Мы перезвоним вам в 
                       течении 30 секунд. Гарантируем сохранность данных</span>
-                      <input onclick="sendForm('free_lesson_form'); return false;" type="submit" class="user-action inp2 btn3"
-                          value="ОСТАВИТЬ ЗАЯВКУ">
-                      <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
+                  <input onclick="sendForm('free_lesson_form'); yaCounter34798545.reachGoal('FREE_LESSON_CONFIRM'); return false;" type="submit" class="user-action inp2 btn3" value="ОСТАВИТЬ ЗАЯВКУ">
+                        <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
                   </form>
               </div>
               <div class="clear"></div>
@@ -734,10 +733,10 @@
                       <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
                       <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                       <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
-                      <esinput name="email" type="text" class="inp1" placeholder="Ваш e-mail">
+                      <!--input name="email" type="text" class="inp1" placeholder="Ваш e-mail"-->
                         <span>* поле обязательно для заполнения. Мы перезвоним вам в 
                         течении 30 секунд. Гарантируем сохранность данных</span>
-                        <input onclick="sendForm('free_lesson_form2'); return false;" type="submit" class="user-action inp2 btn3"
+                        <input onclick="sendForm('free_lesson_form2'); yaCounter34798545.reachGoal('FREE_LESSON_CONFIRM'); return false;" type="submit" class="user-action inp2 btn3"
                             value="ОСТАВИТЬ ЗАЯВКУ">
                         <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
                     </form>
@@ -775,7 +774,7 @@
                     <input class="inputt2" name="phone" type="text" value maxlength="100"
                         autocomplete="of">
                 </div>
-                <input class="popupgreen" onclick="sendForm('group_form{{ group.id }}'); return false;" type="submit" name="send" value="Записаться">
+                <input class="popupgreen" onclick="sendForm('group_form{{ group.id }}'); yaCounter34798545.reachGoal('GROUP_CONFIRM'); return false;" type="submit" name="send" value="Записаться">
             </form>
             <a class="close1" href="#nv4">x</a>
         </div>
@@ -901,8 +900,8 @@
                         <input type="hidden" name="station" data-name="dance_hall.station" value="" />
                         <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
                         <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
-                        <button type="submit" onclick="sendForm('group_form2'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
-                        <button type="submit" onclick="sendForm('group_form2', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
+                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}'); yaCounter34798545.reachGoal('GROUP_CONFIRM'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                        <button type="submit" onclick="sendForm('group_form2_{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
                         <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
                     </form>
                 </div>
@@ -973,7 +972,7 @@
                 <input type="hidden" name="user_type" value="Заказ звонка">
                 Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
                 Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
-                <input onclick="sendForm('call_form'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
+                <input onclick="sendForm('call_form'); yaCounter34798545.reachGoal('CALL_BACK'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
                 <div style="display: none; margin: 51px 0 0;" class="user-message">Отправка данных...</div>
             </form>
         </div>
