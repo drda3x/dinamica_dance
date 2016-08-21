@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import time
 import json
@@ -8,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from application.models import Groups, BonusClasses, PassTypes, GroupList, DanceHalls, User
+from application.models import Groups, BonusClasses, PassTypes, GroupList, DanceHalls
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils.timezone import get_default_timezone
@@ -177,14 +178,13 @@ class IndexView(TemplateView):
                 duration=group.duration,
                 days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
                 days_full=', '.join([self.days[i][1] for i in group.days_nums]),
-                passes=map(int, group.external_passes.all().values_list('id', flat=True)),
-                dance_hall = group.dance_hall.__json__(),
+                passes=passes,
+                dance_hall = group.dance_hall,
                 # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
-                teachers=[t.pk for t in group.teachers.all()],
+                teachers=group.teachers.all(),
                 course_details=group.course_details or group.level.course_details,
                 course_results=group.course_results or group.level.course_results,
-                start_date=start_date,
-                is_beginners=group.level.string_code == self.beginners_str_code
+                start_date=start_date
             )
 
         all_groups = list(Groups.opened.select_related('level'))
@@ -226,34 +226,7 @@ class IndexView(TemplateView):
         ]
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
-        context['dance_halls'] = DanceHalls.objects.all()
-        context['halls'] = json.dumps([i.__json__() for i in context['dance_halls'] if i.lat is not None and i.lon is not None])
-        # json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
-
-        context['groups'] = json.dumps({
-            i['id']: i
-            for i in context['beginners'] + context['inters'] + context['advanced'] + context['other']
-        })
-
-        def get_pass_name(p):
-            try:
-                if p.lessons == 1:
-                    return u'Разовое посещение'
-                else:
-                    if p.skips == 0:
-                        return u'Абонемент на %d заняти%s (без пропусков)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й')
-                    else:
-                        return u'Абонемент на %d заняти%s (%d пропуск%s)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов')
-            except Exception:
-                return ''
-
-
-        context['passes'] = [
-            dict(id=i.id, name=get_pass_name(i), prise=i.prise)
-            for i in PassTypes.objects.all()
-        ]
-
-        context['teachers'] = User.objects.all()
+        context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
 
         return context
 
