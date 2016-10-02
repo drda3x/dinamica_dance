@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="yandex-verification" content="f131b3e74c3712f4" />
         <meta charset="utf-8">
         <title>Танцевальный клуб - Динамика</title>
         {% load staticfiles %}
@@ -109,8 +110,8 @@
                             <li>Не скучать вечерами за компьютером в одиночестве;</li>
                             <li>Найти свою "танцевальную семью" и зажигать вместе</li>
                         </ul>
-                        <a href="#nv7" title="записаться на бесплатное занятие" class="btn1" onclick="softScroll('#nv7')">записаться
-                        на бесплатное занятие</a>
+                        <a href="#nv7" title="записаться на открытый урок" class="btn1" onclick="softScroll('#nv7')">записаться
+                        на открытый урок</a>
                     </div>
                 </div>
             </div>
@@ -120,12 +121,12 @@
               {% for bonus_class in bonus_classes  %}
               <div style="float: none; display: inline-block; margin-right: 0; text-align: left;" class="l1"> <!-- Да, долбое...изм, но сейчас не хочу копаться глубоко)) -->
                     <div class="clnd1">{{ bonus_class.month }}<span>{{ bonus_class.day }}</span></div>
-                    <h4>БЕСПЛАТНЫЙ <br/>УРОК ПО ХАСТЛУ</h4>
+                    <h4>ОТКРЫТЫЙ УРОК<br>ПО ХАСТЛУ ЗА 99 РУБ.</h4>
                     <b>Когда:</b> {{ bonus_class.day }} {{ bonus_class.month_2 }} <br/>
                     <b>Во сколько?</b> с {{ bonus_class.begin_time }} до {{ bonus_class.end_time }} <br/>
                     м.{{ bonus_class.metro_station }}  {{ bonus_class.hall_address }}({{ bonus_class.time_from_metro }} мин. от метро)
                 
-                    <a style="width: 50%;" href="#nv7" title="записаться на бесплатное занятие" class="btn1" onclick="softScroll('#nv7')">ХОЧУ ТАНЦЕВАТЬ!</a>
+                    <a style="width: 50%;" href="#nv7" title="записаться на открытый урок" class="btn1" onclick="softScroll('#nv7')">ХОЧУ ТАНЦЕВАТЬ!</a>
 
                 </div>
                 {% endfor %}
@@ -143,7 +144,7 @@
         <section class="s2">
             <div class="wrapper">
                 <div class="l2">
-                  <h4>Бесплатное занятие<span>
+                  <h4>Открытый урок за 99 руб.<span>
                       + скидка на абонемент 25%</span>
                   </h4>
                   <span class="l2s1">абонемент от 2500 рублей</span>
@@ -156,7 +157,7 @@
               </div>
               <div class="r2">
                   <form method="post" id="free_lesson_form">
-                      <h4>Записаться на бесплатное занятие!</h4>
+                      <h4>Записаться на открытый урок!</h4>
                       {% csrf_token %}
                       <input type="hidden" name="user_type" value="Запись на мастер-класс">
                       <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
@@ -164,9 +165,8 @@
                       <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
                       <!--input name="email" type="text" class="inp1" placeholder="Ваш e-mail"-->
                       <span>* поле обязательно для заполнения. Мы перезвоним вам в 
-                      течении 30 секунд. Гарантируем сохранность данных</span>
+                      ближайшее время. Гарантируем сохранность данных</span>
                   <input onclick="sendForm('free_lesson_form'); yaCounter34798545.reachGoal('FREE_LESSON_CONFIRM'); return false;" type="submit" class="user-action inp2 btn3" value="ОСТАВИТЬ ЗАЯВКУ">
-                        <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
                   </form>
               </div>
               <div class="clear"></div>
@@ -322,7 +322,7 @@
                           </p>
                       </div>
                   </div>
-                  <!--div class="slider2">
+                  <div class="slider2">
                       <img src="{% static "img/treneri6.jpg" %}" class="img-slider2">
                       <div class="block19 ">
                           <p class="p1">Максим Истомин</p>
@@ -337,7 +337,7 @@
                               тандеме с прекрасными девушками!»
                           </p>
                       </div>
-                  </div-->
+                  </div>
                   <div class="slider2">
                       <img src="{% static "img/treneri9.jpg" %}" class="img-slider2">
                       <div class="block19 ">
@@ -717,7 +717,7 @@
       <section class="s2" id="nv7">
           <div class="wrapper">
               <div class="l2">
-                  <h4>Бесплатное занятие<span>
+                  <h4>Открытый урок за 99 руб.<span>
                       + скидка на абонемент 25%</span>
                   </h4>
                   <span class="l2s1">абонемент от 2500 рублей</span>
@@ -726,15 +726,15 @@
               </div>
               <div class="r2">
                   <form method="post" id="free_lesson_form2">
-                      <h4>Записаться на бесплатное занятие!</h4>
+                      <h4>Записаться на открытый урок!</h4>
                       {% csrf_token %}
                       <input type="hidden" name="user_type" value="Запись на мастер-класс">
                       <input type="hidden" name="class_date" value="{{ bonus_class.date_str }}">
                       <input name="name" type="text" class="inp1" placeholder="Ваше имя*">
                       <input name="tel" type="text" class="inp1" placeholder="Ваш телефон*" required="">
-                      <!--input name="email" type="text" class="inp1" placeholder="Ваш e-mail"-->
+                      <esinput name="email" type="text" class="inp1" placeholder="Ваш e-mail">
                         <span>* поле обязательно для заполнения. Мы перезвоним вам в 
-                        течении 30 секунд. Гарантируем сохранность данных</span>
+                        ближайщее время. Гарантируем сохранность данных</span>
                         <input onclick="sendForm('free_lesson_form2'); yaCounter34798545.reachGoal('FREE_LESSON_CONFIRM'); return false;" type="submit" class="user-action inp2 btn3"
                             value="ОСТАВИТЬ ЗАЯВКУ">
                         <div class="user-message user-message-2 inp2 btn3">ОТПРАВКА ДАННЫХ...</div>
@@ -745,9 +745,19 @@
         </section>
         <footer>
             <div class="wrapper">
-                Copyright © 2015 - Все права защищены
+                Copyright © 2016- Все права защищены
             </div>
         </footer>
+        
+        <!-- Планчег работы 
+          1. Создаем класс-модель, в котором сохраняем все дянные о группе
+          2. Создаем шаблон, в который динамический будем подставлять дааные из модельки...
+             Ну да, backbone, не смотри так на меня... 
+        -->
+        
+
+
+        <!-- отсюда можно удалять -->
         {% for group in all_groups %}
         <a href="#nv4" class="swiftseo-overlay" id="g{{ group.id }}"></a>
         <div class="window2 swiftseo-popup">
@@ -969,6 +979,7 @@
             </form>
         </div>
         <a href="#x" class="swiftseo-overlay" id="napisat"></a>
+        <!-- До сюда -->
         <script src="{% static "js/slider.js" %}"></script>
         <script src="{% static "js/buff.js" %}"></script>
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
