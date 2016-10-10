@@ -243,3 +243,87 @@ class IndexView(TemplateView):
             return redirect('http://dinamica.dance/')
 
         return super(IndexView, self).dispatch(request)
+
+
+class DetailsView(TemplateView):
+    template_name = "details.html"
+    months = [
+        ('январь', 'января'),
+        ('февраль', 'февраля'),
+        ('март', 'марта'),
+        ('апрель', 'апреля'),
+        ('май', 'мая'),
+        ('июнь', 'июня'),
+        ('июль', 'июля'),
+        ('август', 'августа'),
+        ('сентябрь', 'сентября'),
+        ('октябрь', 'октября'),
+        ('ноябрь', 'ноября'),
+        ('декабрь', 'декабря')
+    ]
+
+    days = [
+        ('ПН', 'Понедельник'),
+        ('ВТ', 'Вторник'),
+        ('СР', 'Среда'),
+        ('ЧТ', 'Четверг'),
+        ('ПТ', 'Пятница'),
+        ('СБ', 'Суббота'),
+        ('ВС', 'Воскресение')
+    ]
+
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailsView, self).get_context_data()
+
+        def get_group_repr(group):
+            now = datetime.now()
+            passes = []
+            for p in group.external_passes.all().order_by('lessons', 'skips'): #PassTypes.objects.filter(pk__in=group.external_passes, prise__gt=0).order_by('lessons', 'skips'):
+                if p.lessons == 1:
+                    passes.append(dict(name=u'Разовое посещение', prise=p.prise))
+                else:
+                    if p.skips == 0:
+                        passes.append(dict(name=u'Абонемент на %d заняти%s (без пропусков)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й'), prise=p.prise))
+                    else:
+                        passes.append(dict(name=u'Абонемент на %d заняти%s (%d пропуск%s)' % (p.lessons, u'е' if p.lessons == 1 else u'я' if p.lessons < 5 else u'й', p.skips, u'' if p.skips == 1 else u'а' if p.skips < 5 else u'ов'), prise=p.prise))
+
+            dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
+            delta = (dt - now.date()).days
+
+            if delta + 21 < 0:
+                start_date = u''
+            elif delta == 0:
+                start_date = u'старт сегодня'
+            elif delta == 1:
+                start_date = u'старт завтра'
+            elif delta == 2:
+                start_date = u'старт послезавтра'
+            else:
+                start_date = u'c %d %s' % (dt.day, MONTH_PARENT_FORM[dt.month])
+
+            return dict(
+                id=group.id,
+                name=group.name, # '%s-%s' % (group.dance.name.upper(), group.level.name.upper()),
+                time='%s-%s' % (str(group.time)[0:5], str(group.end_time)[0:5]),
+                date =(lambda dt: u'%d %s %d' % (dt.day, MONTH_PARENT_FORM[dt.month], dt.year))(max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())),
+                free_places=(group.free_placees or 0) - GroupList.objects.filter(group=group, active=True).count(),
+                top_msg=group.lending_message or '',
+                duration=group.duration,
+                days=map(lambda i, d: dict(marked=i in group.days_nums, repr=d[0]), xrange(0, 7), self.days),
+                days_full=', '.join([self.days[i][1] for i in group.days_nums]),
+                passes=passes,
+                dance_hall = group.dance_hall,
+                # teachers=u'%s и %s' % (group.teacher_leader, group.teacher_follower) if group.teacher_leader and group.teacher_follower else group.teacher_leader or group.teacher_follower,  # todo это поле надо привести в соответствие базе!!!
+                teachers=group.teachers.all(),
+                course_details=group.course_details or group.level.course_details,
+                course_results=group.course_results or group.level.course_results,
+                start_date=start_date
+            )
+
+
+        gid = self.request.GET['gid']
+        group = Groups.objects.get(pk=gid)
+        context['group'] = get_group_repr(group)
+
+        return context

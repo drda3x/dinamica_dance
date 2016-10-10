@@ -1,36 +1,6 @@
-<a href="#nv4" class="swiftseo-overlay" id="g{{ group.id }}"></a>
-<div class="window2 swiftseo-popup">
-    {{ group.name }}
-    <form id="group_form{{ group.id }}" method="post">
-        {% csrf_token %}
-        <span class="sp1">Запись в группу <br/> {{ group.name }} {{group.start_date}}</span>
-        <span class="sp2">
-        {{ group.time }} {% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}<br/>
-        м.{{ group.dance_hall.station }}<br>{{ group.address }}
-        </span>
-        <input type="hidden" name="user_type" value="Заявка на запись в группу" />
-        <input type="hidden" name="group_name" value="{{ group.name }}" />
-        <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
-        <input type="hidden" name="time" value="{{ group.time }}" />
-        <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
-        <div class="name_inp">ФИО</div>
-        <div class="input-prepend">
-            <input type="text" name="name" class="inputt2">
-        </div>
-        <div class="name_inp">Телефон</div>
-        <div class="input-prepend">
-            <input class="inputt2" name="phone" type="text" value maxlength="100"
-                autocomplete="of">
-        </div>
-        <input class="popupgreen" onclick="sendForm('group_form{{ group.id }}'); yaCounter34798545.reachGoal('GROUP_CONFIRM'); return false;" type="submit" name="send" value="Записаться">
-    </form>
-    <a class="close1" href="#nv4">x</a>
-</div>
-{% endfor %}
-{% for group in all_groups %}
-<a href="#nv4" class="swiftseo-overlay" id="det{{ group.id }}"></a>
-<!--<div class="podrobwindow1 swiftseo-popup2">-->
-<div class="podrobw1 swiftseo-popup2">
+
+    <a href="#nv4" class="swiftseo-overlay details" id="det{{group.id}}"></a>
+    <div class="podrobw1 swiftseo-popup2 details">
     <h3>{{ group.name }}</h3>
     <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
     <span class="sp5">{{ group.top_msg }}</span>
@@ -190,32 +160,5 @@
             <div class="clear"></div>
         </div>
     {% endif %}
+    <a href="#nv4" class="close1">x</a>
 </div>
-<a class="close1" href="#nv4">x</a>
-</div>
-<!--</div>-->
-{% endfor %}
-<a href="#" class="swiftseo-overlay" id="success_l"></a>
-<div class="swiftseo-popup">
-    <p>
-        Спасибо, что Вы выбрали именно нас!<br>
-        Наш администратор свяжется с Вами в ближайшее время.<br>
-        <br>
-        Всегда Ваша,<br>
-        комманда ТСК "Динамика"
-    </p>
-</div>
-<a href="#" class="swiftseo-overlay" id="zvonok"></a>
-<div class="swiftseo-popup">
-    <p class="popup-zag">Закажите звонок!</p>
-    <form method="post" id="call_form">
-        {% csrf_token %}
-        <input type="hidden" name="user_type" value="Заказ звонка">
-        Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
-        Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
-        <input onclick="sendForm('call_form'); yaCounter34798545.reachGoal('CALL_BACK'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
-        <div style="display: none; margin: 51px 0 0;" class="user-message">Отправка данных...</div>
-    </form>
-</div>
-<a href="#x" class="swiftseo-overlay" id="napisat"></a>
-

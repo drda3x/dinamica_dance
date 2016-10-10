@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from dinamica_dance.views import IndexView
+from dinamica_dance.views import IndexView, DetailsView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^details', DetailsView.as_view()),
     url(r'', IndexView.as_view())
 ]

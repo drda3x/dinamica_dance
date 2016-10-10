@@ -20,7 +20,12 @@
             window.onload = function () {
               var dates = [{% for bonus_class in bonus_classes%}{{ bonus_class.date }}{% if not forloop.last%},{% endif %}{% endfor %}];
                 CDT((dates.length > 0) ? dates[0] : 0);
-                console.log("con1");
+
+                var id = parseInt(window.location.hash.replace(/[^0-9]/g, ''));
+                if(id) { 
+                  showDetails(id);
+                  window.location.hash = "";
+                }
             }
         </script>
         <script>
@@ -556,7 +561,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}} <br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" onclick="showDetails({{group.id}})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -584,7 +589,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" onclick="showDetails({{group.id}})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -612,7 +617,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" onclick="showDetails({{group.id}})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -640,7 +645,7 @@
                   <tr>
                       <td class="brl1 cd1">{{ group.name }} {{group.start_date}}<br/>
                           <a class="zaps1" title="Записаться" href="#g{{ group.id }}">Записаться</a>
-                          <a class="zaps1 pdrb1" title="Подробнее" href="#det{{ group.id }}">Подробнее</a>
+                          <a class="zaps1 pdrb1" title="Подробнее" onclick="showDetails({{group.id}})">Подробнее</a>
                       <td>
                           <span class="p2">{{ group.time }}</span><br>
                           {% for day in group.days %}
@@ -748,7 +753,29 @@
                 Copyright © 2016- Все права защищены
             </div>
         </footer>
-        
+        <a href="#" class="swiftseo-overlay" id="success_l"></a>
+        <div class="swiftseo-popup">
+            <p>
+                Спасибо, что Вы выбрали именно нас!<br>
+                Наш администратор свяжется с Вами в ближайшее время.<br>
+                <br>
+                Всегда Ваша,<br>
+                комманда ТСК "Динамика"
+            </p>
+        </div>
+        <a href="#" class="swiftseo-overlay" id="zvonok"></a>
+        <div class="swiftseo-popup">
+            <p class="popup-zag">Закажите звонок!</p>
+            <form method="post" id="call_form">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" value="Заказ звонка">
+                Имя:<br><input type="text" name="name" class="inputt2"/><br><br>
+                Телефон:<br><input type="text" name="tel" class="inputt2" required/><br>
+                <input onclick="sendForm('call_form'); yaCounter34798545.reachGoal('CALL_BACK'); return false;" value="ЗАКАЗАТЬ" type="submit" class="user-action popupgreen">
+                <div style="display: none; margin: 51px 0 0;" class="user-message">Отправка данных...</div>
+            </form>
+        </div>
+        <a href="#x" class="swiftseo-overlay" id="napisat"></a>
         <script src="{% static "js/slider.js" %}"></script>
         <script src="{% static "js/buff.js" %}"></script>
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
@@ -838,6 +865,29 @@
             function showUserAction() {
                 $('.user-action').show();
                 $('.user-message').hide();
+            }
+
+            function showDetails(gid) {
+
+              if($('body').has('#det'+gid).length == 0) {
+                $.ajax({
+                  url: "details",
+                  data: {
+                      gid: gid
+                  }
+                }).done(function(data) {
+                  var detHtml = $(data);
+                  $('body').append(detHtml);
+                  window.location.hash = 'det' + gid
+                  //$('#det-container').append(data).show();
+                }); 
+              } else {
+                  window.location.hash = 'det' + gid
+              }
+            }
+            
+            function closeDetails() {
+                $('body').remove('.details');
             }
             
             // Обеспечиваем плавность скрола 
