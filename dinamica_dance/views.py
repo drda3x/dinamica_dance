@@ -325,5 +325,6 @@ class DetailsView(TemplateView):
         gid = self.request.GET['gid']
         group = Groups.objects.get(pk=gid)
         context['group'] = get_group_repr(group)
+        context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
 
         return context
