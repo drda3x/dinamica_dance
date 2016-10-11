@@ -318,7 +318,8 @@ class DetailsView(TemplateView):
                 teachers=group.teachers.all(),
                 course_details=group.course_details or group.level.course_details,
                 course_results=group.course_results or group.level.course_results,
-                start_date=start_date
+                start_date=start_date,
+                is_beginners=group.level.string_code == 'beginners'
             )
 
 
