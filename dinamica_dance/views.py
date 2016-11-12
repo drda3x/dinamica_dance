@@ -190,7 +190,7 @@ class IndexView(TemplateView):
         all_groups = list(Groups.opened.select_related('level'))
         bonus_class = None
         try:
-            bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:2]
+            bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
             #for _class in bonus_classes:
             #   if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
             #       bonus_class = _class

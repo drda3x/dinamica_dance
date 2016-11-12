@@ -1,4 +1,4 @@
 .idea
 *.pyc
-
+build
 /project/settings_local.py

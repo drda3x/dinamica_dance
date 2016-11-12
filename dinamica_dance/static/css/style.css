@@ -221,26 +221,26 @@ header{
 	clear:both;
 }
 .s1{
-	padding:40px 0 90px 0;
+	padding:40px 0 0 0;
 }
 .l1{
-	float:left;
-	width:49%;
+	width:33%;
 	margin-right:2%;
 	box-sizing:border-box;
-	padding-left:180px;
+	/*padding-left:150px;
 	padding-top:20px;
-	padding-bottom:20px;
+	padding-bottom:20px;*/
 	color:#6b6b6b;
 	font-size:1.2em;
 	font-family: 'Philosopher', sans-serif;
 	position:relative;
 	line-height:1.2em;
+    display: table-cell;
 }
 .clnd1{
-	background:url(../img/l1.jpg) no-repeat top center;
-	width:165px;
-	height:163px;
+	background:url(../img/l1_mini.jpg) no-repeat top center;
+	width:125px;
+	height:123px;
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -248,14 +248,14 @@ header{
 	font-family: 'Open Sans', sans-serif;
 	color:#ffffff;
 	font-weight:bold;
-	font-size:0.9em;
-	padding:38px 0 0 0;
+	font-size:12pt;
+	padding:25px 0 0 0;
 	text-transform:uppercase;
 }
 .clnd1 span{
 	display:block;
-	padding:25px 0 0 0;
-	font-size:3.5em;
+	padding:15px 0 0 0;
+	font-size:2.5em;
 	color:#4c4c4c;
 }
 .r1{
@@ -268,7 +268,14 @@ header{
 	line-height:1.2em;
 }
 .l1 h4{
-	font-size:1.7em;
+	font-size: 16pt;
+    margin-left:130px;
+
+}
+.mk_info{
+    width: 65%;
+    position: relative;
+    left: 130px;
 }
 .r1 ul{
 	list-style:inside disc;

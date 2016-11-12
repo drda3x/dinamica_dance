@@ -122,17 +122,18 @@
             </div>
         </header>
         <section class="s1">
-            <div style="text-align: center;" class="wrapper">
+            <div style="display: table; padding-top: 10px;" class="wrapper">
               {% for bonus_class in bonus_classes  %}
-              <div style="float: none; display: inline-block; margin-right: 0; text-align: left;" class="l1"> <!-- Да, долбое...изм, но сейчас не хочу копаться глубоко)) -->
+              <div class="l1">
                     <div class="clnd1">{{ bonus_class.month }}<span>{{ bonus_class.day }}</span></div>
-                    <h4>ОТКРЫТЫЙ УРОК<br>ПО ХАСТЛУ ЗА 99 РУБ.</h4>
-                    <b>Когда:</b> {{ bonus_class.day }} {{ bonus_class.month_2 }} <br/>
-                    <b>Во сколько?</b> с {{ bonus_class.begin_time }} до {{ bonus_class.end_time }} <br/>
-                    м.{{ bonus_class.metro_station }}  {{ bonus_class.hall_address }}({{ bonus_class.time_from_metro }} мин. от метро)
-                
-                    <a style="width: 50%;" href="#nv7" title="записаться на открытый урок" class="btn1" onclick="softScroll('#nv7')">ХОЧУ ТАНЦЕВАТЬ!</a>
-
+                        <h4>ОТКРЫТЫЙ УРОК<br>ПО ХАСТЛУ ЗА 99 РУБ.</h4>
+                        <div class="mk_info">
+                            <b>Когда?</b> {{ bonus_class.day }} {{ bonus_class.month_2 }} <br/>
+                            <b>Во сколько?</b> с {{ bonus_class.begin_time }} до {{ bonus_class.end_time }} <br/>
+                            м.{{ bonus_class.metro_station }}  {{ bonus_class.hall_address }}({{ bonus_class.time_from_metro }} мин. от метро)
+                        
+                            <a href="#nv7" title="записаться на открытый урок" class="btn1" onclick="softScroll('#nv7')">ХОЧУ ТАНЦЕВАТЬ!</a>
+                    </div>
                 </div>
                 {% endfor %}
                 <!--div class="r1">
