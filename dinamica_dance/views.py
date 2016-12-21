@@ -187,7 +187,7 @@ class IndexView(TemplateView):
                 start_date=start_date
             )
 
-        all_groups = list(Groups.opened.select_related('level'))
+        all_groups = list(Groups.opened.select_related('level').filter(external_available=False))
         bonus_class = None
         try:
             bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
