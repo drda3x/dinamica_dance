@@ -1,0 +1,28 @@
+   222	              <h2><img src="{% static "img/h2icn1.jpg" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/> ТРЕНЕРЫ</h2>
+   225	                      <img src="{% static "img/treneri1.jpg" %}" class="img-slider2">
+   250	                      <img src="{% static "img/treneri2.jpg" %}" class="img-slider2">
+   271	                      <img src="{% static "img/treneri3.jpg" %}" class="img-slider2">
+   288	                      <img src="{% static "img/treneri4.jpg" %}" class="img-slider2">
+   307	                      <img src="{% static "img/treneri5.jpg" %}" class="img-slider2">
+   326	                      <img src="{% static "img/treneri6.jpg" %}" class="img-slider2">
+   342	                      <img src="{% static "img/treneri9.jpg" %}" class="img-slider2">
+   360	                      <img src="{% static "img/treneri7.jpg" %}" class="img-slider2">
+   375	                      <img src="{% static "img/treneri11.jpg" %}" class="img-slider2">
+   395	                      <img src="{% static "img/treneri12.jpg" %}" class="img-slider2">
+   415	                      <img src="{% static "img/treneri8.jpg" %}" class="img-slider2">
+   430	                      <img src="{% static "img/treneri10.jpg" %}" class="img-slider2">
+   497	                              <img src="{% static "img/slider/Dinamika_site_photo1.jpg" %}" class="img-slider">
+   500	                              <img src="{% static "img/slider/Dinamika_site_photo2.jpg" %}" class="img-slider">
+   503	                              <img src="{% static "img/slider/Dinamika_site_photo3.jpg" %}" class="img-slider">
+   506	                              <img src="{% static "img/slider/Dinamika_site_photo4.jpg" %}" class="img-slider">
+   509	                              <img src="{% static "img/slider/Dinamika_site_photo5.jpg" %}" class="img-slider">
+   512	                              <img src="{% static "img/slider/Dinamika_site_photo6.jpg" %}" class="img-slider">
+   515	                              <img src="{% static "img/slider/Dinamika_site_photo7.jpg" %}" class="img-slider">
+   518	                              <img src="{% static "img/slider/Dinamika_site_photo8.jpg" %}" class="img-slider">
+   521	                              <img src="{% static "img/slider/Dinamika_site_photo9.jpg" %}" class="img-slider">
+   524	                              <img src="{% static "img/slider/Dinamika_site_photo10.jpg" %}" class="img-slider">
+   667	              <div class="tsd1"><span class="tsdzagl1">Разовое занятие</span><span class="chs1"><img src="{% static "img/tsdimg1.jpg" %}"
+   674	                  </span><span class="chs1"><img src="{% static "img/tsdimg2.jpg" %}" alt="Танцевальный клуб - Динамика" width="100%"
+   678	                  src="{% static "img/tsdimg3.jpg" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/></span><span
+   682	                  class="chs1"><img src="{% static "img/tsdimg4.jpg" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/></span><span
+   685	                  src="{% static "img/tsdimg5.jpg" %}" alt="Танцевальный клуб - Динамика" width="100%" height="auto"/></span><span

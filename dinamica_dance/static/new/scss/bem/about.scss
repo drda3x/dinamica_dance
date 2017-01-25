@@ -1,0 +1,123 @@
+.about {
+  padding-top: 4rem;
+  padding-bottom: 0.8rem;
+  background: #eaeaea url(../img/bg3.jpg) top left repeat;
+  background-size: 70px 70px;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 0px 3px rgba(0,0,0,0.28);
+}
+
+.about__title {
+  margin-top: 0;
+  margin-bottom: 3.6rem;
+  text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  color: #555;
+
+}
+
+.about__row {
+  // margin-left: -15px;
+  // margin-right: -15px;
+}
+
+.about__col-1 {
+  // float: left;
+  //width: 50%;
+  // padding-left: 15px;
+  // padding-right: 15px;
+  padding-bottom: 1.6rem;
+}
+
+.about__col-2 {
+  // float: left;
+  // width: 50%;
+  // padding-left: 15px;
+  // padding-right: 15px;
+}
+
+.about__card {
+  margin-bottom: 3.2rem;
+  text-align: center;
+  // min-height: 350px;
+  img {
+    margin-bottom: 0.8rem;
+    width: 100px;
+  }
+}
+
+.about__text-1 {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.4rem;
+ // font-size:;
+}
+
+.about__text-2 {
+  color: #333;
+  //font-size:0.9rem;
+}
+
+@media (min-width: 567px) {
+
+}
+
+@media (min-width: 768px) {
+  .about__col-2 {
+    // float: left;
+    // width: 50%;
+    flex-basis: calc(50% - 15px);
+
+  }
+  .about__card {
+    // min-height: 330px;
+    // margin-bottom: 0;
+  }
+  .about__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 992px) {
+  .about__col-2 {
+    // float: left;
+    // width: 50%;
+    flex-basis: calc(25% - 15px);
+
+  }
+  .about__text-2 {
+    font-size: 0.9rem;
+  }
+  .about__col-1 {
+    padding-bottom: 0;
+  }
+  .about {
+    padding-bottom: 2.4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .about__col-2 {
+    // float: left;
+    // width: 50%;
+    flex-basis: calc(50% - 15px);
+
+  }
+  .about__col-1 {
+    // float: left;
+    // width: 50%;
+    flex-basis: calc(50% - 15px);
+
+  }
+  .about__card {
+    min-height: 300px;
+    margin-bottom: 0;
+  }
+  .about {
+    padding-bottom: 0.6rem;
+  }
+}

@@ -1,0 +1,232 @@
+<div class="modal fade" id="js-modal-ajax-plan" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-ajax" action="lead.php" method="POST">
+                    <input type="hidden" name="google_c" value="group_form{{group_info.pk}}">
+                    <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
+                    <input type="hidden" name="type" value="Запись в группу">
+                    <input type="hidden" name="detail" id="modal-detail" value="">
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">{{group_info.name}}</h4>
+                    <div class="mod__text-1">{{mod__text-1}}</div>
+                    <div class="mod__row-1">
+                        <div class="mod__col-1">
+                            <div class="mod__text-2">Общая информация</div>
+                            <table class="mod__table-1">
+                                <tr>
+                                    <td>Начало занятий</td>
+                                    <td>{{group_info.string_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Дни недели</td>
+                                    <td>Вторник, Четверг</td>
+                                </tr>
+                                <tr>
+                                    <td>Время занятий</td>
+                                    <td>20:30-22:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Метро</td>
+                                    <td>Шаболовская</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="mod__col-1">
+                            <div class="mod__text-2">Стоимость занятий</div>
+                            <table class="mod__table-1">
+                                <tr>
+                                    <td>Разовое посещение</td>
+                                    <td>550</td>
+                                </tr>
+                                <tr>
+                                    <td>Абонемент на 8 занятий (1 пропуск)</td>
+                                    <td>3500</td>
+                                </tr>
+                                <tr>
+                                    <td>Абонемент на 16 занятий (2 пропуска)</td>
+                                    <td>6400</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Для студентов скидка — 1000 руб.</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mod__row-2">
+                        <div class="mod__col-2">
+                            <div class="mod__text-3">
+                                Подробнее о курсе
+                            </div>
+                            <ul class="mod__text-ul-1">
+                                <li>Сможете уверенно чувствовать себя на хастл-дискотеках;</li>
+                                <li>Украсите свои фотоальбомы эффектными танцевальными снимками;</li>
+                                <li>Приобретете десяток новых друзей;</li>
+                                <li>Станете увереннее в себе, стройнее и счастливее;</li>
+                            </ul>
+                        </div>
+                        <div class="mod__col-2">
+                            <div class="mod__text-3">
+                                В конце курса Вы научитесь
+                            </div>
+                            <ul class="mod__text-ul-1">
+                                <li>Основным элементам хастла (базовый шаг, смены, «веревочки», поддержки, вращения);</li>
+                                <li>Понимать партнера/партнершу без слов;</li>
+                                <li>«Обыгрывать» своими движениями музыку;</li>
+                                <li>Приглашать на танец любого понравившегося человека;</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mod__trener-text">Преподаватели</div>
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="img/example/mod/1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Антон Егоров</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Восьмикратный победитель и многократный призер танцевальных чемпионатов в различных
+                                    номинациях (в том числе Чемпионата России 2014)
+                                </li>
+                                <li>Действующий чемпион Москвы в категории Star
+                                    Если бывают танцоры «от Бога», то Антон – несомненно один из них. Начав заниматься
+                                    2,5 года назад, он успел обойти по уровню мастерства многих профессионалов,
+                                    танцующих с детства.
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я люблю слушать хорошую музыку и мне хотелось ей
+                                соответствовать, а не просто стоять и «мысленно» танцевать. А еще я сам – студент,
+                                поэтому понимаю, как важно, чтобы материал объяснялся доходчиво и весело»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen class="embed-responsive-item"
+                                        src="https://www.youtube.com/embed/RhLkreUL_4s"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="img/example/mod/2.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Илона Романчук</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Танцевальный стаж – 11 лет, танцор B-класса по хастлу
+                                </li>
+                                <li>Призер, победитель и финалист множества всероссийских чемпионатов по хастлу в
+                                    отдельных номинациях (в том числе Чемпионата Москвы 2014)
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я приехала из маленького северного городка в Республики
+                                Коми, где танцы были одним из немногих способов проявить себя, а о хастле узнала, когда
+                                переехала в Москву и находилась в поиске себя. Я полюбила хастл из-за… мужчин. Настоящих
+                                мужчин (то есть партнеров) – уверенных в себе, харизматичных, способных на языке танца
+                                рассказать увлекательную историю, - таких мужчин хочется слушать и следовать за ними»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen class="embed-responsive-item"
+                                        src="https://www.youtube.com/embed/vv3wHA5ugO4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mod__form-wrap">
+                        <div class="mod__trener-text">Записаться</div>
+                        <div class="modal-group">
+                            <label class="modal-group__label">Ваше имя:</label>
+                            <input name="name" class="modal-group__input" type="text"
+                                   placeholder="Иван Иванов">
+                        </div>
+                        <div class="modal-group">
+                            <label class="modal-group__label">Ваш телефон <span>*</span>:</label>
+                            <input name="tel" class="modal-group__input js-mask-phone required" type="text"
+                                   placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="modal-group">
+                            <button class="modal-group__button" type="submit">Записаться</button>
+                        </div>
+                    </div>
+
+                    <div class="mod__text-5">
+                        Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь
+                        клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и
+                        популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия,
+                        благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках,
+                        шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в
+                        разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие
+                        учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения
+                        между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и,
+                        возможно, встретить свою любовь!
+                    </div>
+                    <div class="mod__trener-text">Как проехать</div>
+                    <div class="mod__map-row">
+                        <div class="mod__map-col">
+                            <div class="mod__map-img-wrap">
+                                <img src="img/example/mod/map1.jpg">
+                            </div>
+                        </div>
+                        <div class="mod__map-col">
+                            <div class="mod__map-text-1"><b>Адрес зала:</b> метро Шаболовская, Малый Калужский переулок 15 стр 16 </div>
+                            <div class="mod__map-text-2"><b>Площадь зала:</b> 100 кв.м. </div>
+
+                            <div class="mod__map-text-1"><b>Напольное покрытие:</b> ламинат;</div>
+                            <div class="mod__map-text-1"><b> Воздух:</b> сплит-система, вытяжка;</div>
+                            <div class="mod__map-text-1"><b>Раздевалки:</b> мужская, женская;</div>
+                            <div class="mod__map-text-2"><b>Душ и туалет:</b> есть;</div>
+
+                          <div class="mod__map-text-1"><b>Описание дороги до зала:</b></div>
+                            <div class="mod__map-text-2">м. Шабловская, после выхода из стеклянных дверей поворачивая налево обойти вестибюль метро
+                                вокруг, за станцией повернуть направо, идти по тротуару до пересечения с улицей, потом до
+                                конца тротуара и налево. Далее идти прямо до перекрестка, перейти дорогу, повернуть налево и
+                                идти прямо по Донской улице до пересечения с Малым Калужским переулком, повернуть на
+                                переулок. Слева от вас будет проходная со шлагбаумом, там необходимо взять пропуск. После
+                                проходной правее будет крыльцо с козырьком, вам туда. После того как зашли прямо перед вами
+                                будет серая дверь на минус первый этаж, после лестницы правее дверь в танцевальный зал:)</div>
+                            <div class="mod__map-text-2">Любые вопросы можно задать по телефону: <a href="tel:+79168246661">+7-916-824-666-1</a></div>
+                        </div>
+                    </div>
+                    <div class="mod__trener-text">В чём приходить на занятия</div>
+                    <div class="mod__row-21">
+                        <div class="mod__col-21">
+                            <div class="mod__text-3">
+                                Одежда
+                            </div>
+                            <div class="mod__text-21">Должна быть свободной, не стесняющей движений. Главное, чтобы Вам
+                                было удобно двигаться, поэтому нежелательно одевать мини-юбки, высокие каблуки и обувь с
+                                длинными носами.
+                            </div>
+                        </div>
+                        <div class="mod__col-21">
+                            <div class="mod__text-3">
+                                Обувь
+                            </div>
+                            <div class="mod__text-21">На занятия желательно одевать без каблуков, особенно на первом
+                                этапе (идеальный вариант - это джазовки или чешки).
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+
+                     -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#js-modal-ajax-plan').on('hidden.bs.modal', function (e) {
+        window.location.hash = "!";
+        $('#js-modal-ajax-plan').remove();
+    });
+</script>

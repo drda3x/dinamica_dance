@@ -1,0 +1,31 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  //-webkit-appearance: none;
+  &:focus {
+    outline: none;
+  }
+}
+button {
+  text-align: center;
+}
+
+figure {
+  margin: 0;
+}
+

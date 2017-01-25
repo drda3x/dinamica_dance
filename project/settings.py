@@ -37,8 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'application',
-    'dinamica_dance'
+    'dinamica_dance',
+    'application'
 )
 
 MIDDLEWARE_CLASSES = (

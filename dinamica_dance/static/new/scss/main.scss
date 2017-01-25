@@ -1,0 +1,60 @@
+$lh: 1.4;
+
+@import 'main/normalize.scss';
+@import 'main/add-normalize.scss';
+@import 'main/typography.scss';
+@import 'main/basegrid.scss';
+//@import 'main/paddingandmargin.scss';
+
+@import 'include/grid.scss';
+//@import 'include/form.scss';
+//@import 'include/lightbox.scss';
+@import 'include/modal.scss';
+@import 'include/slick.scss';
+@import 'include/offcanvas.scss';
+
+@import 'bem/header.scss';
+@import 'bem/start.scss';
+@import 'bem/open.scss';
+@import 'bem/about.scss';
+@import 'bem/trener.scss';
+@import 'bem/video.scss';
+@import 'bem/reviews.scss';
+@import 'bem/gallery.scss';
+@import 'bem/plan.scss';
+@import 'bem/learn.scss';
+@import 'bem/end.scss';
+@import 'bem/footer.scss';
+
+@import 'bem/mod.scss';
+
+#ajax-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url(../img/icon/ajax.svg) center center no-repeat rgba(15, 15, 15, .85);
+  background-size: 100px 100px;
+  z-index: 9999999
+}
+
+#hall_map {
+  width: 100%;
+  height: 370px;
+  margin-bottom: 4.8rem;
+}
+
+@media (min-width: 768px) {
+  #hall_map {
+    height: 420px
+  }
+
+}
+
+@media (min-width: 992px) {
+  #hall_map {
+    height: 500px
+  }
+
+}

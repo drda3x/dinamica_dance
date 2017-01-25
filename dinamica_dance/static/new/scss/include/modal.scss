@@ -1,0 +1,226 @@
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.modal.fade .modal-lg {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: 0;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.modal-backdrop.in {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+
+
+.modal-close {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+  transition: .3s;
+  position: absolute;
+  right: 18px;
+  top: 4px;
+  &:hover {
+    color: red;
+  }
+}
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: 'Philosopher', sans-serif;
+  margin-top: 0;
+  margin-bottom: 25px;
+  line-height: 1.3;
+  color: #444;
+
+}
+.modal-title-desc-wrap {
+  margin-bottom:1.6rem;
+  margin-top: -0.4rem;
+  font-size:0.9rem;
+  font-weight:600;
+  color: #888;
+}
+.modal-title-desc {
+}
+.modal-group {
+  margin-bottom:1.1rem;
+}
+.modal-group__label {
+  display: block;
+  text-transform: uppercase;
+  font-size:0.7rem;
+  font-weight:600;
+  letter-spacing:0.02em;
+  margin-bottom:0.2rem;
+  color: #666;
+  span {
+    color: red;
+  }
+}
+.modal-group__input {
+  width: 100%;
+  height: 2.6rem;
+  padding: 0 1rem;
+  border-radius: 4px;
+  border: 1px solid #cbcbcb;
+}
+.modal-group__button {
+  box-shadow: none;
+  padding: 0 2.4rem 0 2.4rem;
+  height: 2.6rem;
+  line-height:2.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-size:0.8rem;
+  letter-spacing: 0.02em;
+  border: none;
+  background-color: #f4791b;
+  color: #fff;
+  transition: background .2s ease-in-out;
+  &:hover {
+    background-color: #dc6d18;
+  }
+  &:active {
+    background-color: #af5713;
+    transition: background .1s ease-in-out;
+  }
+}
+.modal-body {
+  position: relative;
+  padding: 45px 25px 35px 25px;
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 500px;
+    margin: 30px auto;
+  }
+
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-sm {
+    width: 300px;
+  }
+  .modal-body {
+    padding: 50px 100px 35px 55px;
+  }
+  .modal-close {
+    right: 25px;
+  top: 12px;
+  }
+  .modal-title  {
+    font-size: 32px;
+  }
+  .modal-lg {
+    width: 700px;
+    .modal-body {
+      padding-right: 55px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+
+
+
+

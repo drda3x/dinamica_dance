@@ -1,0 +1,32 @@
+
+footer {
+  //background-color: #D50018;
+  background-color: #5d5b4b;
+}
+.footer__text-1 {
+  text-align: center;
+  color: #fff;
+  font-size:0.9rem;
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+  //border-top: 1px solid #888;
+}
+
+@media (min-width: 992px) {
+  .footer__text-1  {
+   // padding-top: 1.3rem;
+   // padding-bottom: 1.1rem;
+  }
+  footer {
+    //padding-top: 5.6rem;
+  //  background: #D50018 url(../img/background/bg2.png) top center no-repeat;
+  }
+}
+@media (min-width: 1200px) {
+  .footer__text-1 {
+    font-size:0.8rem;
+  }
+  footer {
+  //  padding-top:5.13rem;
+  }
+}

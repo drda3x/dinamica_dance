@@ -1,0 +1,164 @@
+
+    <a href="#nv4" class="swiftseo-overlay details" id="det{{group.id}}"></a>
+    <div class="podrobw1 swiftseo-popup2 details">
+    <h3>{{ group.name }}</h3>
+    <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
+    <span class="sp5">{{ group.top_msg }}</span>
+    <div class="ls1">
+        <h4>Общая информация</h4>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td>Начало занятий</td>
+                    <td>{{ group.date }}</td>
+                </tr>
+                {% if group.free_places and group.free_places > 0 %}
+                <tr>
+                    <td>Осталось мест</td>
+                    <td>{{ group.free_places }}</td>
+                </tr>
+                {% endif %}
+                {% if group.duration %}
+                <tr>
+                    <td>Длительность курса</td>
+                    <td>{{ group.duration }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td>Дни недели</td>
+                    <td>{{ group.days_full }}</td>
+                </tr>
+                <tr>
+                    <td>Время занятий</td>
+                    <td>{{ group.time }}</td>
+                </tr>
+                <tr>
+                    <td>Метро</td>
+                    <td>{{ group.dance_hall.station }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="rs1">
+        <h4>Стоимость занятий</h4>
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+                {% if not group.passes %}
+                <tr>
+                    <td>Точную стоимость и варианты оплаты можно узнать по телефону +7-916-824-666-1</td>
+                </tr>
+                {% endif %}
+                {% for p in group.passes %}
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.prise }}</td>
+                </tr>
+                {% endfor %}
+                {% if group.is_beginners %}
+                <tr>
+                    <td class="ltd1">Для студентов скидка — 1000 руб.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+    <div class="prewho1">
+        <div class="ls1">
+            {% if group.course_details %}
+            <h4>Подробнее о курсе</h4>
+            <p>{{ group.course_details | safe }}</p>
+            {% endif %}
+        </div>
+        <div class="rs1">
+          {% if group.course_results %}
+          <h4>В конце курса Вы научитесь</h4>
+          <p>{{ group.course_results | safe }}</p>
+          {% endif %}
+        </div>
+        <div class="clear"></div>
+    <div class="prepod1">
+        <span class="hline"></span>
+        <div class="h3bl1">
+            <h3>ПРЕПОДАВАТЕЛИ</h3>
+        </div>
+        {% for teacher in group.teachers %}
+        <div class="ls2">
+            {% if teacher.photo_file %}
+            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ teacher.photo_file }}" width="290" height="280" />
+            {% endif %}
+            <h4>{{ teacher.first_name }} {{ teacher.last_name }}</h4>
+            <p>{{ teacher.about | safe }}</p>
+        </div>
+        <div class="rs2">
+            {% if teacher.video %}
+            <div class="videoblock1">
+                <div class="videoWrapper">
+                    <iframe width="560" height="349" src="{{ teacher.video }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+        {% endfor %}
+        <div class="formwrapper1">
+            <form id="group_form2_{{ group.id }}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="user_type" value="Заявка на запись в группу" />
+                <input type="hidden" name="group_name" value="{{ group.name }}" />
+                <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
+                <input type="hidden" name="time" value="{{ group.time }}" />
+                <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
+                <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
+                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
+                <button type="submit" onclick="sendForm('group_form2_{{ group.id }}'); yaCounter34798545.reachGoal('GROUP_CONFIRM'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
+                <button type="submit" onclick="sendForm('group_form2_{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
+                <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
+            </form>
+        </div>
+        {% if group.is_beginners %}
+        <p class="bp1">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
+        {% endif %}
+    </div>
+    <div class="predres1">
+        <span class="hline"></span>
+        <div class="h3bl1">
+            <h3>как проехать</h3>
+        </div>
+        <div class="ls1">
+          <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
+                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
+                <div>
+                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
+                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
+                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="rs1">
+            <span class="prenazv1">м. {{ group.dance_hall.station }}
+            {{ group.dance_hall.address }}</span>
+            <p>{{ group.dance_hall.about | safe }}</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% if group.is_beginners %}
+        <div class="prewho1">
+            <span class="hline"></span>
+            <div class="h3bl1">
+                <h3>В чём приходить на занятия</h3>
+            </div>
+            <div class="ls1">
+                <h4>Одежда</h4>
+                <p>Должна быть свободной, не стесняющей движений. Главное, чтобы Вам было удобно двигаться, поэтому нежелательно одевать мини-юбки, высокие каблуки и обувь с длинными носами.</p>
+            </div>
+            <div class="rs1">
+              <h4>Обувь</h4>
+                <p>На занятия желательно одевать без каблуков, особенно на первом этапе (идеальный вариант - это джазовки или чешки).</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endif %}
+    <a href="#nv4" class="close1">x</a>
+</div>

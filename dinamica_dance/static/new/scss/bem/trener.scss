@@ -1,0 +1,119 @@
+.trener {
+  // height: 500px;
+  // background: url(../img/background/bg3.jpg) left top repeat;
+
+  padding-top:4.4rem;
+  padding-bottom: 4rem;
+}
+
+.trener__title {
+
+  margin-top: 0;
+  margin-bottom: 3.6rem;
+  //text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  font-weight:700;
+  text-transform: uppercase;
+  font-size:2.2rem;
+
+  span {
+    position: relative;
+    display: inline-block;
+    padding-left: 51px;
+    &:before {
+      position: absolute;
+      content: "";
+      background: url(../img/icon/trener-1.jpg) center center no-repeat;
+      width: 40px;
+      height: 71px;
+      left: 0;
+      top: -0.45rem;
+    }
+  }
+}
+.trener__block {
+
+}
+.trener__slider {
+
+}
+.trener__slider-item {
+ // height: 300px;
+}
+.trener__slider-item-wrap {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom:1.6rem;
+}
+.trener__slider-left {
+  text-align: center;
+  margin-bottom:1.6rem;
+  img {
+    display: inline-block;
+  }
+}
+.trener__text-1 {
+  font-weight:600;
+  margin-bottom:1rem;
+}
+.trener__text-2 {
+  font-size:0.9rem;
+  padding: 0 0 0 1.22rem;
+  margin: 0 0 1rem 0;
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}
+.trener__text-3 {
+  font-size:0.9rem;
+  margin: 0 0 1rem 0;
+
+}
+@media (min-width: 567px) {
+
+  .trener__title {
+
+    text-align: center;
+
+    span {
+
+    }
+
+  }
+  .trener__slider-item-wrap {
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 2.4rem;
+  }
+}
+@media (min-width: 768px) {
+  .trener__slider-left {
+    display: table-cell;
+    vertical-align: top;
+    img {
+      max-width: none;
+      width: 250px;
+    }
+  }
+  .trener__slider-right {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 30px;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+  .trener__slider-item-wrap {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .trener__slider-left {
+
+    img {
+
+      width: auto;
+    }
+  }
+}

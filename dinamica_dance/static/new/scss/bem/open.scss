@@ -1,0 +1,151 @@
+.open {
+  // height: 400px;
+  padding-top: 4.8rem;
+  overflow-y: hidden;
+  margin-bottom:4.8rem;
+}
+
+.open__col {
+  position: relative;
+  margin-bottom: 3.2rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.open__col-left {
+  background: url(../img/icon/open-1.jpg) center center no-repeat;
+  width: 125px;
+  height: 123px;
+  position: absolute;
+  left: -42px;
+  top: 0;
+}
+
+.open__col-right {
+  padding-left: 85px;
+}
+
+.open__col-left-text-1 {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  padding-top: 24px;
+  text-transform: uppercase;
+}
+
+.open__col-left-text-2 {
+  color: #4c4c4c;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 45px;
+  padding-top: 5px;
+  line-height: 1;
+}
+
+.open__text-1 {
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 600;
+  color: #9e0119;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  margin-top: 0;
+}
+
+.open__btn-1 {
+  margin-top:1.6rem;
+  a {
+    color: #ffffff;
+    background-color: #e97217;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    //font-family: 'Philosopher', sans-serif;
+    font-size:0.8rem;
+    display: inline-block;
+    height:2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1.8rem;
+    font-weight:600;
+    transition: background .2s ease-in-out;
+    &:hover {
+      background-color: #dc6d18;
+    }
+    &:active {
+      background-color: #af5713;
+      transition: background .1s ease-in-out;
+    }
+
+  }
+
+}
+.open__text-2 {
+  font-weight: 300;
+  b {
+    font-weight:600;
+  }
+}
+.open__text-3 {
+  font-weight: 300;
+}
+@media (min-width: 360px) {
+  .open__col-left {
+    left: -15px;
+  }
+
+  .open__col-right {
+    padding-left: 110px;
+  }
+}
+@media (min-width: 567px) {
+  .open__col-right {
+    padding-left: 130px;
+  }
+  .open__col {
+
+    max-width: 415px;
+
+  }
+}
+@media (min-width: 768px) {
+  .open__col {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 33.333%
+  }
+  .open__row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  .open__col-right {
+    padding-left: 0;
+    padding-top: 140px;
+  }
+  .open__col-left {
+    left: 0;
+  }
+  .open__col {
+    max-width: none;
+    margin-bottom: 0;
+  }
+  .open {
+    padding-top: 3rem;
+  }
+}
+@media (min-width: 1200px) {
+  .open__col-right {
+    padding-left: 120px;
+    padding-top: 0;
+  }
+  .open__col-left {
+    left: 0;
+  }
+}

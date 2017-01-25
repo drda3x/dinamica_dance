@@ -1,0 +1,130 @@
+.reviews {
+  // height: 500px;
+  // background: url(../img/background/bg3.jpg) left top repeat;
+// background: #eaeaea;
+  padding-top: 4.4rem;
+  padding-bottom: 5rem;background: #eaeaea url(../img/bg3.jpg) top left repeat;
+  background-size: 70px 70px;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 0px 3px rgba(0,0,0,0.28);
+  position: relative;
+  z-index: 1;
+}
+
+.reviews__title {
+
+  margin-top: 0;
+  margin-bottom: 3.6rem;
+  //text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+
+  span {
+    position: relative;
+    display: inline-block;
+    padding-left: 68px;
+    &:before {
+      position: absolute;
+      content: "";
+      background: url(../img/icon/reviews-1.png) center center no-repeat;
+      background-size: 59px 43px;
+      width: 59px;
+      height: 43px;
+      left: 0;
+      top: 0.3rem;
+    }
+  }
+}
+.reviews__col {
+  //margin-bottom:4rem;
+  text-align: center;
+  &:not(:last-child) {
+    margin-bottom:4rem;
+  }
+}
+.reviews__header-left {
+  margin-bottom:1rem;
+}
+.reviews__header-title {
+  font-weight: 700;
+  font-size:1.45rem;
+  font-family: 'Philosopher', sans-serif;
+  margin-bottom:0.1rem;
+}
+.reviews__header-link {
+  margin-bottom:1.2rem;
+  a {
+    color: #D50018;
+    font-family: 'Philosopher', sans-serif;
+    font-style: italic;
+    font-weight:700;
+    font-size:1.2rem;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: #D50018;
+    }
+  }
+}
+@media (min-width: 567px) {
+  .reviews__title {
+
+    text-align: center;
+
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  .reviews__col {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width:33.333%;
+    text-align: left;
+    &:not(:last-child) {
+      margin-bottom:0;
+    }
+  }
+  .reviews__row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .reviews__header-left {
+    display: table-cell;
+    vertical-align: top;
+    img {
+      max-width: none;
+    }
+  }
+  .reviews__header-right {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 15px;
+  }
+  .reviews__header-link {
+    margin-bottom: 0;
+  }
+  .reviews__header {
+    margin-bottom:1rem;
+  }
+  .reviews__header-title {
+
+    font-size:1.35rem;
+
+  }
+  .reviews__header-link {
+
+    a {
+
+      font-size:1.1rem;
+
+    }
+  }
+}

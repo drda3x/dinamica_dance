@@ -1,0 +1,63 @@
+.video {
+  // height: 500px;
+  // background: url(../img/background/bg3.jpg) left top repeat;
+  background: #d1d1d1;
+  padding-top: 4.4rem;
+  padding-bottom: 4.8rem;
+}
+
+.video__title {
+
+  margin-top: 0;
+  margin-bottom: 3.6rem;
+  //text-align: center;
+  font-family: 'Philosopher', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+
+  span {
+    position: relative;
+    display: inline-block;
+    padding-left: 64px;
+    &:before {
+      position: absolute;
+      content: "";
+      background: url(../img/icon/video-1.png) center center no-repeat;
+      width: 50px;
+      height: 49px;
+      left: 0;
+      top: 0rem;
+    }
+  }
+}
+.video__wrap {
+  margin-left:auto;
+  margin-right:auto;
+  max-width: 960px;
+}
+
+@media (min-width: 567px) {
+  .video__title {
+
+    text-align: center;
+
+  }
+}
+
+@media (min-width: 768px) {
+  .video__title {
+    font-size:2.2rem;
+  }
+  .video {
+    background: #d1d1d1 url(../img/background/bg6.jpg) center center no-repeat;
+    background-size: cover;
+  }
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+
+}

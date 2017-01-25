@@ -1,0 +1,1084 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="yandex-verification" content="f131b3e74c3712f4"/>
+    <title>Танцевальный клуб - Динамика</title>
+    <meta name="description" content="Танцевальный клуб - Динамика"/>
+    <link rel="icon" type="image/png" href="img/favicon.png"/>
+    <link href='https://fonts.googleapis.com/css?family=Philosopher:700,400italic&subset=cyrillic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600&subset=cyrillic' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="{% static "new/css/main.css" %}" type="text/css"/>
+    <script>
+        // Магия Google аналитики
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-79680817-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter34798545 = new Ya.Metrika({
+                    id: 34798545,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            } catch (e) {
+            }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () {
+                    n.parentNode.insertBefore(s, n);
+                };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/34798545" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+<div id="header__start"></div>
+<header>
+    <div class="header__wrap">
+        <div class="container">
+            <div class="header__pr">
+                <div class="header__logo-wrap">
+                    <a href="#header__start" class="js-scroll">
+                        <img src="{% static "new/img/logo.png" %}" alt="Логотип Динамика Хастл">
+                    </a>
+                </div>
+                <nav class="header__menu-wrap">
+                    <div class="header__menu">
+                        <ul class="header__menu-ul js-scroll">
+                            <li class="header__menu-li"><a class="header__menu-link" href="#about">Почему мы?</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#trener">Тренеры</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#reviews">Отзывы</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#gallery">Фото</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#map">Адреса</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#plan">Расписание</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#learn">Цены</a></li>
+                            <li class="header__menu-li"><a class="header__menu-link" href="#end">Записаться</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="header__trigger ">
+                    <a class="mobile-menu-trigger" href="#!"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="header__padding"></div>
+<section class="start">
+    <div class="container">
+        <div class="start__wrap">
+            <div class="start__block-1 clearfix">
+                <div class="start__block-1-left">
+                    <a href="tel:+79168246661">+7 (916) 824-666-1</a>
+                </div>
+                <div class="start__block-1-right">
+                    <a data-toggle="modal" href="#js-modal-callback">Заказать звонок</a>
+                </div>
+
+            </div>
+            <div class="start__text-1">Найди друзей, идеальную пару и&nbsp;самого себя&nbsp;&mdash; танцуя!</div>
+            <div class="start__block-2">
+                <div class="start__text-2">Хастл&nbsp;&mdash; это не&nbsp;просто модный парный танец, но&nbsp;и&nbsp;способ:</div>
+                <ul class="start__text-3">
+                    <li>Знакомиться с&nbsp;десятками девушек или парней за&nbsp;вечер;</li>
+                    <li>Поддерживать себя в&nbsp;форме без нудного фитнеса;</li>
+                    <li>Не&nbsp;скучать вечерами за&nbsp;компьютером в&nbsp;одиночестве;</li>
+                    <li>Найти свою &laquo;танцевальную семью&raquo; и&nbsp;зажигать вместе.</li>
+                </ul>
+                <div class="start__btn-wrap">
+                    <a class="js-scroll" href="#end">Записаться на&nbsp;открытый урок</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="open" class="open">
+    <div class="container">
+        <div class="clearfix open__row">
+            {% for bonus_class in bonus_classes  %}
+            <div class="open__col">
+                <div class="open__col-left">
+                    <div class="open__col-left-text-1">{{ bonus_class.month }}</div>
+                    <div class="open__col-left-text-2">{{ bonus_class.day }}</div>
+                </div>
+                <div class="open__col-right">
+                    <h4 class="open__text-1">
+                        Открытый урок <br> по&nbsp;хастлу за&nbsp;99&nbsp;руб.
+                    </h4>
+                    <div class="open__text-2">
+                        <b>Когда?</b> {{ bonus_class.day }}&nbsp;{{ bonus_class.month_2 }}
+                    </div>
+                    <div class="open__text-2">
+                        <b>Во&nbsp;сколько?</b> с&nbsp;{{ bonus_class.begin_time }} до&nbsp;{{ bonus_class.end_time }}
+                    </div>
+                    <div class="open__text-3">
+                        м.{{ bonus_class.metro_station }}<br> {{ bonus_class.hall_address }}({{ bonus_class.time_from_metro }}&nbsp;мин. от&nbsp;метро)
+                    </div>
+                    <div class="open__btn-1">
+                        <a class="js-scroll" href="#end">Хочу танцевать!</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id="about" class="about">
+    <div class="container">
+        <div class="about__row">
+            <div class="about__col-1">
+                <h2 class="about__title">Почему хастл?</h2>
+                <div class="about__row">
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/1.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Популярный</div>
+                            <div class="about__text-2">Ежедневно танцуют тысячи людей</div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/2.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Под любимую музыку</div>
+                            <div class="about__text-2">Хастл можно танцевать под любые песни, которые вам нравятся&nbsp;&mdash;
+                                от
+                                r&amp;b до&nbsp;тяжелого рока
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/3.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Лучшие педагоги&nbsp;&mdash; в&nbsp;России</div>
+                            <div class="about__text-2">Российская школа хастла считается самой сильной в&nbsp;мире</div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/4.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Самый свободный из&nbsp;парных танцев</div>
+                            <div class="about__text-2">В&nbsp;хастле можно миксовать лучшее из&nbsp;других танцевальных
+                                направлений
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about__col-1">
+                <h2 class="about__title">Почему &laquo;ДИНАМИКА&raquo;?</h2>
+                <div class="about__row">
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/5.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">ТОП-школа</div>
+                            <div class="about__text-2">Динамика возглавляет рейтинг лучших хастл-клубов России. При этом
+                                стоимость занятий среди школ &laquo;первого эшелона&raquo; у
+                                нас&nbsp;&mdash; самая низкая
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/6.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">4&nbsp;зала в&nbsp;центре Москвы</div>
+                            <div class="about__text-2">Все они расположены рядом с&nbsp;метро. Выбирайте ближайший к&nbsp;работе
+                                или дому!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/7.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Зажигаем вместе</div>
+                            <div class="about__text-2">Каждую неделю мы&nbsp;устраиваем различные клубные тусовки
+                                (помимо
+                                занятий)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about__col-2">
+                        <div class="about__card">
+                            <img src="{% static "new/img/example/about/8.png" %}" alt="Танцевальный клуб - Динамика">
+                            <div class="about__text-1">Эффективное обучение</div>
+                            <div class="about__text-2">Более 1400 учеников и&nbsp;ни&nbsp;одного всероссийского конкурса
+                                без
+                                призовых мест наших ребят!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="trener" class="trener">
+    <div class="container">
+        <h2 class="trener__title"><span>Тренеры</span></h2>
+        <div class="trener__block">
+            <div class="trener__slider">
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="{% static "new/img/example/treneri/treneri1.jpg" %}" alt="Михаил Кудрявцев">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Михаил Кудрявцев</div>
+                                <ul class="trener__text-2">
+                                    <li>А и Star класс по хастлу, Чемпион Москвы 2010 и трехкратный финалист Чемпионата
+                                        России.
+                                        Действующий чемпион России в категории JnJ Star
+                                    </li>
+                                    <li>Тренер сильнейших танцоров (в том числе семерых из ТОП-30 России)</li>
+                                    <li>Судья высшей категории, главный судья большинства танцевальных турниров, член
+                                        Аттестационной
+                                        комиссии судей
+                                    </li>
+                                </ul>
+                                <div class="trener__text-3">Настоящий фанат своего дела, который не успокоится, пока не
+                                    добьется
+                                    лучшего результата во всем:
+                                </div>
+                                <ul class="trener__text-2">
+                                    <li>Вернуться на паркет, несмотря на запреты врачей - и стать чемпионом!</li>
+                                    <li>Открыть свою танцевальную школу в 22 года без какой-либо поддержки со стороны -
+                                        и за пару
+                                        лет вывести ее в топ-3 школ Москвы!
+                                    </li>
+                                    <li>Сделать из учеников «с нуля» королей танцпола – сотни примеров!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri2.jpg" %}" alt="Ирина Кудрявцева">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Ирина Кудрявцева</div>
+                                <ul class="trener__text-2">
+                                    <li>А и Star класс по хастлу, Чемпионка Москвы 2010 и двукратная финалистка
+                                        Чемпионата России
+                                    </li>
+                                    <li>Тренер сильнейших танцоров России, судья высшей категории</li>
+                                    <li>Танцор А класса и класса STAR по JnJ.</li>
+                                </ul>
+                                <div class="trener__text-3">«Я профессионально занималась танцами всю жизнь, но в 20 лет
+                                    из-за травмы пришлось прервать
+                                    выступления. Это был тяжелый период в жизни: я с трудом могла ходить, привычный круг
+                                    общения распался,
+                                    я рассталась с молодым человеком…
+                                </div>
+                                <div class="trener__text-3">Тогда в моей жизни появился хастл, который подарил мне шанс
+                                    вернуться в танцевальный мир (ведь
+                                    хастл могут танцевать абсолютно все), сотни друзей, дело моей жизни и главное –
+                                    любовь, которую
+                                    я нашла в лице своего партнера Миши. С тех пор я сама помогла многим найти идеальную
+                                    пару – и
+                                    для занятий, и для жизни»
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri3.jpg" %}" alt="Татьяна Дутчак">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Татьяна Дутчак</div>
+                                <ul class="trener__text-2">
+                                    <li>А и Star класс по хастлу, призер Чемпионатов Москвы и России в различных
+                                        номинациях,
+                                        действующая вице-чемпионка России в номинации «шоу-хастл»
+                                    </li>
+                                    <li>Мастер спорта, лицензированный тренер (МФТС)</li>
+                                </ul>
+                                <div class="trener__text-3">Татьяна – невероятно чуткий педагог с впечатляющим
+                                    танцевальным (24 года) и преподавательским (6
+                                    лет) стажем. Специализируется на работе с начинающими, славится тем, что умеет
+                                    «раскрыть» любого
+                                    в танце (даже самых стеснительных, неуклюжих и робких) и с первых шагов учит быть
+                                    женственными
+                                    (или мужественными). А еще ее группы – самые веселые дружные!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri4.jpg" %}" alt="Виталий Ермаков">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Виталий Ермаков</div>
+                                <ul class="trener__text-2">
+                                    <li>B и Star-класс по хастлу, финалист и победитель чемпионатов Москвы и России в
+                                        различных
+                                        номинациях
+                                    </li>
+                                    <li>Входит в ТОП-3 партнеров России (выступает всего полтора года)</li>
+                                    <li>Более 100 учеников, успешно выступающих на всероссийских конкурсах</li>
+                                </ul>
+                                <div class="trener__text-3">Танцы спасли меня в сложный момент в жизни – я только
+                                    вернулся из армии и не знал, что делать со
+                                    своей жизнью дальше… Чтобы отвлечься, заглянул в танцевальную студию рядом с домом –
+                                    и вскоре
+                                    купил безлимитный абонемент и стал проводить в зале по десять часов ежедневно. Танцы
+                                    – это увлечение, которое просто не может наскучить, это новые знакомства, мелодии и
+                                    открытия каждый день
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri5.jpg" %}" alt="Галина Романчикова">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Галина Романчикова</div>
+                                <ul class="trener__text-2">
+                                    <li>B и Star-класс по хастлу, финалист и победитель Чемпионатов России и Москвы в
+                                        различных номинациях
+                                    </li>
+                                    <li>Входит в ТОП-5 партнерш России (выступает два года)</li>
+                                </ul>
+                                <div class="trener__text-3">Галина – увлеченный своим делом, трудолюбивый и невероятно
+                                    талантливый танцор и педагог, который
+                                    умеет по-настоящему мотивировать и вдохновлять своих учеников (а также
+                                    организовывать самые
+                                    крутые тусовки).
+                                </div>
+                                <div class="trener__text-3">Владеет десятками танцевальных стилей (от классической
+                                    хореографии до хип-хопа) – и умело
+                                    интегрирует это в парный танец.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri9.jpg" %}" alt="Романчук Илона">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Романчук Илона</div>
+                                <ul class="trener__text-2">
+                                    <li>Танцевальный стаж – 11 лет, танцор B-класса по хастлу</li>
+                                    <li>Призер, победитель и финалист множества всероссийских чемпионатов по хастлу в
+                                        отдельных
+                                        номинациях (в том числе Чемпионата Москвы 2014)
+                                    </li>
+                                </ul>
+                                <div class="trener__text-3">«Я приехала из маленького северного городка в Республике
+                                    Коми, в котором танцы были одним из немногих
+                                    способов проявить себя. О хастле я узнала, когда переехала в Москву и находилась в
+                                    поиске себя.
+                                    Я полюбила хастл из-за… мужчин. Настоящих мужчин (то есть партнеров) – уверенных в
+                                    себе,
+                                    харизматичных, способных на языке танца рассказать увлекательную историю. Таких
+                                    мужчин хочется
+                                    слушать и следовать за ними»
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri7.jpg" %}" alt="Дмитрий Карпенко">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Дмитрий Карпенко</div>
+                                <ul class="trener__text-2">
+                                    <li>Танцевальный стаж – 22 года, педагогический стаж – 8 лет, в хастле – 7 лет</li>
+                                    <li>А и Star класс по хастлу, финалист Чемпионата Москвы 2010 в номинации B-класс
+                                    </li>
+                                </ul>
+                                <div class="trener__text-3">Я занимался бальными танцами с самого детства и всегда
+                                    тренировался с большой самоотдачей… Я
+                                    любил тренироваться и танцевать, но мне очень не хватало простых радостей – друзей,
+                                    путешествий,
+                                    общения с девушками, вечеринок, всегда приходилось выбирать – или развлечение и
+                                    общение, или танцы. В хастле же
+                                    все это можно совмещать, более того – одно невозможно без другого!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri11.jpg" %}" alt="Евгений Арутюнян">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Евгений Арутюнян</div>
+                                <ul class="trener__text-2">
+                                    <li>Танцевальный стаж – 10 лет</li>
+                                    <li>B и Star-класс по хастлу, финалист Чемпионатов Москвы (2015) и России (2014) в
+                                        различных
+                                        номинациях
+                                    </li>
+                                </ul>
+                                <div class="trener__text-3">Евгений – любимый «танцевальный папа» многих «динамиковцев»,
+                                    заботящийся о каждом из своих учеников и
+                                    активно поддерживающий их на конкурсах и дискотеках.
+                                </div>
+                                <div class="trener__text-3">В хастл меня привела девушка, которая очень хотела научиться
+                                    танцевать, но стеснялась приходить
+                                    без «своего» партнера. Поначалу я отлынивал от занятий, как мог, пока, глядя на
+                                    лучших танцоров,
+                                    не понял, как много интересных способов проявить себя можно найти в хастле
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri12.jpg" %}" alt="Антон Егоров">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Антон Егоров</div>
+                                <ul class="trener__text-2">
+                                    <li>Семикратный победитель и многократный призер танцевальных чемпионатов в
+                                        различных номинациях
+                                        (в том числе Чемпионата России 2014)
+                                    </li>
+                                    <li>Лучший танцор уровня Main в России, танцор B-класса</li>
+                                </ul>
+                                <div class="trener__text-3">Если бывают танцоры «от Бога», то Антон – несомненно один из
+                                    них. Начав заниматься 2,5 года
+                                    назад, он успел обойти по уровню мастерства многих профессионалов, танцующих с
+                                    детства.
+                                </div>
+                                <div class="trener__text-3">«Я люблю слушать хорошую музыку и мне хотелось ей
+                                    соответствовать, а не просто стоять и
+                                    «мысленно» танцевать. А еще я сам – студент, поэтому понимаю, как важно, чтобы
+                                    материал
+                                    объяснялся доходчиво и весело»
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri8.jpg" %}" alt="Сергей Хитянов">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Сергей Хитянов</div>
+                                <ul class="trener__text-2">
+                                    <li>A и Star-класс по хастлу</li>
+                                    <li>Танцевальный стаж – 7 лет, преподавательский стаж – 3 года</li>
+                                </ul>
+                                <div class="trener__text-3">«Мне с детства нравились танцевальные сцены в кино, но не
+                                    хватало уверенности в себе, чтобы
+                                    танцевать самому, думал, что уже поздно начать. Помог случай – мы ставили номер по
+                                    «Грязным
+                                    танцам» к университетскому празднику и я понял, как много терял, откладывая. Теперь
+                                    стараюсь в
+                                    первую очередь помочь своим ученикам избавиться от страхов и перестать сомневаться в
+                                    себе»
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/treneri10.jpg" %}" alt="Юлия Шибаршина">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Юлия Шибаршина</div>
+                                <ul class="trener__text-2">
+                                    <li>Танцор А и Star-класса;</li>
+                                    <li>Танцевальный стаж — 7 лет, преподавательский стаж — 3 года;</li>
+                                    <li>Помимо хастла изучала джаз-модерн, стрип-дэнс, классическую хореографию и
+                                        йогу;
+                                    </li>
+                                </ul>
+                                <div class="trener__text-3">«В студенческие годы мне захотелось как-то проявить себя и
+                                    завести интересное хобби, но для
+                                    многого я была «слишком взрослой». К счастью, хастл оказался не только красивым и
+                                    интересным для
+                                    изучения, но и «терпимым» к отсутствию опыта, вынужденным перерывам и к моей
+                                    девичьей
+                                    застенчивости. Хастл — это в первую очередь радость от занятий, дискотек,
+                                    выступлений и просто
+                                    от совместного времяпрепровождения»
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="video" class="video">
+    <div class="container">
+        <h2 class="video__title"><span>Так проходят занятия<br> в школе хастла «ДИНАМИКА»</span></h2>
+        <div class="video__wrap">
+            <div class="embed-responsive embed-responsive-16by9 embed-shadow">
+                <iframe allowfullscreen class="embed-responsive-item"
+                        src="https://player.vimeo.com/video/151710478"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="reviews" class="reviews">
+    <div class="container">
+        <h2 class="reviews__title"><span>Отзывы</span></h2>
+        <div class="reviews__row clearfix">
+            <div class="reviews__col">
+                <div class="reviews__card">
+                    <div class="reviews__header">
+                        <div class="reviews__header-left">
+                            <img src="{% static "new/img/example/otz1.png" %}" alt="Мария Шустикова">
+                        </div>
+                        <div class="reviews__header-right">
+                            <div class="reviews__header-title">Мария Шустикова</div>
+                            <div class="reviews__header-link"><a target="_blank" href="https://vk.com/masyashus">https://vk.com/masyashus</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviews__body">
+                        <div class="reviews__body-text">Я начала ходить на занятия не так давно, и хочу сказать, что
+                            программа разработана очень эффективно. Уже за два месяца можно научиться отлично танцевать,
+                            выполнять основные элементы и чувствовать себя уверенно на дискотеках!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reviews__col">
+                <div class="reviews__card">
+                    <div class="reviews__header">
+                        <div class="reviews__header-left">
+                            <img src="{% static "new/img/example/otz2.png" %}" alt="Павел Гуськов">
+                        </div>
+                        <div class="reviews__header-right">
+                            <div class="reviews__header-title">Павел Гуськов</div>
+                            <div class="reviews__header-link"><a target="_blank" href="https://vk.com/id31907088">https://vk.com/id31907088</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviews__body">
+                        <div class="reviews__body-text">Раньше я считал, что танцы — это абсолютно не мужское занятие.
+                            Но в «Динамике» отличная раскрепощающая атмосфера, которая помогает раскрыть талант к танцу,
+                            о существовании которого ты не подозревал, здесь никто не был обделен вниманием, помощью и
+                            поддержкой и все заряжает желанием танцевать:)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reviews__col">
+                <div class="reviews__card">
+                    <div class="reviews__header">
+                        <div class="reviews__header-left">
+                            <img src="{% static "new/img/example/otz3.png" %}" alt="Татьяна Дейнега">
+                        </div>
+                        <div class="reviews__header-right">
+                            <div class="reviews__header-title">Татьяна Дейнега</div>
+                            <div class="reviews__header-link"><a target="_blank" href="http://vk.com/tatiana_deinega">http://vk.com/tatiana_deinega</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviews__body">
+                        <div class="reviews__body-text">«Изначально я просто хотела научиться красиво двигаться, но с
+                            первой недели занятий меня сразу затянуло в мир хастл-тусовки — дискотеки, соревнования,
+                            посиделки, выезды за город… Теперь «Динамика» — это мой второй дом, в который хочется
+                            возвращаться снова и снова»
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="gallery" class="gallery">
+    <div class="container">
+        <h2 class="gallery__title"><span>Наши залы и тренировки</span></h2>
+        <div class="gallery__block">
+            <div class="gallery__slider">
+                <div class="gallery__slider-item">
+                    <img src="{% static "new/img/example/gallery/1.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/2.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/3.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/4.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/5.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/6.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/7.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/8.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/9.jpg" %}" alt="">
+                </div>
+                <div class="gallery__slider-item">
+                    <img src="" data-lazy="{% static "new/img/example/gallery/10.jpg" %}" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="plan" class="plan">
+    <div class="container">
+        <h2 class="plan__title"><span>Расписание</span></h2>
+        <div class="plan__nav">
+            <div class="plan__md clearfix">
+                <ul>
+                    <li class="select"><a href="#!">Начинающие группы</a></li>
+                    <li><a href="#!">Продолжающие группы</a></li>
+                    <li><a href="#!">Конкурсные группы</a></li>
+                    <li><a href="#!">Другие</a></li>
+                </ul>
+            </div>
+            <div class="plan__nav-mobile">
+                <div>Выберите группу:</div>
+                <select>
+                    <option>Начинающие группы</option>
+                    <option>Продолжающие группы</option>
+                    <option>Конкурсные группы</option>
+                    <option>Другие</option>
+                </select>
+            </div>
+        </div>
+        <div class="plan__preblock-wrap">
+            <div class="plan__preblock clearfix">
+                <div class="plan__preblock-col">
+                    Группа
+                </div>
+                <div class="plan__preblock-col">
+                    Время
+                </div>
+                <div class="plan__preblock-col">
+                    Место
+                </div>
+            </div>
+        </div>
+        <div class="plan__block">
+            <div class="plan__block-item clearfix">
+                {% for group in beginners %}
+                <div class="plan__block-item-row">
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-1">{{ group.name }} {{group.start_date}}</div>
+                        <div class="plan__btn-wrap clearfix">
+                            <div class="plan__btn-wrap-1">
+                                <a data-toggle="modal" href="#js-modal-write">Записаться</a>
+                            </div>
+                            <div class="plan__btn-wrap-2">
+                                <a href="#ajax/g{{ group.id }}">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-2">{{ group.time }}</div>
+                        <div class="plan__text-3">{% for day in group.days %}
+                            {% if day.marked %}
+                            <span>{{ day.repr }}</span>
+                            {% else %}
+                            {{ day.repr }}
+                            {% endif %}
+                            {% endfor %}</div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-4">{{ group.dance_hall.station | upper }}</div>
+                        <div class="plan__text-5">{{ group.dance_hall.address }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Продолжающие группы -->
+
+            <div class="plan__block-item clearfix" style="display: none;">
+                {% for group in inters %}
+                <div class="plan__block-item-row">
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-1">{{ group.name }} {{group.start_date}}</div>
+                        <div class="plan__btn-wrap clearfix">
+                            <div class="plan__btn-wrap-1">
+                                <a data-toggle="modal" href="#js-modal-write">Записаться</a>
+                            </div>
+                            <div class="plan__btn-wrap-2">
+                                <a href="#ajax/g{{ group.id }}">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-2">{{ group.time }}</div>
+                        <div class="plan__text-3">{% for day in group.days %}
+                            {% if day.marked %}
+                            <span>{{ day.repr }}</span>
+                            {% else %}
+                            {{ day.repr }}
+                            {% endif %}
+                            {% endfor %}</div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-4">{{ group.dance_hall.station | upper }}</div>
+                        <div class="plan__text-5">{{ group.dance_hall.address }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <!-- Конкурсные группы -->
+
+            <div class="plan__block-item clearfix" style="display: none;">
+                {% for group in advanced %}
+                <div class="plan__block-item-row">
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-1">{{ group.name }} {{group.start_date}}</div>
+                        <div class="plan__btn-wrap clearfix">
+                            <div class="plan__btn-wrap-1">
+                                <a data-toggle="modal" href="#js-modal-write">Записаться</a>
+                            </div>
+                            <div class="plan__btn-wrap-2">
+                                <a href="#ajax/g{{ group.id }}">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-2">{{ group.time }}</div>
+                        <div class="plan__text-3">{% for day in group.days %}
+                            {% if day.marked %}
+                            <span>{{ day.repr }}</span>
+                            {% else %}
+                            {{ day.repr }}
+                            {% endif %}
+                            {% endfor %}</div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-4">{{ group.dance_hall.station | upper }}</div>
+                        <div class="plan__text-5">{{ group.dance_hall.address }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Другие -->
+
+            <div class="plan__block-item clearfix" style="display: none;">
+                {% for group in other %}
+                <div class="plan__block-item-row">
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-1">{{ group.name }} {{group.start_date}}</div>
+                        <div class="plan__btn-wrap clearfix">
+                            <div class="plan__btn-wrap-1">
+                                <a data-toggle="modal" href="#js-modal-write">Записаться</a>
+                            </div>
+                            <div class="plan__btn-wrap-2">
+                                <a href="#ajax/g{{ group.id }}">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-2">{{ group.time }}</div>
+                        <div class="plan__text-3">{% for day in group.days %}
+                            {% if day.marked %}
+                            <span>{{ day.repr }}</span>
+                            {% else %}
+                            {{ day.repr }}
+                            {% endif %}
+                            {% endfor %}</div>
+                    </div>
+                    <div class="plan__block-item-col">
+                        <div class="plan__text-4">{{ group.dance_hall.station | upper }}</div>
+                        <div class="plan__text-5">{{ group.dance_hall.address }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<section id="learn" class="learn">
+    <div class="container">
+        <h2 class="learn__title"><span>Стоимость обучения</span></h2>
+        <div class="learn__row">
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Разовое занятие</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg1.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">550 руб</div>
+                    <div class="learn__text-3">1 занятие 1,5 часа</div>
+                </div>
+            </div>
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Абонемент на 8 занятий</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg2.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">3500 руб</div>
+                    <div class="learn__text-3">1 занятие 1,5 часа</div>
+                </div>
+            </div>
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Абонемент на 16 занятий</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg3.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">6400 руб</div>
+                    <div class="learn__text-3">1 занятие 1,5 часа</div>
+                </div>
+            </div>
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Студенческий абонемет со скидкой</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg4.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">1000 руб</div>
+                    <div class="learn__text-3">1 занятие 1,5 часа</div>
+                </div>
+            </div>
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Индивидуальные занятия</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg5.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">от 1000 до 2000 руб</div>
+                    <div class="learn__text-3">1 занятие 1 час</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="map" class="map">
+    <div id="hall_map"></div>
+</section>
+<section class="end">
+    <div class="container">
+        <div class="end__row clearfix">
+            <div class="end__col">
+                <div class="end__left">
+                    <h4 class="end__title">Открытый урок<br> за 99 руб. <span>+ скидка на абонемент<br> от 500 до 1600 руб.</span>
+                    </h4>
+                    <div class="end__pretitle">до конца акции осталось:</div>
+                    <div class="end__clock-wrap">
+                        <div id="end__clock"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="end" class="end__col">
+                <div class="end__right">
+                    <form method="POST" action="lead.php" class="form-ajax">
+                        <input type="hidden" name="google_c" value="free_lesson_form2">
+                        <input type="hidden" name="yandex_c" value="FREE_LESSON_CONFIRM">
+                        <input type="hidden" name="type" value="Запись на мастер-класс">
+                        <h4 class="end__form-title">Записаться на<br> открытый урок!</h4>
+                        <div class="end__form-group">
+                            <input type="text" name="name" placeholder="Ваше имя*" class="">
+                        </div>
+                        <div class="end__form-group">
+                            <input type="text" name="tel" placeholder="+7 (___) ___-__-__"
+                                   class="required js-mask-phone" required>
+                        </div>
+                        <div class="end__text-1">* поле обязательно для заполнения. Мы перезвоним вам в ближайщее время.
+                            Гарантируем сохранность данных
+                        </div>
+                        <div class="end__btn-wrap">
+                            <button type="submit">Оставить заявку</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div class="footer__text-1">Copyright © 2016- Все права защищены</div>
+    </div>
+</footer>
+<div id="off-canvas" class="offcanvas">
+    <ul class="off-canvas__ul js-scroll">
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#about">Почему мы?</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#trener">Тренеры</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#reviews">Отзывы</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#gallery">Фото</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#map">Адреса</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#plan">Расписание</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#learn">Цены</a></li>
+        <li class="off-canvas__li"><a class="off-canvas__link" href="#end">Записаться</a></li>
+    </ul>
+</div>
+<div class="modal fade" id="js-modal-callback" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-ajax" action="lead.php" method="POST">
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">Заказать звонок</h4>
+                    <input type="hidden" name="google_c" value="call_form">
+                    <input type="hidden" name="yandex_c" value="CALL_BACK">
+                    <input type="hidden" name="type" value="Заказать звонок">
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваше имя:</label>
+                        <input name="name" class="modal-group__input" type="text"
+                               placeholder="Иван Иванов">
+                    </div>
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваш телефон <span>*</span>:</label>
+                        <input name="tel" class="modal-group__input js-mask-phone required" type="text"
+                               placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="modal-group">
+                        <button class="modal-group__button" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="js-modal-write" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-ajax" action="lead.php" method="POST">
+                    <input type="hidden" name="google_c" value="group_form63">
+                    <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
+                    <input type="hidden" name="type" value="Запись в группу">
+                    <input type="hidden" name="detail" id="modal-detail2" value="">
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">Запись в группу</h4>
+                    <div class="modal-title-desc-wrap">
+                        <div class="modal-title-desc"></div>
+                        <div class="modal-title-desc"></div>
+                        <div class="modal-title-desc"></div>
+                        <div class="modal-title-desc"></div>
+                    </div>
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваше имя:</label>
+                        <input name="name" class="modal-group__input" type="text"
+                               placeholder="Иван Иванов">
+                    </div>
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваш телефон <span>*</span>:</label>
+                        <input name="tel" class="modal-group__input js-mask-phone required" type="text"
+                               placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="modal-group">
+                        <button class="modal-group__button" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="js-modal-success" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">Спасибо, что Вы выбрали именно нас!</h4>
+                    <div style="font-weight: 600; margin-bottom: 1.6rem; color: #777;">Наш администратор свяжется с Вами в ближайшее время.</div>
+                    <div style="font-weight: 600; margin-bottom: 1.6rem; color: #777;">Всегда Ваша,<br>
+                        комманда ТСК "Динамика"
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{% static "new/js/jquery-2.1.0.min.js" %}"><\/script>')</script>
+<script type="text/javascript" src="{% static "new/js/off-canvas.js" %}"></script>
+<script type="text/javascript" src="{% static "new/js/bootstrap-modal.min.js" %}"></script>
+<script type="text/javascript" src="{% static "new/js/jquery.countdown.min.js" %}"></script>
+<script type="text/javascript" src="{% static "new/js/slick.min.js" %}"></script>
+<script type="text/javascript" src="{% static "new/js/scroll.js" %}"></script>
+<script type="text/javascript" src="{% static "new/js/mask.js" %}"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript" src="{% static "new/js/main.js" %}"></script>
+</body>
+</html>

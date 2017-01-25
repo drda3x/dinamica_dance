@@ -1,0 +1,83 @@
+html {
+  font-size: 14.5px;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14.5px;
+  line-height: $lh;
+  color: #212121;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 400;
+  //background-color: #fff;
+  background-color: #F9F7E6;
+}
+
+strong, b, em, i {
+  line-height: 1em;
+}
+
+a {
+  color: #006be0;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #006be0;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none
+}
+
+
+img {
+  max-width: 100%;
+  vertical-align: middle
+}
+
+hr {
+  margin-top: ($lh*2)rem;
+  margin-bottom: ($lh*2)rem;
+  border: 0;
+  border-top: 1px solid #eee
+}
+
+p {
+  font-weight: 400;
+  margin-top: ($lh*1.5)rem;
+  margin-bottom: ($lh*1.5)rem;
+}
+
+
+@media (min-width: 567px) {
+  body, html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  body, html {
+    font-size: 15.5px;
+  }
+}
+
+@media (min-width: 992px) {
+  body, html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body, html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1400px) {
+  body, html {
+    font-size: 17.4px;
+  }
+}
+
