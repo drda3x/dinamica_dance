@@ -247,7 +247,7 @@ class IndexView(TemplateView):
 
 
 class DetailsView(TemplateView):
-    template_name = "details.html"
+    template_name = "1.html"
 
     months = [
         ('январь', 'января'),
@@ -274,6 +274,25 @@ class DetailsView(TemplateView):
         ('ВС', 'Воскресение')
     ]
 
+    def get_pass_types(self, group):
+        result = []
+
+        for pt in group.external_passes.all():
+            _, mod_val = divmod(pt.lessons, 100)
+            if pt.lessons == 1:
+                result.append((u"Pазовое посещение", pt.prise))
+            elif mod_val == 0 or 5 <= mod_val <= 19:
+                result.append((u"Абонемент на %d занятий" % pt.lessons, pt.prise))
+            else:
+                _, mod_val = divmod(pt.lessons, 10)
+                if mod_val == 1:
+                    result.append((u"Абонемент на %d занятие" % pt.lessons, pt.prise))
+                elif mod_val < 5:
+                    result.append((u"Абонемент на %d занятия" % pt.lessons, pt.prise))
+                else:
+                    result.append((u"Абонемент на %d занятий" % pt.lessons, pt.prise))
+
+        return result
 
     def get_context_data(self, **kwargs):
         context = super(DetailsView, self).get_context_data()
@@ -286,13 +305,17 @@ class DetailsView(TemplateView):
             mk = BonusClasses.objects.get(within_group=group)
 
             if mk.date <= today:
-                context['mod__text-1'] = u"Первое занятие 99р."
+                context['mod__text_1'] = u"Первое занятие 99р."
 
         except BonusClasses.DoesNotExist:
-            context['mod__text-1'] = u""
-
+            context['mod__text_1'] = u""
 
         context['group_info'] = group
+        context['group_time'] = "%s - %s" % (
+            str(group.time or '')[0:-3],
+            str(group.end_time or '')[0:-3]
+        )
+        context['passes'] = self.get_pass_types(group)
 
 
         return context

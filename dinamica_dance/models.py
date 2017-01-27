@@ -6,7 +6,6 @@ from application.models import Groups as GroupsOrigin
 
 
 class Groups(GroupsOrigin):
-    proxy = True
     months = [
         ('январь', 'января'),
         ('февраль', 'февраля'),
@@ -29,3 +28,10 @@ class Groups(GroupsOrigin):
             self.months[self.start_date.month - 1][1],
             self.start_date.year
         )
+
+    @property
+    def end_time_repr(self):
+        return str(self.end_time or '')[0:-3]
+
+    class Meta:
+        proxy = True

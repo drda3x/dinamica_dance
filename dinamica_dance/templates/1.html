@@ -11,44 +11,42 @@
                         <span>&times;</span>
                     </button>
                     <h4 class="modal-title">{{group_info.name}}</h4>
-                    <div class="mod__text-1">{{mod__text-1}}</div>
+                    <div class="mod__text-1">{{mod__text_1}}</div>
                     <div class="mod__row-1">
                         <div class="mod__col-1">
                             <div class="mod__text-2">Общая информация</div>
                             <table class="mod__table-1">
                                 <tr>
                                     <td>Начало занятий</td>
-                                    <td>{{group_info.string_date}}</td>
+                                    <td>{{group_info.start_date_str}}</td>
                                 </tr>
                                 <tr>
                                     <td>Дни недели</td>
-                                    <td>Вторник, Четверг</td>
+                                    <td>
+                                        {% for d in group_info.days %}
+                                            {{d}}
+                                        {% endfor %}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Время занятий</td>
-                                    <td>20:30-22:00</td>
+                                    <td>{{group_time}}</td>
                                 </tr>
                                 <tr>
                                     <td>Метро</td>
-                                    <td>Шаболовская</td>
+                                    <td>{{group_info.dance_hall.station}}</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="mod__col-1">
                             <div class="mod__text-2">Стоимость занятий</div>
                             <table class="mod__table-1">
-                                <tr>
-                                    <td>Разовое посещение</td>
-                                    <td>550</td>
-                                </tr>
-                                <tr>
-                                    <td>Абонемент на 8 занятий (1 пропуск)</td>
-                                    <td>3500</td>
-                                </tr>
-                                <tr>
-                                    <td>Абонемент на 16 занятий (2 пропуска)</td>
-                                    <td>6400</td>
-                                </tr>
+                                {% for name, prise in passes%}
+                                    <tr>
+                                        <td>{{name}}</td>
+                                        <td>{{prise}}</td>
+                                    </tr>
+                                {%endfor%}
                                 <tr>
                                     <td colspan="2">Для студентов скидка — 1000 руб.</td>
                                 </tr>
