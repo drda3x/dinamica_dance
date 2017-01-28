@@ -19,6 +19,7 @@ from django.db.models import Q, Sum
 from project.settings import EMAIL_TO, TEACHERS_BOOK_STATIC_URL
 
 from application.utils.date_api import MONTH_PARENT_FORM
+from django.views.decorators.csrf import csrf_exempt
 
 
 class EmailNotifier(object):
@@ -35,7 +36,11 @@ class EmailNotifier(object):
 
     def send_mail(self, **kwargs):
         try:
-            text = self.get_test(**kwargs)
+            text = u"Имя: %s\nТелефон: %s\nДетали заявки: %s" % (
+                kwargs.get('name', ''),
+                kwargs.get('tel', ''),
+                kwargs.get('detail', '')
+            ) #self.get_test(**kwargs)
 
             if not text:
                 raise ValueError('Wrong email type')
@@ -43,7 +48,7 @@ class EmailNotifier(object):
             msg = MIMEMultipart()
             msg['From'] = Header(self.mail_from, self.encoding)
             msg['To'] = Header(self.mail_to, self.encoding)
-            msg['Subject'] = Header(kwargs['user_type'], self.encoding)
+            msg['Subject'] = Header(kwargs['type'], self.encoding)
 
             msg_text = MIMEText(text.encode('cp1251'), 'plain', self.encoding)
             msg_text.set_charset(self.encoding)
@@ -247,7 +252,15 @@ class IndexView(TemplateView):
 
 
 class DetailsView(TemplateView):
-    template_name = "1.html"
+    template_name = "details.html"
+    http_method_names = ['get', 'post']
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(DetailsView, self).dispatch(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        return super(DetailsView, self).get(*args, **kwargs)
 
     months = [
         ('январь', 'января'),
@@ -277,7 +290,7 @@ class DetailsView(TemplateView):
     def get_pass_types(self, group):
         result = []
 
-        for pt in group.external_passes.all():
+        for pt in group.external_passes.all().order_by("lessons"):
             _, mod_val = divmod(pt.lessons, 100)
             if pt.lessons == 1:
                 result.append((u"Pазовое посещение", pt.prise))
@@ -293,6 +306,14 @@ class DetailsView(TemplateView):
                     result.append((u"Абонемент на %d занятий" % pt.lessons, pt.prise))
 
         return result
+
+    def get_group_about_info(self, group):
+        group_details = group.course_details or group.level.course_details
+        group_results = group.course_results or group.level.course_results
+        return {
+            "details": group_details,
+            "results": group_results
+        }
 
     def get_context_data(self, **kwargs):
         context = super(DetailsView, self).get_context_data()
@@ -316,6 +337,7 @@ class DetailsView(TemplateView):
             str(group.end_time or '')[0:-3]
         )
         context['passes'] = self.get_pass_types(group)
-
+        context['group_course_info'] = self.get_group_about_info(group)
+        context['teachers'] = group.teachers.all().values_list("pk", flat=True)
 
         return context

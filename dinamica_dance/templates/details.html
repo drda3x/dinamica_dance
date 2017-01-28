@@ -1,164 +1,635 @@
+{% load staticfiles %}
+<div class="modal fade" id="js-modal-ajax-plan" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-ajax" action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="google_c" value="group_form63">
+                    <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
+                    <input type="hidden" name="type" value="Запись в группу">
+                    <input type="hidden" name="detail" id="modal-detail" value="{{group_info.name}} {{group_time}} {{group_info.dance_hall.station}}">
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">{{group_info.name}}</h4>
+                    <div class="mod__text-1">{{mod__text_1}}</div>
+                    <div class="mod__row-1">
+                        <div class="mod__col-1">
+                            <div class="mod__text-2">Общая информация</div>
+                            <table class="mod__table-1">
+                                <tr>
+                                    <td>Начало занятий</td>
+                                    <td>{{group_info.start_date_str}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Дни недели</td>
+                                    <td>
+                                        {% for d in group_info.days %}
+                                            {{d}}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Время занятий</td>
+                                    <td>{{group_time}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Метро</td>
+                                    <td>{{group_info.dance_hall.station}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="mod__col-1">
+                            <div class="mod__text-2">Стоимость занятий</div>
+                            <table class="mod__table-1">
+                                {% for name, prise in passes%}
+                                    <tr>
+                                        <td>{{name}}</td>
+                                        <td>{{prise}}</td>
+                                    </tr>
+                                {%endfor%}
+                                <tr>
+                                    <td colspan="2">Для студентов скидка — 1000 руб.</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mod__row-2">
+                        <div class="mod__col-2">
+                            <div class="mod__text-3">
+                                Подробнее о курсе
+                            </div>
+                            <ul class="mod__text-ul-1">
+                                {{group_course_info.details | safe}}
+                            </ul>
+                        </div>
+                        <div class="mod__col-2">
+                            <div class="mod__text-3">
+                                В конце курса Вы научитесь
+                            </div>
+                            <ul class="mod__text-ul-1">
+                                {{group_course_info.results | safe}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mod__trener-text">Преподаватели</div>
+                    {% if 2 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/3.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Михаил Кудрявцев</div>
+                            <ul class="mod__trener-text-ul">
+                                <li> А и Star класс по хастлу, действующий Чемпион России в категории Star
+                                </li>
+                                <li>Тренер сильнейших танцоров (в том числе семерых из ТОП-30 России)
+                                </li>
+                                <li>Судья высшей категории, главный судья десятков танцевальных турниров, член
+                                    Аттестационной комиссии судей
+                                </li>
 
-    <a href="#nv4" class="swiftseo-overlay details" id="det{{group.id}}"></a>
-    <div class="podrobw1 swiftseo-popup2 details">
-    <h3>{{ group.name }}</h3>
-    <!--<h4>ВАЖНО!!! 15 марта для всех записавшихся в группу занятие БЕСПЛАТНОЕ.</h4>-->
-    <span class="sp5">{{ group.top_msg }}</span>
-    <div class="ls1">
-        <h4>Общая информация</h4>
-        <table cellpadding="0" cellspacing="0">
-            <tbody>
-                <tr>
-                    <td>Начало занятий</td>
-                    <td>{{ group.date }}</td>
-                </tr>
-                {% if group.free_places and group.free_places > 0 %}
-                <tr>
-                    <td>Осталось мест</td>
-                    <td>{{ group.free_places }}</td>
-                </tr>
-                {% endif %}
-                {% if group.duration %}
-                <tr>
-                    <td>Длительность курса</td>
-                    <td>{{ group.duration }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td>Дни недели</td>
-                    <td>{{ group.days_full }}</td>
-                </tr>
-                <tr>
-                    <td>Время занятий</td>
-                    <td>{{ group.time }}</td>
-                </tr>
-                <tr>
-                    <td>Метро</td>
-                    <td>{{ group.dance_hall.station }}</td>
-                </tr>
-            </tbody>
-        </table>
+
+                            </ul>
+                            <div class="mod__trener-text-2" style="margin-bottom: 1rem;">Настоящий фанат своего дела,
+                                который никогда не успокоится, пока не добьется наилучшего результата во всем:
+                            </div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Вернуться на паркет, несмотря на запреты врачей - и стать чемпионом!</li>
+                                <li>Открыть свою танцевальную школу в 22 года без какой-либо поддержки со стороны - и за
+                                    пару лет вывести ее в топ-3 школ Москвы!
+                                </li>
+                                <li>Сделать из учеников «с нуля» королей танцпола – сотни примеров!</li>
+
+                            </ul>
+                            <br>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/bwZEmnkovxo"></iframe>
+                            </div>
+                        </div>
+                    </div> 
+                    {% endif %}
+                    {% if 9 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/1.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Антон Егоров</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Восьмикратный победитель и многократный призер танцевальных чемпионатов в различных
+                                    номинациях (в том числе Чемпионата России 2014)
+                                </li>
+                                <li>Действующий чемпион Москвы в категории Star
+                                    Если бывают танцоры «от Бога», то Антон – несомненно один из них. Начав заниматься
+                                    2,5 года назад, он успел обойти по уровню мастерства многих профессионалов,
+                                    танцующих с детства.
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я люблю слушать хорошую музыку и мне хотелось ей
+                                соответствовать, а не просто стоять и «мысленно» танцевать. А еще я сам – студент,
+                                поэтому понимаю, как важно, чтобы материал объяснялся доходчиво и весело»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen class="embed-responsive-item"
+                                        src="https://www.youtube.com/embed/RhLkreUL_4s"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 6 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/6.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Евгений Арутюнян</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Танцевальный стаж – 10 лет
+                                </li>
+                                <li>B и Star - класс по хастлу, финалист Чемпионатов Москвы (2015) и России (2014) в
+                                    различных номинациях
+                                    Евгений – любимый «танцевальный папа» десятков учеников, очень эмоциональный и
+                                    радеющий за каждого из своих учеников, активно поддерживающий их на конкурсах и
+                                    дискотеках.
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«В хастл меня привела девушка, которая очень хотела
+                                научиться танцевать, но стеснялась приходить без «своего» партнера. Поначалу я отлынивал
+                                от занятий, как мог, пока не понял, глядя на лучших танцоров, сколько в хастле можно
+                                найти интересных способов
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/6LaQzOP0Knk"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 7 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/12.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Виталий Ермаков</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>А и Star-класс по хастлу, финалист и победитель чемпионатов Москвы и России в
+                                    различных номинациях в отдельных номинациях;
+                                </li>
+                                <li>Входит в ТОП-3 партнеров России (выступает всего полтора года);
+                                </li>
+                                <li>Больше 100 учеников, успешно выступающих на всероссийских конкурсах.</li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Танцы спасли меня в сложный момент в жизни – я только
+                                вернулся из армии и не знал, что делать со совей жизнью дальше… Чтобы отвлечься,
+                                заглянул в танцевальную студию рядом с домом – и вскоре купил безлимитный абонемент и
+                                стал проводить в зале по десять часов ежедневно с 12 до 22. Танцы – это увлечение, что
+                                никогда не может наскучить, это незабываемые новые знакомства, мелодии и открытия каждый
+                                день»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/79cuuQEnMh0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 13 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/8.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Сергей Хитянов</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>A и Star-класс по хастлу
+                                </li>
+                                <li>Танцевальный стаж – 7 лет, преподавательский стаж – 3 года
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Мне с детства нравились танцевальные сцены в кино, но не
+                                хватало уверенности в себе, чтобы танцевать самому, думал, что уже поздно начать. Помог
+                                случай – мы ставили номер по «Грязным танцам» к университетскому празднику и я понял,
+                                как много терял, откладывая. Теперь стараюсь в первую очередь помочь своим ученикам
+                                избавиться от страхов и перестать сомневаться в себе»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/jI5AIetW6jY"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 22 in teachers %}
+                        <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/10.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Евгений Скориков - ассистент</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Танцор Main-класса. Высшее хореографическое образование.
+                                </li>
+                                <li>Танцевальный стаж – 20 лет, помимо хастла танцует jazz funk, джаз-модерн, эстрадные,
+                                    бальные, танцор известных шоу и мюзиклов.
+                                </li>
+                                <li>Входит в топ-20 партнеров класса Main в России, 8-кратный призер различных турниров,
+                                    чемпион Санкт-Петербурга 2016 (категория Main).
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«На танцы меня отдали родители в возрасте 5 лет — чтобы
+                                перестал косолапить. Поначалу скучал, терпел и выслушивал насмешки приятелей, но позже,
+                                когда сверстники мучились от того, что не знают, как подступиться к девочкам, понял, как
+                                мне повезло! В танцах прикосновения при общении естественны, а мужчина-танцор знает, как
+                                выглядеть привлекательным — даже если 20 лет спустя продолжает косолапить ;)»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/-kCB3xQT0jY"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 3 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/11.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Ирина Кудрявцева</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>А и Star класс по хастлу, Чемпионка Москвы 2010 и двукратная финалистка Чемпионата
+                                    России;
+                                </li>
+                                <li>Тренер сильнейших танцоров России, судья высшей категории.
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я профессионально занималась танцами всю жизнь, но в 20 лет
+                                из-за травмы пришлось прервать выступления, это был тяжелый период - я с трудом могла
+                                ходить, привычный круг общения распался, я рассталась с молодым человеком…<br>
+
+                                Тогда в моей жизни появился хастл, который подарил мне шанс вернуться в танцевальный мир
+                                (ведь хастл могут танцевать абсолютно все), сотни друзей, дело моей жизни и главное –
+                                любовь, которую я нашла в лице своего партнера Миши. С тех пор я сама помогла многим
+                                найти идеальную пару – и для занятий, и для жизни»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/PRowD__9axQ"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 4 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/5.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Галина Романчикова</div>
+
+                            <div class="mod__trener-text-2">B и Star-класс по хастлу, финалист и победитель Чемпионата
+                                Москвы в отдельных номинациях Галина – увлеченный своим делом, трудолюбивый и невероятно
+                                талантливый танцор и педагог, который умеет по-настоящему мотивировать и вдохновлять
+                                своих учеников (а также организовывать самые крутые тусовки). Владеет десятками
+                                танцевальных стилей (от классической хореографии до хип-хопа) – и умело интегрирует это
+                                в парный танец.
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/JXKXB_GT_ko"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 5 in teachers%}
+                        <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/7.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Татьяна Дутчак</div>
+                            <ul class="mod__trener-text-ul">
+                                <li> А и Star класс по хастлу, призер Чемпионатов Москвы и России в различных
+                                    номинациях, действующая вице-чемпионка России в номинации «шоу-хастл»
+                                </li>
+                                <li>Мастер спорта, лицензированный тренер (МФТС)
+                                </li>
+
+                            </ul>
+                            <div class="mod__trener-text-2">Татьяна – невероятно чуткий
+                                педагог с впечатляющим танцевальным (24 года) и преподавательским (6 лет) стажем.
+                                Специализируется на работе с начинающими, славится тем, что умеет «раскрыть» любого в
+                                танце (даже самых стеснительных, неуклюжих и робких) и с первых шагов учит быть
+                                женственными (или мужественными). А еще ее группы – самые веселые дружные!
+                            </div>
+
+
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/6f25hgK6bio?list=PLBc74jIHP1AP4uYtVEk2-OSTO68HREooX"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 12 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/2.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Илона Романчук</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Танцевальный стаж – 11 лет, танцор B-класса по хастлу
+                                </li>
+                                <li>Призер, победитель и финалист множества всероссийских чемпионатов по хастлу в
+                                    отдельных номинациях (в том числе Чемпионата Москвы 2014)
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я приехала из маленького северного городка в Республики
+                                Коми, где танцы были одним из немногих способов проявить себя, а о хастле узнала, когда
+                                переехала в Москву и находилась в поиске себя. Я полюбила хастл из-за… мужчин. Настоящих
+                                мужчин (то есть партнеров) – уверенных в себе, харизматичных, способных на языке танца
+                                рассказать увлекательную историю, - таких мужчин хочется слушать и следовать за ними»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen class="embed-responsive-item"
+                                        src="https://www.youtube.com/embed/vv3wHA5ugO4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 21 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/4.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Екатерина Новикова</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>В и Star-класс, 25-кратный призер и 11-кратная чемпионка общероссийских чемпионатов
+                                    по хастлу, входит в ТОП-10 лучших танцовщиц хастла в России (2016);
+                                </li>
+                                <li>Танцевальный стаж — 10 лет, преподавательский стаж — 3 года, судья 3 категории.
+                                </li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Я занялась хастлом на последнем курсе университета, после
+                                вернулась в родной город — но уже не могла остановиться и продолжала ездить на
+                                тренировки несколько раз в неделю за 160 км. С тех пор любовь к танцам вела меня по
+                                жизни, из-за нее я переехала сначала в Новосибирск, а затем — в Москву… И эту любовь я
+                                хочу передать своим ученикам, ведь хастл — как вкусная шоколадка. Оторваться
+                                невозможно!»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/LGWWCNOtlSQ"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 19 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/9.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Инна Тынкович</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Танцевальный стаж — 26 лет, педагогический стаж — 7 лет;
+                                </li>
+                                <li>Лучшая танцовщица России класса Main (по рейтингу Discofox Analytics);
+                                </li>
+                                <li>Финалистка чемпионатов России и Москвы в отдельных номинациях.</li>
+                            </ul>
+                            <div class="mod__trener-text-2">«Оставив карьеру профессиональной бальницы, я начала
+                                пробовать различные стили парных танцев — но ни один из них не впечатлил меня так
+                                сильно, как хастл.
+                                Мне нравится, что в хастле танец не сложится, если вы с партнером не будете слышать друг
+                                друга. Совсем как в жизни.
+                                Помимо парных стилей, я также занималась воздушной акробатикой (этюды на петлях, трюки в
+                                pole dance), классической хореографией, контемпом — и все это помогает мне формировать
+                                уникальный личный стиль, тот самый особый «почерк», которым я пишу свои танцевальные
+                                истории в хастле.»
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="mod__form-wrap">
+                        <div class="mod__trener-text">Записаться</div>
+                        <div class="modal-group">
+                            <label class="modal-group__label">Ваше имя:</label>
+                            <input name="name" class="modal-group__input" type="text"
+                                   placeholder="Иван Иванов">
+                        </div>
+                        <div class="modal-group">
+                            <label class="modal-group__label">Ваш телефон <span>*</span>:</label>
+                            <input name="tel" class="modal-group__input js-mask-phone required" type="text"
+                                   placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="modal-group">
+                            <button class="modal-group__button" type="submit">Записаться</button>
+                        </div>
+                    </div>
+
+                    <div class="mod__text-5">
+                        Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь
+                        клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и
+                        популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия,
+                        благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках,
+                        шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в
+                        разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие
+                        учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения
+                        между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и,
+                        возможно, встретить свою любовь!
+                    </div>
+                    <div class="mod__trener-text">Как проехать</div>
+                    {% if group_info.dance_hall.pk == 5 %}
+                    <div class="mod__map-row">
+                        <div class="mod__map-col">
+                            <div class="mod__map-img-wrap">
+                                <img src="{% static "new/img/example/mod/map1.jpg" %}">
+                            </div>
+                        </div>
+                        <div class="mod__map-col">
+                            <div class="mod__map-text-1"><b>Адрес зала:</b> метро Шаболовская, Малый Калужский переулок 15 стр 16 </div>
+                            <div class="mod__map-text-2"><b>Площадь зала:</b> 100 кв.м. </div>
+
+                            <div class="mod__map-text-1"><b>Напольное покрытие:</b> ламинат;</div>
+                            <div class="mod__map-text-1"><b> Воздух:</b> сплит-система, вытяжка;</div>
+                            <div class="mod__map-text-1"><b>Раздевалки:</b> мужская, женская;</div>
+                            <div class="mod__map-text-2"><b>Душ и туалет:</b> есть;</div>
+
+                          <div class="mod__map-text-1"><b>Описание дороги до зала:</b></div>
+                            <div class="mod__map-text-2">м. Шабловская, после выхода из стеклянных дверей поворачивая налево обойти вестибюль метро
+                                вокруг, за станцией повернуть направо, идти по тротуару до пересечения с улицей, потом до
+                                конца тротуара и налево. Далее идти прямо до перекрестка, перейти дорогу, повернуть налево и
+                                идти прямо по Донской улице до пересечения с Малым Калужским переулком, повернуть на
+                                переулок. Слева от вас будет проходная со шлагбаумом, там необходимо взять пропуск. После
+                                проходной правее будет крыльцо с козырьком, вам туда. После того как зашли прямо перед вами
+                                будет серая дверь на минус первый этаж, после лестницы правее дверь в танцевальный зал:)</div>
+                        </div>
+                        {% endif %}
+                        {% if group_info.dance_hall.pk == 4 or group_info.dance_hall.pk == 10 %}
+                        <div class="mod__map-row">
+                            <div class="mod__map-col">
+                                <div class="mod__map-img-wrap">
+                                    <img src="{% static "new/img/example/mod/map3.jpg" %}">
+                                </div>
+                            </div>
+                            <div class="mod__map-col">
+                                <div class="mod__map-text-1"><b>Адрес зала:</b>
+
+                                    метро Волгоградский пр-т, Волгоградский проспект 32 стр. 8
+                                </div>
+                                <div class="mod__map-text-1"><b>Код от этажа:</b> 1299</div>
+                                <div class="mod__map-text-2"><b>Площадь зала:</b> 90 кв.м.</div>
+
+                                <div class="mod__map-text-1"><b>Напольное покрытие:</b> ламинат;</div>
+                                <div class="mod__map-text-1"><b> Воздух:</b> сплит-система, вытяжка;</div>
+                                <div class="mod__map-text-1"><b>Раздевалки:</b> мужская, женская;</div>
+                                <div class="mod__map-text-2"><b>Душ:</b> есть;</div>
+
+                                <div class="mod__map-text-1"><b>Описание дороги до зала:</b></div>
+                                <div class="mod__map-text-2">1й вагон из центра, из стеклянных дверей налево. Идем прямо
+                                    вдоль Волгоградского проспекта до Академии МФЮА, поворачиваем направо в арку под
+                                    шлагбаум, далее прямо метров 100, до арки для въезда машин, слева от арки красный
+                                    пластиковый козырек, заходим в этот подъезд, поднимаемся на 3 этаж, и в левое крыло.
+                                    Сначала будут раздевалки, где можно переодеться и оставить верхнюю одежду/обувь, ценные
+                                    вещи берем с собой в зал, который находится в самом конце этого коридора.
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if group_info.dance_hall.pk == 6%}
+                    <div class="mod__map-row">
+                        <div class="mod__map-col">
+                            <div class="mod__map-img-wrap">
+                                <img src="{% static "new/img/example/mod/map2.jpg" %}">
+                            </div>
+                        </div>
+                        <div class="mod__map-col">
+                            <div class="mod__map-text-1"><b>Адрес зала:</b> метро Краснопресненская, Пресненский пер, д.
+                                2, Спортивный клуб "Дружба"
+                            </div>
+                            <div class="mod__map-text-2"><b>Площадь зала:</b> 80 кв.м.</div>
+
+                            <div class="mod__map-text-1"><b>Напольное покрытие:</b> ламинат;</div>
+                            <div class="mod__map-text-1"><b> Воздух:</b> сплит-система, вытяжка;</div>
+                            <div class="mod__map-text-1"><b>Раздевалки:</b> мужская, женская;</div>
+
+                            <div class="mod__map-text-1"><b>Описание дороги до зала:</b></div>
+                            <div class="mod__map-text-2">м. Краснопресненская, после выхода на улицу из стеклянных
+                                дверей повернуть налево. Далее идти прямо по ул. Красная Пресня до пересечения с
+                                Пресненским переулком и повернуть налево на него. Идем прямо по переулку, проходим мимо
+                                шлагбаума ( он будет по левую руку от вас) и через 3 метра слева будет вход, центр
+                                досуга "Дружба", вам туда:)
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if group_info.dance_hall.pk == 11%}
+                    <div class="mod__map-row">
+                        <div class="mod__map-col">
+                            <div class="mod__map-img-wrap">
+                                <img src="{% static "new/img/example/mod/map4.jpg" %}">
+                            </div>
+                        </div>
+                        <div class="mod__map-col">
+                            <div class="mod__map-text-1"><b>Адрес зала:</b>
+
+                                м. Улица 1905 года Пресненский вал 7
+                            </div>
+                            <div class="mod__map-text-2"><b>Площадь зала:</b> 75 кв.м.</div>
+
+                            <div class="mod__map-text-1"><b>Напольное покрытие:</b> ламинат;</div>
+                            <div class="mod__map-text-1"><b>Воздух:</b> сплит-система, вытяжка;</div>
+                            <div class="mod__map-text-1"><b>Раздевалки:</b> мужская, женская;</div>
+
+                            <div class="mod__map-text-1"><b>Описание дороги до зала:</b></div>
+                            <div class="mod__map-text-2">Метро - улица 1905 года, последний вагон из центра, налево вдоль улицы Пресненский Вал. Доходим до дома номер 7, заходим в подъезд в виде красной башни (справа от него зоомагазин).
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="mod__map-text-2">Любые вопросы можно задать по телефону: <a href="tel:+79168246661">+7-916-824-666-1</a></div>
+                    {% if group_info.level.string_code == "beginners" %}
+                    <div class="mod__trener-text">В чём приходить на занятия</div>
+                    <div class="mod__row-21">
+                        <div class="mod__col-21">
+                            <div class="mod__text-3">
+                                Одежда
+                            </div>
+                            <div class="mod__text-21">Должна быть свободной, не стесняющей движений. Главное, чтобы Вам
+                                было удобно двигаться, поэтому нежелательно одевать мини-юбки, высокие каблуки и обувь с
+                                длинными носами.
+                            </div>
+                        </div>
+                        <div class="mod__col-21">
+                            <div class="mod__text-3">
+                                Обувь
+                            </div>
+                            <div class="mod__text-21">На занятия желательно одевать без каблуков, особенно на первом
+                                этапе (идеальный вариант - это джазовки или чешки).
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!--
+
+                     -->
+
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="rs1">
-        <h4>Стоимость занятий</h4>
-        <table cellpadding="0" cellspacing="0">
-            <tbody>
-                {% if not group.passes %}
-                <tr>
-                    <td>Точную стоимость и варианты оплаты можно узнать по телефону +7-916-824-666-1</td>
-                </tr>
-                {% endif %}
-                {% for p in group.passes %}
-                <tr>
-                    <td>{{ p.name }}</td>
-                    <td>{{ p.prise }}</td>
-                </tr>
-                {% endfor %}
-                {% if group.is_beginners %}
-                <tr>
-                    <td class="ltd1">Для студентов скидка — 1000 руб.</td>
-                </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-    <div class="clear"></div>
-    <div class="prewho1">
-        <div class="ls1">
-            {% if group.course_details %}
-            <h4>Подробнее о курсе</h4>
-            <p>{{ group.course_details | safe }}</p>
-            {% endif %}
-        </div>
-        <div class="rs1">
-          {% if group.course_results %}
-          <h4>В конце курса Вы научитесь</h4>
-          <p>{{ group.course_results | safe }}</p>
-          {% endif %}
-        </div>
-        <div class="clear"></div>
-    <div class="prepod1">
-        <span class="hline"></span>
-        <div class="h3bl1">
-            <h3>ПРЕПОДАВАТЕЛИ</h3>
-        </div>
-        {% for teacher in group.teachers %}
-        <div class="ls2">
-            {% if teacher.photo_file %}
-            <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ teacher.photo_file }}" width="290" height="280" />
-            {% endif %}
-            <h4>{{ teacher.first_name }} {{ teacher.last_name }}</h4>
-            <p>{{ teacher.about | safe }}</p>
-        </div>
-        <div class="rs2">
-            {% if teacher.video %}
-            <div class="videoblock1">
-                <div class="videoWrapper">
-                    <iframe width="560" height="349" src="{{ teacher.video }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-        <div class="clear"></div>
-        {% endfor %}
-        <div class="formwrapper1">
-            <form id="group_form2_{{ group.id }}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="user_type" value="Заявка на запись в группу" />
-                <input type="hidden" name="group_name" value="{{ group.name }}" />
-                <input type="hidden" name="days" value="{% for day in group.days %}{% if day.marked %}{{ day.repr }} {% endif %}{% endfor %}" />
-                <input type="hidden" name="time" value="{{ group.time }}" />
-                <input type="hidden" name="station" value="{{ group.dance_hall.station }}" />
-                <input type="text" name="name" class="input-medium focused inp1" placeholder="Ваши ФИО">
-                <input class="input-medium focused inp1" name="phone" type="text" value maxlength="100" autocomplete="of" placeholder="Ваш Телефон">
-                <button type="submit" onclick="sendForm('group_form2_{{ group.id }}'); yaCounter34798545.reachGoal('GROUP_CONFIRM'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1" name="send">Записаться</button>
-                <button type="submit" onclick="sendForm('group_form2_{{ group.id }}', 'call'); return false;" class="input-prepend btnorder feedback btn btn-block btn-large btn-success btn1 zaps1 btn5" name="send">Заказать звонок</button>
-                <span class="btnt1">Любые вопросы Вы можете задать по телефону: +7-916-824-666-1</span>
-            </form>
-        </div>
-        {% if group.is_beginners %}
-        <p class="bp1">Тренеры ТСК "Динамика" и специальная группа организаторов создают активную социальную жизнь клуба. ТСК "Динамика" является известным организатором любимых хастловцами дискотек и популярнейших хастл-вечеринок, клуб активно проводит культурно-массовые мероприятия, благотворительные акции, спортивные и развлекательные выезды, посиделки в ресторанах и кафешках, шашлыки, походы, танцы под открытым небом, выездные сборы, поездки на танцевальные турниры в разные города и страны, флешмобы, катания на коньках, лыжах, лошадях и прочие интегрирующие учеников мероприятия, так что в их группах всегда складываются дружеские и тёплые отношения между людьми, что позволит Вам обрести замечательную интересную компанию, новых друзей и, возможно, встретить свою любовь!</p>
-        {% endif %}
-    </div>
-    <div class="predres1">
-        <span class="hline"></span>
-        <div class="h3bl1">
-            <h3>как проехать</h3>
-        </div>
-        <div class="ls1">
-          <div class="gallery" onmouseout="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}')">
-                <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.map_filename }}" id="preview{{group.id}}" width="525" height="405" style="margin-bottom:10px; margin-top:5px;">
-                <div>
-                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p1_filename }}')" width="165" height="110" style="margin-right:3px;">
-                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p2_filename }}')" width="165" height="110" style="margin-right:3px;">
-                    <img src="{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}" onmouseover="changeImage('preview{{group.id}}', '{{ TEACHERS_BOOK_STATIC_URL }}{{ group.dance_hall.p3_filename }}')" width="165" height="110">
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
-        <div class="rs1">
-            <span class="prenazv1">м. {{ group.dance_hall.station }}
-            {{ group.dance_hall.address }}</span>
-            <p>{{ group.dance_hall.about | safe }}</p>
-        </div>
-        <div class="clear"></div>
-    </div>
-    {% if group.is_beginners %}
-        <div class="prewho1">
-            <span class="hline"></span>
-            <div class="h3bl1">
-                <h3>В чём приходить на занятия</h3>
-            </div>
-            <div class="ls1">
-                <h4>Одежда</h4>
-                <p>Должна быть свободной, не стесняющей движений. Главное, чтобы Вам было удобно двигаться, поэтому нежелательно одевать мини-юбки, высокие каблуки и обувь с длинными носами.</p>
-            </div>
-            <div class="rs1">
-              <h4>Обувь</h4>
-                <p>На занятия желательно одевать без каблуков, особенно на первом этапе (идеальный вариант - это джазовки или чешки).</p>
-            </div>
-            <div class="clear"></div>
-        </div>
-    {% endif %}
-    <a href="#nv4" class="close1">x</a>
 </div>
+<script>
+    $('#js-modal-ajax-plan').on('hidden.bs.modal', function (e) {
+        window.location.hash = "!";
+        $('#js-modal-ajax-plan').remove();
+    });
+</script>

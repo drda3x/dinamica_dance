@@ -133,7 +133,7 @@
 <section id="open" class="open">
     <div class="container">
         <div class="clearfix open__row">
-            {% for bonus_class in bonus_classes  %}
+            {% for bonus_class in bonus_classes %}
             <div class="open__col">
                 <div class="open__col-left">
                     <div class="open__col-left-text-1">{{ bonus_class.month }}</div>
@@ -942,7 +942,8 @@
             </div>
             <div id="end" class="end__col">
                 <div class="end__right">
-                    <form method="POST" action="lead.php" class="form-ajax">
+                    <form method="POST" action="" class="form-ajax">
+                        {% csrf_token %}
                         <input type="hidden" name="google_c" value="free_lesson_form2">
                         <input type="hidden" name="yandex_c" value="FREE_LESSON_CONFIRM">
                         <input type="hidden" name="type" value="Запись на мастер-класс">
@@ -987,14 +988,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="form-ajax" action="lead.php" method="POST">
+                <form class="form-ajax" action="" method="POST">
                     <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
                     <h4 class="modal-title">Заказать звонок</h4>
+                    {% csrf_token %}
                     <input type="hidden" name="google_c" value="call_form">
                     <input type="hidden" name="yandex_c" value="CALL_BACK">
-                    <input type="hidden" name="type" value="Заказать звонок">
+                    <input type="hidden" name="type" value="Заказ обратного звонка">
                     <div class="modal-group">
                         <label class="modal-group__label">Ваше имя:</label>
                         <input name="name" class="modal-group__input" type="text"
@@ -1017,7 +1019,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="form-ajax" action="lead.php" method="POST">
+                <form class="form-ajax" action="" method="POST">
+                    {% csrf_token %}
                     <input type="hidden" name="google_c" value="group_form63">
                     <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
                     <input type="hidden" name="type" value="Запись в группу">
@@ -1063,8 +1066,6 @@
                     <div style="font-weight: 600; margin-bottom: 1.6rem; color: #777;">Всегда Ваша,<br>
                         комманда ТСК "Динамика"
                     </div>
-
-
                 </form>
             </div>
         </div>
