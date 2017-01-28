@@ -323,9 +323,9 @@ class DetailsView(TemplateView):
         group = Groups.objects.get(pk=group_id)
 
         try:
-            mk = BonusClasses.objects.get(within_group=group)
+            mk = BonusClasses.objects.filter(date__gte=today, within_group=group).earliest('date')
 
-            if mk.date <= today:
+            if mk.date <= today.date():
                 context['mod__text_1'] = u"Первое занятие 99р."
 
         except BonusClasses.DoesNotExist:
