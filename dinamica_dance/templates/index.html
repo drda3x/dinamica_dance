@@ -1084,7 +1084,7 @@
 <script type="text/javascript" src="{% static "new/js/main.js" %}?1234"></script>
 <script>
 (function() {
-    $('#end__clock').countdown('2017/01/30', function (event) {
+    $('#end__clock').countdown('{{clock_date}}', function (event) {
         var $this = $(this).html(event.strftime('' + '<div><span>%d</span> дни</div>' + '<div><span>%H</span> часы</div>' + '<div><span>%M</span> минуты</div>' + '<div><span>%S</span> секунды</div>'));
     });
     var isMobile = {

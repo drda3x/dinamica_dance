@@ -194,16 +194,8 @@ class IndexView(TemplateView):
             )
 
         all_groups = list(Groups.opened.select_related('level').filter(external_available=False))
-        bonus_class = None
         try:
             bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
-            #for _class in bonus_classes:
-            #   if now < make_aware(datetime.combine(_class.date, _class.end_time), get_default_timezone()):
-            #       bonus_class = _class
-            #       break
-
-            #f not bonus_class:
-            #   raise BonusClasses.DoesNotExist
 
         except BonusClasses.DoesNotExist:
             #bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
@@ -230,6 +222,7 @@ class IndexView(TemplateView):
             )
             for bonus_class in bonus_classes
         ]
+        context['clock_date'] = bonus_classes.first().date.strftime('%Y/%m/%d')
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
         context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
