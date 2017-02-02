@@ -195,9 +195,12 @@ class IndexView(TemplateView):
 
         all_groups = list(Groups.opened.select_related('level').filter(external_available=False))
         try:
-            bonus_classes = BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
+            bonus_classes = filter(
+                lambda bk: datetime.combine(bk.date, bk.end_time).replace(tzinfo=get_default_timezone()) >= now,
+                BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
+            )
 
-        except BonusClasses.DoesNotExist:
+        except (BonusClasses.DoesNotExist, IndexError):
             #bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
             bonus_classes = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
 
@@ -206,6 +209,8 @@ class IndexView(TemplateView):
         context['advanced'] = map(get_group_repr, filter(lambda g: g.level is not None and g.level.string_code == self.advanced_str_code, all_groups))
         context['other'] = map(get_group_repr, filter(lambda g: g.level is None or g.level.string_code not in [self.beginners_str_code, self.intermediate_str_code, self.advanced_str_code], all_groups))
         context['all_groups'] = context['beginners'] + context['inters'] + context['advanced'] + context['other']
+
+
         context['bonus_classes'] = [
             dict(
                 #date=bonus_class.date.strftime('%d.%m.%Y'),
@@ -222,7 +227,9 @@ class IndexView(TemplateView):
             )
             for bonus_class in bonus_classes
         ]
-        context['clock_date'] = datetime.combine(bonus_classes.first().date, bonus_classes.first().end_time).strftime('%Y/%m/%d %H:%M:%S')
+        context['clock_date'] = datetime.combine(
+            bonus_classes[0].date, bonus_classes[0].end_time
+        ).strftime('%Y/%m/%d %H:%M:%S')
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
         context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
