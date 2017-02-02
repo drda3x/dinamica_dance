@@ -332,5 +332,6 @@ class DetailsView(TemplateView):
         context['passes'] = self.get_pass_types(group)
         context['group_course_info'] = self.get_group_about_info(group)
         context['teachers'] = group.teachers.all().values_list("pk", flat=True)
+        context['show_start_date'] = group.start_date > today.date()
 
         return context

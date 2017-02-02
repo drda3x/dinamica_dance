@@ -18,10 +18,12 @@
                         <div class="mod__col-1">
                             <div class="mod__text-2">Общая информация</div>
                             <table class="mod__table-1">
+                                {% if show_start_date %} 
                                 <tr>
                                     <td>Начало занятий</td>
                                     <td>{{group_info.start_date_str}}</td>
                                 </tr>
+                                {% endif %}
                                 <tr>
                                     <td>Дни недели</td>
                                     <td>
@@ -49,9 +51,11 @@
                                         <td>{{prise}}</td>
                                     </tr>
                                 {%endfor%}
+                                {% if group_info.level.string_code == "beginners" %}
                                 <tr>
                                     <td colspan="2">Для студентов скидка — 1000 руб.</td>
                                 </tr>
+                                {% endif %}
                             </table>
                         </div>
                     </div>
