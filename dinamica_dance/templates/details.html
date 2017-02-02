@@ -60,22 +60,12 @@
                         </div>
                     </div>
                     <div class="mod__row-2">
-                        <div class="mod__col-2">
-                            <div class="mod__text-3">
-                                Подробнее о курсе
-                            </div>
-                            <ul class="mod__text-ul-1">
-                                {{group_course_info.details | safe}}
-                            </ul>
+                        <div class="mod__text-3">
+                            Подробнее о курсе
                         </div>
-                        <div class="mod__col-2">
-                            <div class="mod__text-3">
-                                В конце курса Вы научитесь
-                            </div>
-                            <ul class="mod__text-ul-1">
-                                {{group_course_info.results | safe}}
-                            </ul>
-                        </div>
+                        <ul class="mod__text-ul-1">
+                            {{group_course_info.details | safe}}
+                        </ul>
                     </div>
                     <div class="mod__trener-text">Преподаватели</div>
                     {% if 2 in teachers %}
