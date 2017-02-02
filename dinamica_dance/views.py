@@ -222,7 +222,7 @@ class IndexView(TemplateView):
             )
             for bonus_class in bonus_classes
         ]
-        context['clock_date'] = bonus_classes.first().date.strftime('%Y/%m/%d')
+        context['clock_date'] = datetime.combine(bonus_classes.first().date, bonus_classes.first().end_time).strftime('%Y/%m/%d %H:%M:%S')
 
         context['TEACHERS_BOOK_STATIC_URL'] = TEACHERS_BOOK_STATIC_URL
         context['halls'] = json.dumps([i.__json__() for i in DanceHalls.objects.filter(lat__isnull=False, lon__isnull=False)])
