@@ -23,7 +23,8 @@ tar -xf ~/buffer/dinamica_dance.tar.gz -C ~/dinamica.dance/www
 rm -rf ~/buffer/*
 # Запуск сервера
 source ~/python/bin/activate
-python ~/dinamica.dance/www/manage.py collectstatic --noinput
+cd ~/dinamica.dance/www
+python manage.py collectstatic --noinput
 pkill -u u48649 -f django-wrapper.fcgi
 exit
 EOF
