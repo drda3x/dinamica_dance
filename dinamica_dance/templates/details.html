@@ -8,7 +8,7 @@
                     <input type="hidden" name="google_c" value="group_form63">
                     <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
                     <input type="hidden" name="type" value="Запись в группу">
-                    <input type="hidden" name="detail" id="modal-detail" value="{{group_info.name}} {{group_time}} {{group_info.dance_hall.station}}">
+                    <input type="hidden" name="detail" id="modal-detail" value="{{group_info.name}} {% for d in group_info.days %} {{ d }} {% endfor %} {{group_time}} {{group_info.dance_hall.station}}">
                     <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
