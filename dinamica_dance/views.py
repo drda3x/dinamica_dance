@@ -163,7 +163,9 @@ class IndexView(TemplateView):
             dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
             delta = (dt - now.date()).days
 
-            if delta + 21 < 0:
+            print group.name, group.id, delta
+
+            if delta < 0:
                 start_date = u''
             elif delta == 0:
                 start_date = u'старт сегодня'
