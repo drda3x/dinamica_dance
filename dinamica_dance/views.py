@@ -163,8 +163,6 @@ class IndexView(TemplateView):
             dt = max(group.start_date, group.nearest_update() or datetime(1900, 1, 1).date())
             delta = (dt - now.date()).days
 
-            print group.name, group.id, delta
-
             if delta < 0:
                 start_date = u''
             elif delta == 0:
@@ -199,7 +197,7 @@ class IndexView(TemplateView):
         try:
             bonus_classes = filter(
                 lambda bk: datetime.combine(bk.date, bk.end_time).replace(tzinfo=get_default_timezone()) >= now,
-                BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:3]
+                BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:4]
             )
 
         except (BonusClasses.DoesNotExist, IndexError):
