@@ -109,6 +109,9 @@ class EmailNotifier(object):
 
 
 class IndexView(TemplateView):
+
+    CLASSES_TO_SHOW = 6
+
     template_name = 'index.html'
     http_method_names = ('get', 'post')
 
@@ -197,8 +200,8 @@ class IndexView(TemplateView):
         try:
             bonus_classes = filter(
                 lambda bk: datetime.combine(bk.date, bk.end_time).replace(tzinfo=get_default_timezone()) >= now,
-                BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:4]
-            )
+                BonusClasses.objects.select_related().filter(date__gte=now.date()).order_by('date')[:self.CLASSES_TO_SHOW + 1]
+            )[:self.CLASSES_TO_SHOW]
 
         except (BonusClasses.DoesNotExist, IndexError):
             #bonus_class = BonusClasses.objects.select_related().filter(date__lt=now.date()).latest('date')
