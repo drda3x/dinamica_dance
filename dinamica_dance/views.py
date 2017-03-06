@@ -298,7 +298,9 @@ class DetailsView(TemplateView):
 
         for pt in group.external_passes.all().order_by("lessons"):
             _, mod_val = divmod(pt.lessons, 100)
-            if pt.lessons == 1:
+            if pt.shown_value:
+                result.append((pt.shown_value, pt.prise))
+            elif pt.lessons == 1:
                 result.append((u"Pазовое посещение", pt.prise))
             elif mod_val == 0 or 5 <= mod_val <= 19:
                 result.append((u"Абонемент на %d занятий" % pt.lessons, pt.prise))
@@ -310,6 +312,7 @@ class DetailsView(TemplateView):
                     result.append((u"Абонемент на %d занятия" % pt.lessons, pt.prise))
                 else:
                     result.append((u"Абонемент на %d занятий" % pt.lessons, pt.prise))
+        print result
 
         return result
 

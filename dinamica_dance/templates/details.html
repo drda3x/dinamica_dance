@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load list_filters %}
 <div class="modal fade" id="js-modal-ajax-plan" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -461,7 +462,7 @@
                                 будет серая дверь на минус первый этаж, после лестницы правее дверь в танцевальный зал:)</div>
                         </div>
                         {% endif %}
-                        {% if group_info.dance_hall.pk == 4 or group_info.dance_hall.pk == 10 %}
+                        {% if group_info.dance_hall.pk|in_list:"4 10 12" %}
                         <div class="mod__map-row">
                             <div class="mod__map-col">
                                 <div class="mod__map-img-wrap">
