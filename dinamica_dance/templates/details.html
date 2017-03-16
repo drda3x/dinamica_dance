@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load list_filters %}
 <div class="modal fade" id="js-modal-ajax-plan" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -8,7 +9,7 @@
                     <input type="hidden" name="google_c" value="group_form63">
                     <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
                     <input type="hidden" name="type" value="Запись в группу">
-                    <input type="hidden" name="detail" id="modal-detail" value="{{group_info.name}} {{group_time}} {{group_info.dance_hall.station}}">
+                    <input type="hidden" name="detail" id="modal-detail" value="{{group_info.name}} {% for d in group_info.days %} {{ d }} {% endfor %} {{group_time}} {{group_info.dance_hall.station}}">
                     <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
@@ -103,6 +104,42 @@
                         </div>
                     </div> 
                     {% endif %}
+                    {% if 25 in teachers %}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/13.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Евгений Дидора</div>
+                            <ul class="mod__trener-text-ul">
+                                <li>танцор B10 и Star-класса</li>
+                                <li>финалист ЧР и ЧМ 2016 в категории Star</li>
+                                <li>танцевальный стаж — 25 лет</li>
+                                <li>тренерский стаж — 13 лет</li>
+                                <li>тренер десятков чемпионов во всех категориях — от Е класса до Main</li>
+                            </ul>
+                            <!--div class="mod__trener-text-2" style="margin-bottom: 1rem;">Настоящий фанат своего дела,
+                                который никогда не успокоится, пока не добьется наилучшего результата во всем:
+                            </div>
+                            <ul class="mod__trener-text-ul">
+                                <li>Вернуться на паркет, несмотря на запреты врачей - и стать чемпионом!</li>
+                                <li>Открыть свою танцевальную школу в 22 года без какой-либо поддержки со стороны - и за
+                                    пару лет вывести ее в топ-3 школ Москвы!
+                                </li>
+                                <li>Сделать из учеников «с нуля» королей танцпола – сотни примеров!</li>
+
+                            </ul-->
+                            <br>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/U90NskRR95M"></iframe>
+                            </div>
+                        </div>
+                    </div> 
+                    {% endif %}
                     {% if 9 in teachers %}
                     <div class="mod__trener-row">
                         <div class="mod__trener-col">
@@ -128,7 +165,7 @@
                         <div class="mod__trener-col">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe allowfullscreen class="embed-responsive-item"
-                                        src="https://www.youtube.com/embed/RhLkreUL_4s"></iframe>
+                                        src="https://www.youtube.com/embed/44UC1OcA88c"></iframe>
                             </div>
                         </div>
                     </div>
@@ -183,6 +220,29 @@
                         <div class="mod__trener-col">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/79cuuQEnMh0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if 10 in teachers%}
+                    <div class="mod__trener-row">
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-img">
+                                <img src="{% static "new/img/example/mod/8.jpg" %}" alt="">
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="mod__trener-text-1">Дмитрий Карпенко</div>
+                            <ul class="mod__trener-text-ul">
+                                <li><!-- Пункты --></li>
+                            </ul>
+                            <div class="mod__trener-text-2">
+                            <!-- Текст о себе -->
+                            </div>
+                        </div>
+                        <div class="mod__trener-col">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/O4E2LWPxmsw"></iframe>
                             </div>
                         </div>
                     </div>
@@ -298,7 +358,7 @@
                         </div>
                         <div class="mod__trener-col">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/JXKXB_GT_ko"></iframe>
+                                <iframe allowfullscreen="" class="embed-responsive-item" src="https://www.youtube.com/embed/U90NskRR95M"></iframe>
                             </div>
                         </div>
                     </div>
@@ -350,7 +410,7 @@
                         <div class="mod__trener-col">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe allowfullscreen class="embed-responsive-item"
-                                        src="https://www.youtube.com/embed/vv3wHA5ugO4"></iframe>
+                                        src="https://www.youtube.com/embed/f388qtx1jfw"></iframe>
                             </div>
                         </div>
                     </div>
@@ -461,7 +521,7 @@
                                 будет серая дверь на минус первый этаж, после лестницы правее дверь в танцевальный зал:)</div>
                         </div>
                         {% endif %}
-                        {% if group_info.dance_hall.pk == 4 or group_info.dance_hall.pk == 10 %}
+                        {% if group_info.dance_hall.pk|in_list:"4 10 12" %}
                         <div class="mod__map-row">
                             <div class="mod__map-col">
                                 <div class="mod__map-img-wrap">

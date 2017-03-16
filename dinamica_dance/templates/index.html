@@ -14,7 +14,7 @@
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600&subset=cyrillic' rel='stylesheet'
           type='text/css'>
-    <link rel="stylesheet" href="{% static "new/css/main.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "new/css/main.css" %}?00004" type="text/css"/>
     <script>
         // Магия Google аналитики
         (function (i, s, o, g, r, a, m) {
@@ -343,6 +343,26 @@
                                 </ul>
                                 <div class="trener__text-3">«Танцы спасли меня в сложный период в жизни – я только вернулся из армии и не знал, что делать со своей жизнью дальше… Чтобы отвлечься, заглянул в танцевальную студию рядом с домом – и вскоре купил безлимитный абонемент и стал проводить в зале по десять часов ежедневно, с 12 до 22. Танцы – это увлечение, что никогда не может наскучить, это незабываемые новые знакомства, мелодии и открытия каждый день»
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trener__slider-item">
+                    <div class="trener__slider-item-wrap clearfix">
+                        <div class="trener__slider-left">
+                            <img src="" data-lazy="{% static "new/img/example/treneri/didora_main.jpg" %}" alt="Евгений Дидора">
+                        </div>
+                        <div class="trener__slider-right">
+                            <div class="block19 ">
+                                <div class="trener__text-1">Евгний Дидора</div>
+                                <ul class="trener__text-2">
+                                    <li>танцор B10 и Star-класса</li>
+                                    <li>финалист ЧР и ЧМ 2016 в категории Star</li>
+                                    <li>танцевальный стаж — 25 лет</li>
+                                    <li>тренерский стаж — 13 лет</li>
+                                    <li>тренер десятков чемпионов во всех категориях — от Е класса до Main</li>
+                                </ul>
+                                <div class="trener__text-3"></div>
                             </div>
                         </div>
                     </div>
@@ -855,6 +875,15 @@
                     </div>
                     <div class="learn__text-2">3500 руб</div>
                     <div class="learn__text-3">1 занятие 1,5 часа</div>
+                    <div class="learn__card-hover">
+                        <div class="learn__card-hover-text-1">
+                            Абонемент активируется при посещения первого занятия!
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Возможен ОДИН пропуск, занятие не сгорает, а переносится!
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="learn__col">
@@ -864,29 +893,142 @@
                     </div>
                     <div class="learn__text-2">6400 руб</div>
                     <div class="learn__text-3">1 занятие 1,5 часа</div>
-                </div>
-            </div>
-            <div class="learn__col">
-                <div class="learn__card">
-                    <div class="learn__text-1">Студенческий абонемет со скидкой</div>
-                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg4.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    <div class="learn__card-hover">
+                        <div class="learn__card-hover-text-1">
+                            Абонемент активируется при посещения первого занятия!
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Возможен ДВА пропуск, занятие не сгорает, а переносится!
+
+                        </div>
                     </div>
-                    <div class="learn__text-2">1000 руб</div>
-                    <div class="learn__text-3">1 занятие 1,5 часа</div>
                 </div>
             </div>
             <div class="learn__col">
                 <div class="learn__card">
-                    <div class="learn__text-1">Индивидуальные занятия</div>
+                    <div class="learn__text-1">Клубна карта</div>
                     <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg5.jpg' %}" alt="Танцевальный клуб - Динамика">
                     </div>
-                    <div class="learn__text-2">от 1000 до 2000 руб</div>
-                    <div class="learn__text-3">1 занятие 1 час</div>
+                    <div class="learn__text-2">3700 руб</div>
+                    <div class="learn__text-3">8 занятий 1,5 часа</div>
+                    <div class="learn__card-hover">
+                        <div class="learn__card-hover-text-1">
+                            Карта клуба позволяет посетить 8 ЗАНЯТИЙ в любых группах клуба, соответствующих Вашему уровню!
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Карта активируется в день покупки и действует ровно 31 день!
+
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Карту клуба можно "заморозить", сообщив о сроках во время приобретения карты или подтвердив уважительную причину.
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="learn__col">
+                <div class="learn__card">
+                    <div class="learn__text-1">Студенческий абонемент.</div>
+                    <div class="learn__img-1"><img src="{% static 'new/img/example/tsdimg4.jpg' %}" alt="Танцевальный клуб - Динамика">
+                    </div>
+                    <div class="learn__text-2">2500 руб</div>
+                    <div class="learn__text-3">8 занятий 1,5 час</div>
+                    <div class="learn__card-hover">
+                        <div class="learn__card-hover-text-1">
+                            Абонемент позволяет посетить 8 ЗАНЯТИЙ для группы "Начинающие"!
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Абонемент активируется при посещения первого занятия!
+
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Возможен ОДИН пропуск, занятие не сгорает, а переносится!
+
+                        </div>
+                        <div class="learn__card-hover-text-2">
+                            Для приобретения необходим действующий студенческий билет!
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<section id="door" class="door">
+    <div class="container">
+        <h2 class="door__title"><span>День открытых дверей</span></h2>
+        <div class="row">
+            <div class="col-lg-5" style="text-align: center;">
+                <img class="door__img" src="{% static 'new/img/example/door.jpg' %}" alt="День открытых дверей в Динамика (Хастл)">
+            </div>
+            <div class="col-lg-6">
+                <div class="door__text-wrap">
+                    <div class="door__text-1">Динамика проводит День открытых дверей</div>
+                    <div class="door__text-2-wrap clearfix">
+                        <div class="door__text-2">1. <span>Для начинающих с нуля</span></div>
+                        <div class="door__text-2-link"><a data-toggle="modal" href="#js-modal-door-lead">Записаться</a></div>
+                    </div>
+                    <div class="door__text-2-wrap clearfix">
+                        <div class="door__text-2">2. <span>Для танцоров продолжающего уровня</span></div>
+                        <div class="door__text-2-link"><a data-toggle="modal" href="#js-modal-door-lead">Записаться</a></div>
+                    </div>
+                    <div class="door__text-2-wrap clearfix">
+                        <div class="door__text-2">3. <span>Для танцоров Уровня Бегинер</span></div>
+                        <div class="door__text-2-link"><a data-toggle="modal" href="#js-modal-door-lead">Записаться</a></div>
+                    </div>
+                    <div class="door__text-2-wrap clearfix">
+                        <div class="door__text-2">4. <span>Для танцоров уровня RS&Main</span></div>
+                        <div class="door__text-2-link"><a data-toggle="modal" href="#js-modal-door-lead">Записаться</a></div>
+                    </div>
+
+                    <div class="door__text-3">Стоимость 199 руб</div>
+                    <div class="door__text-4">В конце дня в клубе пройдет ХАСТЛ ВЕЧЕРИНКА</div>
+                    <div class="door__text-5">17 июня в зале на Волгоградском проспекте</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="js-modal-door-lead" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form-ajax" action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="google_c" value="group_form63">
+                    <input type="hidden" name="yandex_c" value="GROUP_CONFIRM">
+                    <input type="hidden" name="type" value="Запись на день открытых дверей">
+                    <input type="hidden" name="detail" id="modal-detail3" value="">
+                    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">День открытых дверей</h4>
+                    <div class="modal-title-desc-wrap">
+                        <div class="modal-title-desc2">Для начинающих с нуля</div>
+                        <div class="modal-title-desc2">Стоимость 199 руб</div>
+                        <div class="modal-title-desc2">17 ИЮНЯ</div>
+                        <div class="modal-title-desc2">в зале на Волгоградском проспекте</div>
+                    </div>
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваше имя:</label>
+                        <input name="name" class="modal-group__input" type="text"
+                               placeholder="Иван Иванов">
+                    </div>
+                    <div class="modal-group">
+                        <label class="modal-group__label">Ваш телефон <span>*</span>:</label>
+                        <input name="tel" class="modal-group__input js-mask-phone required" type="text"
+                               placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="modal-group">
+                        <button onclick="yaCounter34798545.reachGoal('GROUP_CONFIRM');" class="modal-group__button" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <section id="map" class="map">
     <div id="hall_map"></div>
 </section>
@@ -895,7 +1037,7 @@
         <div class="end__row clearfix">
             <div class="end__col">
                 <div class="end__left">
-                    <h4 class="end__title">Открытый урок<br> за 99 руб. <span>+ скидка на абонемент<br> от 500 до 1600 руб.</span>
+                    <h4 class="end__title">Открытый урок<br> за 99 руб. <span>+ скидка на абонемент<br> от 500 до 1400 руб.</span>
                     </h4>
                     <div class="end__pretitle">до конца акции осталось:</div>
                     <div class="end__clock-wrap">
@@ -932,9 +1074,24 @@
 </section>
 <footer>
     <div class="container">
+    <div class="footer__social-row clearfix">
+            <div class="footer__social-wrap clearfix">
+                <a target="_blank" href="https://vk.com/dynamicastudio" class="footer__social-vk"></a>
+                <a target="_blank" href="https://www.instagram.com/dynamica.moscow/"
+                   class="footer__social-instagram"></a>
+                <a target="_blank" href="https://www.facebook.com/dynamicadance/" class="footer__social-fb"></a>
+            </div>
+        </div>
         <div class="footer__text-1">Copyright © 2016- Все права защищены</div>
     </div>
 </footer>
+<div class="panelfix__social-wrap clearfix">
+    <a target="_blank" href="https://vk.com/dynamicastudio" class="panelfix__social-vk"></a>
+    <a target="_blank" href="https://www.instagram.com/dynamica.moscow/"
+       class="panelfix__social-instagram"></a>
+    <a target="_blank" href="https://www.facebook.com/dynamicadance/" class="panelfix__social-fb"></a>
+
+</div>
 <div id="off-canvas" class="offcanvas">
     <ul class="off-canvas__ul js-scroll">
         <li class="off-canvas__li"><a class="off-canvas__link" href="#about">Почему мы?</a></li>
@@ -1044,7 +1201,7 @@
 <script type="text/javascript" src="{% static "new/js/scroll.js" %}"></script>
 <script type="text/javascript" src="{% static "new/js/mask.js" %}"></script>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-<script type="text/javascript" src="{% static "new/js/main.js" %}?1234"></script>
+<script type="text/javascript" src="{% static "new/js/main.js" %}?12344"></script>
 <script>
 (function() {
     $('#end__clock').countdown('{{clock_date}}', function (event) {
