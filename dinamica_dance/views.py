@@ -21,6 +21,11 @@ from project.settings import EMAIL_TO, TEACHERS_BOOK_STATIC_URL
 from application.utils.date_api import MONTH_PARENT_FORM
 from django.views.decorators.csrf import csrf_exempt
 
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 class EmailNotifier(object):
     encoding = 'windows-1251'
@@ -62,8 +67,9 @@ class EmailNotifier(object):
 
             return True
 
-        except Exception:
-            from traceback import format_exc; print format_exc()
+        except Exception as e:
+            logger.error(e)
+            # from traceback import format_exc; print format_exc()
             return False
 
     def get_test(self, **kwargs):
